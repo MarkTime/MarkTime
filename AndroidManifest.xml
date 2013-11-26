@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="boar401s2.marktime"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="11" />
+    
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+        
+        <activity
+            android:name="boar401s2.marktime.MarkTime"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="boar401s2.marktime.Roll"
+            android:label="@string/title_activity_roll" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="boar401s2.marktime.MarkTime" />
+        </activity>
+        <activity
+            android:name="boar401s2.marktime.Settings"
+            android:label="@string/title_activity_settings" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="boar401s2.marktime.MarkTime" />
+        </activity>
+        <activity
+            android:name="boar401s2.marktime.Synchronise"
+            android:label="@string/title_activity_synchronise" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="boar401s2.marktime.MarkTime" />
+        </activity>
+    </application>
+
+</manifest>

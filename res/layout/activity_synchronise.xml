@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Synchronise" >
+
+    <LinearLayout
+        android:id="@+id/synchronise_sync_selector"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible" >
+
+        <Button
+            android:id="@+id/synchronise_squads"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSyncSquads"
+            android:text="Sync Squads" />
+
+        <Button
+            android:id="@+id/synchronise_roll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onSyncRoll"
+            android:text="Sync Roll" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/synchronise_sync_status"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+
+        <ProgressBar
+            android:id="@+id/synchronise_loading"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/synchronise_status"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="Starting..."
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
