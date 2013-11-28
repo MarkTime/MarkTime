@@ -7,6 +7,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import boar401s2.marktime.interfaces.SynchroniseEvents;
 import boar401s2.marktime.storage.spreadsheet.Spreadsheet;
 
 import com.google.gdata.client.spreadsheet.SpreadsheetService;
@@ -26,9 +27,9 @@ public class GDrive {
 	Boolean isConnected = false;
 	
 	Activity activityParent;
-	Events eventsParent;
+	SynchroniseEvents eventsParent;
 	
-	public GDrive(Events eventsParent, Activity activityParent, String email, String password){
+	public GDrive(SynchroniseEvents eventsParent, Activity activityParent, String email, String password){
 		this.activityParent = activityParent;
 		this.eventsParent = eventsParent;
 		ConnectTask task = new ConnectTask();
@@ -87,6 +88,7 @@ public class GDrive {
 				publishProgress("Getting spreadsheet feed...");
 				SPREADSHEET_FEED_URL = new URL("https://spreadsheets.google.com/feeds/spreadsheets/private/full");
 				feed = spreadsheetService.getFeed(SPREADSHEET_FEED_URL, SpreadsheetFeed.class);
+				publishProgress("Connected!");
 				return "Connected!";
 			} catch (Exception ex){
 				ex.printStackTrace();
@@ -96,8 +98,8 @@ public class GDrive {
 		
 		@Override
 		protected void onPostExecute(String status){
-			publishProgress(status);
-			eventsParent.onConnect();
+			//publishProgress(status);
+			eventsParent.onConnected();
 		}
 		
 		@Override

@@ -2,6 +2,9 @@ package boar401s2.marktime.storage.spreadsheet;
 
 import java.io.IOException;
 import java.net.URL;
+
+import boar401s2.marktime.util.Position;
+
 import com.google.gdata.data.spreadsheet.CellEntry;
 import com.google.gdata.data.spreadsheet.CellFeed;
 import com.google.gdata.data.spreadsheet.WorksheetEntry;
@@ -51,6 +54,14 @@ public class Worksheet {
 		}
 	}
 	
+	public int getSheetWidth(){
+		return worksheet.getColCount();
+	}
+	
+	public int getSheetHeight(){
+		return worksheet.getRowCount();
+	}
+	
 	public void printCells(){
 		setCellValue(new Position(1, 1), "Hello World!");
 	}
@@ -76,11 +87,11 @@ public class Worksheet {
 	
 	public String toSpreadsheetCoords(Position pos){
 		String a = "";
-		if (pos.y > 26){
-			a = getCharFromInt(pos.y/26);
+		if (pos.x > 26){
+			a = getCharFromInt(pos.x/26);
 		}
-		a = a + getCharFromInt(pos.y-((pos.y/26)*26));
-		String b = String.valueOf(pos.x);
+		a = a + getCharFromInt(pos.x-((pos.x/26)*26));
+		String b = String.valueOf(pos.y);
 		return a+b;
 	}
 	
@@ -95,18 +106,5 @@ public class Worksheet {
 	
 	private String getCharFromInt(Integer i){
 		return Character.toString(Character.toChars(i+64)[0]);
-	}
-}
-
-class Position{
-	int x = 0;
-	int y = 0;
-	Position(int x, int y){
-		this.x = x;
-		this.y = y;
-	}
-	
-	public String getString(){
-		return String.valueOf(x)+", "+String.valueOf(y);
 	}
 }

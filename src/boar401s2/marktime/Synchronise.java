@@ -1,8 +1,11 @@
 package boar401s2.marktime;
 
+import boar401s2.marktime.exceptions.NonexistantSquadException;
+import boar401s2.marktime.exceptions.SquadNotFetchedException;
+import boar401s2.marktime.interfaces.SynchroniseEvents;
 import boar401s2.marktime.storage.Authentication;
-import boar401s2.marktime.storage.Events;
 import boar401s2.marktime.storage.GDrive;
+import boar401s2.marktime.storage.handlers.Squad;
 import boar401s2.marktime.storage.spreadsheet.Spreadsheet;
 import boar401s2.marktime.storage.spreadsheet.Worksheet;
 
@@ -14,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
-public class Synchronise extends Activity implements Events{
+public class Synchronise extends Activity implements SynchroniseEvents{
 	
 	Authentication auth;
 	TextView statusBox;
@@ -22,6 +25,7 @@ public class Synchronise extends Activity implements Events{
 	GDrive gdrive;
 	Spreadsheet spreadsheet;
 	Worksheet squadSheet;
+	Squad squad;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,11 @@ public class Synchronise extends Activity implements Events{
 			finish();
 		} else {
 			gdrive = new GDrive(this, this, MarkTime.settings.getString("username", ""), MarkTime.settings.getString("password", ""));
+		}
+		
+		if(MarkTime.settings.getString("spreadsheet", "").equalsIgnoreCase("")){
+			Toast.makeText(MarkTime.activity.getApplicationContext(), "Please enter spreadsheet name in 'Settings'", Toast.LENGTH_LONG).show();
+			finish();
 		}
 	}
 	
@@ -64,11 +73,13 @@ public class Synchronise extends Activity implements Events{
 	}
 	
 	@Override
-	public void onConnect(){
-		onSyncSquads();
+	public void onConnected(){
+		syncSquads();
 	}
 	
-	public void onSyncSquads(){
+	public void onSquadFetched(){}
+	
+	public void syncSquads(){
 		//TODO
 		//Write code to download squad data stuff
 		//(Make sure it's an AsyncTask)
@@ -77,16 +88,18 @@ public class Synchronise extends Activity implements Events{
 		//Pick one
 		//Scan through first and last names and store in hashmap
 		//Serialize hashmap and store in file on external storage
-		if (gdrive.driveContainsSpreadsheet("Attendance: 2013")){
-			spreadsheet = gdrive.getSpreadsheet("Attendance: 2013");
-			for (String s: spreadsheet.getWorksheetNames()){
-				System.out.println(s);
-			}
-			squadSheet = spreadsheet.getWorksheet("Sheet1");
-			squadSheet.printCells();
-		} else {
-			onStatusChange("SS does not exist!");
-		}	
+		try {
+			squad = new Squad(this, gdrive, "1");
+			squad.pullSquadFromSpreadsheet();
+			onStatusChange("Saving squad data to file...");
+			try {
+				squad.pushSquadToFile();
+			} catch (SquadNotFetchedException e) {}
+			onStatusChange("Saved squad data to file!");
+		} catch (NonexistantSquadException e) {
+			Toast.makeText(MarkTime.activity.getApplicationContext(), "That squad doesn't exist!", Toast.LENGTH_SHORT).show();
+		}
+		
 	}
 	
 	public void onSyncRoll(){
@@ -102,19 +115,4 @@ public class Synchronise extends Activity implements Events{
 		//Send data to the online spreadsheet
 		//Delete night file
 	}
-
-	/*8class AuthenticateTask implements Runnable{
-		
-		Synchronise parent;
-		
-		public AuthenticateTask(Synchronise parent){
-			this.parent = parent;
-		}
-		
-		@Override
-		public void run(){
-			gdrive = new GDrive(parent, parent, username, password);
-			onSyncSquads();
-		}
-	};*/
 }
