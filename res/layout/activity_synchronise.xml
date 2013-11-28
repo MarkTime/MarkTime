@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="invisible" >
+        android:visibility="visible" >
 
         <Button
             android:id="@+id/synchronise_squads"
@@ -29,29 +29,5 @@
             android:onClick="onSyncRoll"
             android:text="Sync Roll" />
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/synchronise_sync_status"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
-
-        <ProgressBar
-            android:id="@+id/synchronise_loading"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/synchronise_status"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:text="Starting..."
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    </RelativeLayout>
 
 </RelativeLayout>

@@ -80,7 +80,6 @@ public class GDrive {
 		@Override
 		protected String doInBackground(String... params) {
 			try {
-				publishProgress("Creating SpreadsheetService...");
 				spreadsheetService = new SpreadsheetService("SpreadsheetService");
 				publishProgress("Authenticating...");
 				auth = new Authentication(params[0], params[1]);
@@ -88,7 +87,6 @@ public class GDrive {
 				publishProgress("Getting spreadsheet feed...");
 				SPREADSHEET_FEED_URL = new URL("https://spreadsheets.google.com/feeds/spreadsheets/private/full");
 				feed = spreadsheetService.getFeed(SPREADSHEET_FEED_URL, SpreadsheetFeed.class);
-				publishProgress("Connected!");
 				return "Connected!";
 			} catch (Exception ex){
 				ex.printStackTrace();
@@ -98,7 +96,6 @@ public class GDrive {
 		
 		@Override
 		protected void onPostExecute(String status){
-			//publishProgress(status);
 			eventsParent.onConnected();
 		}
 		

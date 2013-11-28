@@ -1,6 +1,7 @@
 package boar401s2.marktime.storage.handlers;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -27,7 +28,7 @@ public class Squad {
 	GDrive gdrive;
 	Spreadsheet spreadsheet;
 	Worksheet sheet;
-	String squadName;
+	public String squadName;
 	SynchroniseEvents eventsParent;
 	
 	boolean fetched = false;
@@ -49,24 +50,30 @@ public class Squad {
 		new PushSquadData().execute();
 	}
 	
-	public void pullSquadFromFile(){
+	public boolean pullSquadFromFile(){
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(MarkTime.activity.getApplicationContext().getFilesDir()+"/Squad-"+squadName+".sqd"));
-			while (true){
-				String ln = br.readLine();
-				if (!ln.equalsIgnoreCase("")){
-					squad.add(br.readLine());
-				} else {
+			File f = new File(MarkTime.activity.getApplicationContext().getFilesDir()+"/"+squadName+".sqd");
+			if (f.exists()==false){
+				return false;
+			}
+			BufferedReader br = new BufferedReader(new FileReader(f));
+			String line;
+			while(true){
+				line = br.readLine();
+				if(line==null){
 					break;
 				}
+				squad.add(line);
 			}
 			br.close();
+			fetched = true;
+			return true;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		fetched = true;
+		return false;
 	}
 	
 	public void pushSquadToFile() throws SquadNotFetchedException{
@@ -74,7 +81,7 @@ public class Squad {
 			throw new SquadNotFetchedException("Haven't fetched squads yet.");
 		}
 		try {
-			FileOutputStream fileOut = MarkTime.activity.getApplicationContext().openFileOutput("Squad-"+squadName+".sqd", Context.MODE_PRIVATE);
+			FileOutputStream fileOut = MarkTime.activity.getApplicationContext().openFileOutput(squadName+".sqd", Context.MODE_PRIVATE);
 			OutputStreamWriter osw = new OutputStreamWriter(fileOut);
 			for (String member: squad){
 				osw.write(member+"\n");
@@ -100,39 +107,18 @@ public class Squad {
 	}
 	
 	public class PullSquadData extends AsyncTask<Void, String, List<String>>{
-
-		@Override
-		protected void onPreExecute(){
-			publishProgress("Fetching squad data...");
-		}
 		
 		@Override
 		protected List<String> doInBackground(Void... values) {
-			
-			spreadsheet = gdrive.getSpreadsheet(MarkTime.settings.getString("spreadsheet", ""));
-			List<String> worksheets = spreadsheet.getWorksheetNames();
-			if (worksheets.contains("Squad-"+squadName)){
-				sheet = spreadsheet.getWorksheet("Squad-"+squadName);
-			}
-			
-			for(int i=2; i<sheet.getSheetHeight(); i++){
-				String firstName = sheet.getCellValue(new Position(1, i));
-				if (!firstName.equalsIgnoreCase("")){
-					String lastName = sheet.getCellValue(new Position(2, i));
-					squad.add(firstName+" "+lastName);
-				} else {
-					break;
-				}
-				float progress = (float) i-1 / (float) sheet.getSheetHeight()-1;
-				progress = progress*100;
-				publishProgress("Fetched "+String.valueOf(progress)+"%");
-			}
+			publishProgress("Opening spreadsheet...");
+			openSpreadsheet();
+			publishProgress("Fetching squad data...");
+			fetchSquadData();
 			return squad;
 		}
 		
 		@Override
 		protected void onPostExecute(List<String> squadmembers){
-			publishProgress("Fetched squad data!");
 			fetched = true;
 			eventsParent.onSquadFetched();
 		}
@@ -142,6 +128,26 @@ public class Squad {
 			eventsParent.onStatusChange(value[0]);
 		}
 		
+	}
+
+	public void openSpreadsheet(){
+		spreadsheet = gdrive.getSpreadsheet(MarkTime.settings.getString("spreadsheet", ""));
+		List<String> worksheets = spreadsheet.getWorksheetNames();
+		if (worksheets.contains(squadName)){
+			sheet = spreadsheet.getWorksheet(squadName);
+		}
+	}
+
+	public void fetchSquadData(){
+		for(int i=2; i<sheet.getSheetHeight(); i++){
+			String firstName = sheet.getCellValue(new Position(1, i));
+			if (!firstName.equalsIgnoreCase("")){
+				String lastName = sheet.getCellValue(new Position(2, i));
+				squad.add(firstName+" "+lastName);
+			} else {
+				break;
+			}
+		}
 	}
 	
 	public class PushSquadData extends AsyncTask<Void, String, List<String>>{

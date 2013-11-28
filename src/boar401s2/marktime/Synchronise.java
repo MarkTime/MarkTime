@@ -1,43 +1,41 @@
 package boar401s2.marktime;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import boar401s2.marktime.exceptions.NonexistantSquadException;
 import boar401s2.marktime.exceptions.SquadNotFetchedException;
 import boar401s2.marktime.interfaces.SynchroniseEvents;
-import boar401s2.marktime.storage.Authentication;
 import boar401s2.marktime.storage.GDrive;
 import boar401s2.marktime.storage.handlers.Squad;
 import boar401s2.marktime.storage.spreadsheet.Spreadsheet;
-import boar401s2.marktime.storage.spreadsheet.Worksheet;
-
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
 public class Synchronise extends Activity implements SynchroniseEvents{
 	
-	Authentication auth;
-	TextView statusBox;
-	
 	GDrive gdrive;
 	Spreadsheet spreadsheet;
-	Worksheet squadSheet;
 	Squad squad;
+	List<String> squadsToSync;
+	
+	ProgressDialog progressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_synchronise);
-		setupActionBar();
-		statusBox = (TextView) findViewById(R.id.synchronise_status);
 		
 		if (MarkTime.settings.getString("username", "").equalsIgnoreCase("") || MarkTime.settings.getString("password", "").equalsIgnoreCase("")){
 			Toast.makeText(MarkTime.activity.getApplicationContext(), "Please enter login details in 'Settings'", Toast.LENGTH_LONG).show();
 			finish();
 		} else {
+			openProgressDialog("Connecting to GDrive...");
 			gdrive = new GDrive(this, this, MarkTime.settings.getString("username", ""), MarkTime.settings.getString("password", ""));
 		}
 		
@@ -66,43 +64,56 @@ public class Synchronise extends Activity implements SynchroniseEvents{
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-	@Override
-	public void onStatusChange(String status) {
-		statusBox.setText(status);
-	}
 	
+	//Called when GDrive has connected//
 	@Override
 	public void onConnected(){
-		syncSquads();
+		onStatusChange("Connecting to spreadsheet...");
+		spreadsheet = gdrive.getSpreadsheet(MarkTime.settings.getString("spreadsheet", ""));
+		closeProgressDialog();
+		
+		setContentView(R.layout.activity_synchronise);
+		setupActionBar();
 	}
-	
-	public void onSquadFetched(){}
-	
-	public void syncSquads(){
-		//TODO
-		//Write code to download squad data stuff
-		//(Make sure it's an AsyncTask)
-		//
-		//Scan for sheets beginning with "squad"
-		//Pick one
-		//Scan through first and last names and store in hashmap
-		//Serialize hashmap and store in file on external storage
-		try {
-			squad = new Squad(this, gdrive, "1");
-			squad.pullSquadFromSpreadsheet();
-			onStatusChange("Saving squad data to file...");
-			try {
-				squad.pushSquadToFile();
-			} catch (SquadNotFetchedException e) {}
-			onStatusChange("Saved squad data to file!");
-		} catch (NonexistantSquadException e) {
-			Toast.makeText(MarkTime.activity.getApplicationContext(), "That squad doesn't exist!", Toast.LENGTH_SHORT).show();
+
+	//Called when "Sync Squads" button is pressed//
+	public void onSyncSquads(View view){
+		squadsToSync = getRemoteSquads();
+		if (squadsToSync.size()==0){
+			Toast.makeText(MarkTime.activity.getApplicationContext(), "There are no squads in the current spreadsheet.", Toast.LENGTH_SHORT).show();
+		} else {	
+			syncSquad(squadsToSync.get(0));
 		}
 		
 	}
 	
-	public void onSyncRoll(){
+	public void syncSquad(String squadName){
+		System.out.println("Syncing squad "+squadName+" on thread "+android.os.Process.getThreadPriority(android.os.Process.myTid()));
+		try {
+			squad = new Squad(this, gdrive, squadName);
+			squad.pullSquadFromSpreadsheet();
+		} catch (NonexistantSquadException e) {
+			Toast.makeText(MarkTime.activity.getApplicationContext(), "The squad "+squad+" doesn't exist!", Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	//Called once a squad has been synced//
+	@Override
+	public void onSquadFetched(){
+		onStatusChange("Saving"+squad.squadName+"...");
+		try {
+			squad.pushSquadToFile();
+		} catch (SquadNotFetchedException e) {}
+		squadsToSync.remove(squadsToSync.indexOf(squad.squadName));
+		if(squadsToSync.size()>0){
+			syncSquad(squadsToSync.get(0));
+		} else {
+			closeProgressDialog();
+		}
+	}
+	
+	//Called when "Sync Roll" button is pressed//
+	public void onSyncRoll(View view){
 		//TODO
 		//Write code to sync the local night database to online
 		//
@@ -114,5 +125,48 @@ public class Synchronise extends Activity implements SynchroniseEvents{
 		//Iterate through hasWhmap
 		//Send data to the online spreadsheet
 		//Delete night file
+	}
+	
+	//==========[Util]==========//
+	
+	public List<String> getLocalSquads(){
+		List<String> localSquads = new ArrayList<String>();
+		for(String s: MarkTime.activity.getApplicationContext().getFilesDir().list()){
+			if(s.startsWith("Squad-")){
+				localSquads.add(s);
+			}
+		}
+		return localSquads;
+	}
+	
+	public List<String> getRemoteSquads(){
+		List<String> remoteSquads = new ArrayList<String>();
+		for (String name: spreadsheet.getWorksheetNames()){
+			if(name.startsWith("Squad-")){
+				remoteSquads.add(name);
+			}
+		}
+		return remoteSquads;
+	}
+
+	//==========[Status Stuff]==========//
+	
+	//Called to update status from sub-classes//
+	@Override
+	public void onStatusChange(String status) {
+		if(!(progressDialog==null)){
+			progressDialog.dismiss();
+			openProgressDialog(status);
+		}
+	}
+	
+	public void openProgressDialog(String message){
+		progressDialog = new ProgressDialog(this);
+		progressDialog.setMessage(message);
+		progressDialog.show();
+	}
+	
+	public void closeProgressDialog(){
+		progressDialog.dismiss();
 	}
 }
