@@ -28,6 +28,9 @@ public class Settings extends Activity {
 		fillTextBoxes();
 	}
 	
+	/**
+	 * Used to fill in the text boxes with the saved settings
+	 */
 	public void fillTextBoxes(){
 		EditText spreadsheet = (EditText) findViewById(R.id.settings_spreadsheet_name);
 		EditText template = (EditText) findViewById(R.id.settings_spreadsheet_template);
@@ -40,9 +43,7 @@ public class Settings extends Activity {
 	}
 	
 	private void setupActionBar() {
-
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-
 	}
 
 	@Override
@@ -61,6 +62,10 @@ public class Settings extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	/**
+	 * Callback for the button "Submit". Writes data to parameters.
+	 * @param view
+	 */
 	public void onSubmit(View view){
 		EditText spreadsheet = (EditText) findViewById(R.id.settings_spreadsheet_name);
 		EditText template = (EditText) findViewById(R.id.settings_spreadsheet_template);

@@ -12,19 +12,18 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
-//Man Hours:
-//25 Hours 22nd
-
-//TODO:
-//Remove dependancies on plaintext auth stuff, have it work off the stored preferences
-//Push to git after that
-//
-//TODO:
-//Fix authentication crashing when incorrect password is entered.
-
+/**
+ * Main activity for this app. Serves as the main menu
+ * for opening other activities, such as settings, and
+ * synchronise
+ * @author John "boar401s2" Board
+ * @date 15/11/2013
+ * @copywrite (c) 2013 John Board
+ */
 public class MarkTime extends Activity {
 	
 	public static final String PREFERENCES = "Preferences";
+	public static boolean isNetworkAvailable = false;
 	public static SharedPreferences settings;
 	public static SharedPreferences.Editor editor;
 	public static Activity activity;
@@ -39,6 +38,7 @@ public class MarkTime extends Activity {
 		editor = settings.edit();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mark_time);
+		isNetworkAvailable = isNetworkAvailable();
 	}
 
 	@Override
@@ -48,18 +48,30 @@ public class MarkTime extends Activity {
 		return true;
 	}
 	
-	public boolean isNetworkAvailable() {
+	/**
+	 * Checks to see if the device is connected to a network.
+	 * @return
+	 */
+	private boolean isNetworkAvailable() {
 	    ConnectivityManager connectivityManager 
 	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
 	    return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 	
+	/**
+	 * Callback for "Mark the Roll" button. Used to open the roll activity.
+	 * @param view
+	 */
 	public void openMark(View view){
 		Intent i = new Intent(this, Roll.class);
 		startActivity(i);
 	}
 	
+	/**
+	 * Callback for "Synchronise" button. Used to open the synchronise activity.
+	 * @param view
+	 */
 	public void openSynchronise(View view){
 		if (isNetworkAvailable()){
 			Intent i = new Intent(this, Synchronise.class);
@@ -69,11 +81,19 @@ public class MarkTime extends Activity {
 		}
 	}
 	
+	/**
+	 * Callback for the "Settings" button. Used to open Settings activity.
+	 * @param view
+	 */
 	public void openSettings(View view){
 		Intent i = new Intent(this, Settings.class);
 		startActivity(i);
 	}
 	
+	/**
+	 * Callback for the "Exit" button. Used to exit the app.
+	 * @param view
+	 */
 	public void onExit(View view){
 		finish();
 	}

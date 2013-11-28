@@ -5,7 +5,7 @@ import java.util.List;
 
 import boar401s2.marktime.exceptions.NonexistantSquadException;
 import boar401s2.marktime.exceptions.SquadNotFetchedException;
-import boar401s2.marktime.interfaces.SynchroniseEvents;
+import boar401s2.marktime.interfaces.SynchroniseInterface;
 import boar401s2.marktime.storage.GDrive;
 import boar401s2.marktime.storage.handlers.Squad;
 import boar401s2.marktime.storage.spreadsheet.Spreadsheet;
@@ -18,7 +18,7 @@ import android.view.View;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
-public class Synchronise extends Activity implements SynchroniseEvents{
+public class Synchronise extends Activity implements SynchroniseInterface{
 	
 	GDrive gdrive;
 	Spreadsheet spreadsheet;
@@ -65,10 +65,13 @@ public class Synchronise extends Activity implements SynchroniseEvents{
 		return super.onOptionsItemSelected(item);
 	}
 	
-	//Called when GDrive has connected//
+	/**
+	 * Called when GDrive has connected.
+	 */
 	@Override
 	public void onConnected(){
 		onStatusChange("Connecting to spreadsheet...");
+		Toast.makeText(MarkTime.activity.getApplicationContext(), "Connected to Google Drive!", Toast.LENGTH_LONG).show();
 		spreadsheet = gdrive.getSpreadsheet(MarkTime.settings.getString("spreadsheet", ""));
 		closeProgressDialog();
 		
@@ -76,7 +79,10 @@ public class Synchronise extends Activity implements SynchroniseEvents{
 		setupActionBar();
 	}
 
-	//Called when "Sync Squads" button is pressed//
+	/**
+	 * Callback for "Sync Squads" button. Syncs the remote squads with the local ones.
+	 * @param view
+	 */
 	public void onSyncSquads(View view){
 		squadsToSync = getRemoteSquads();
 		if (squadsToSync.size()==0){
@@ -87,8 +93,12 @@ public class Synchronise extends Activity implements SynchroniseEvents{
 		
 	}
 	
+	/**
+	 * Used to sync a specific squad
+	 * @param squadName The name of the squad to sync
+	 */
 	public void syncSquad(String squadName){
-		System.out.println("Syncing squad "+squadName+" on thread "+android.os.Process.getThreadPriority(android.os.Process.myTid()));
+		//System.out.println("Syncing squad "+squadName+" on thread "+android.os.Process.getThreadPriority(android.os.Process.myTid()));
 		try {
 			squad = new Squad(this, gdrive, squadName);
 			squad.pullSquadFromSpreadsheet();
@@ -97,13 +107,17 @@ public class Synchronise extends Activity implements SynchroniseEvents{
 		}
 	}
 	
-	//Called once a squad has been synced//
+	/**
+	 * Callback for the squad syncing task. If another squad
+	 * needs to be synced, it syncs it.
+	 */
 	@Override
 	public void onSquadFetched(){
 		onStatusChange("Saving"+squad.squadName+"...");
 		try {
 			squad.pushSquadToFile();
 		} catch (SquadNotFetchedException e) {}
+		Toast.makeText(MarkTime.activity.getApplicationContext(), "Synced "+squad.squadName+"!", Toast.LENGTH_SHORT).show();
 		squadsToSync.remove(squadsToSync.indexOf(squad.squadName));
 		if(squadsToSync.size()>0){
 			syncSquad(squadsToSync.get(0));
@@ -112,7 +126,11 @@ public class Synchronise extends Activity implements SynchroniseEvents{
 		}
 	}
 	
-	//Called when "Sync Roll" button is pressed//
+	/**
+	 * Callback for "Sync Roll" button. Starts syncing the roll
+	 * @param view
+	 * @
+	 */
 	public void onSyncRoll(View view){
 		//TODO
 		//Write code to sync the local night database to online
@@ -127,8 +145,19 @@ public class Synchronise extends Activity implements SynchroniseEvents{
 		//Delete night file
 	}
 	
+	/**
+	 * The roll syncing task callback
+	 */
+	public void onRollSynced(){
+		Toast.makeText(MarkTime.activity.getApplicationContext(), "Not implemented yet!", Toast.LENGTH_SHORT).show();
+	}
+	
 	//==========[Util]==========//
 	
+	/**
+	 * Gets a list of the locally defined squads
+	 * @return List of locally defined squads
+	 */
 	public List<String> getLocalSquads(){
 		List<String> localSquads = new ArrayList<String>();
 		for(String s: MarkTime.activity.getApplicationContext().getFilesDir().list()){
@@ -139,6 +168,11 @@ public class Synchronise extends Activity implements SynchroniseEvents{
 		return localSquads;
 	}
 	
+	/**
+	 * Gets a list of the remote squads
+	 * Should be called off the main thread.
+	 * @return List of remote squads.
+	 */
 	public List<String> getRemoteSquads(){
 		List<String> remoteSquads = new ArrayList<String>();
 		for (String name: spreadsheet.getWorksheetNames()){
@@ -151,7 +185,9 @@ public class Synchronise extends Activity implements SynchroniseEvents{
 
 	//==========[Status Stuff]==========//
 	
-	//Called to update status from sub-classes//
+	/**
+	 * 'Callback' to update the status message
+	 */
 	@Override
 	public void onStatusChange(String status) {
 		if(!(progressDialog==null)){
@@ -160,12 +196,19 @@ public class Synchronise extends Activity implements SynchroniseEvents{
 		}
 	}
 	
+	/**
+	 * Opens a progress dialog.
+	 * @param message Message to display in it
+	 */
 	public void openProgressDialog(String message){
 		progressDialog = new ProgressDialog(this);
 		progressDialog.setMessage(message);
 		progressDialog.show();
 	}
 	
+	/**
+	 * Closes the currently open progress dialog.
+	 */
 	public void closeProgressDialog(){
 		progressDialog.dismiss();
 	}

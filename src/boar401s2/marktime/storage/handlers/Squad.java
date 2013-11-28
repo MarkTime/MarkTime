@@ -15,12 +15,15 @@ import android.os.AsyncTask;
 import boar401s2.marktime.MarkTime;
 import boar401s2.marktime.exceptions.NonexistantSquadException;
 import boar401s2.marktime.exceptions.SquadNotFetchedException;
-import boar401s2.marktime.interfaces.SynchroniseEvents;
+import boar401s2.marktime.interfaces.SynchroniseInterface;
 import boar401s2.marktime.storage.GDrive;
 import boar401s2.marktime.storage.spreadsheet.Spreadsheet;
 import boar401s2.marktime.storage.spreadsheet.Worksheet;
 import boar401s2.marktime.util.Position;
 
+/**
+ * Class to handle getting/saving squad data
+ */
 public class Squad {
 	
 	List<String> squad = new ArrayList<String>();
@@ -29,20 +32,27 @@ public class Squad {
 	Spreadsheet spreadsheet;
 	Worksheet sheet;
 	public String squadName;
-	SynchroniseEvents eventsParent;
+	SynchroniseInterface eventsParent;
 	
 	boolean fetched = false;
 	
-	public Squad(SynchroniseEvents eventsParent, GDrive gdrive, String squadName) throws NonexistantSquadException{
+	public Squad(SynchroniseInterface eventsParent, GDrive gdrive, String squadName) throws NonexistantSquadException{
 		this.gdrive = gdrive;
 		this.squadName = squadName;
 		this.eventsParent = eventsParent;
 	}
 	
+	/**
+	 * Pulls squad data from spreadsheet
+	 */
 	public void pullSquadFromSpreadsheet(){
 		new PullSquadData().execute();
 	}
 	
+	/**
+	 * Pushes squad data to spreadsheet
+	 * @throws SquadNotFetchedException
+	 */
 	public void pushSquadToSpreadsheet() throws SquadNotFetchedException{
 		if (!hasFetchedSquad()){
 			throw new SquadNotFetchedException("Haven't fetched squads yet.");
@@ -50,6 +60,10 @@ public class Squad {
 		new PushSquadData().execute();
 	}
 	
+	/**
+	 * Pulls squad data into a List
+	 * @return Boolean on if it was successful
+	 */
 	public boolean pullSquadFromFile(){
 		try {
 			File f = new File(MarkTime.activity.getApplicationContext().getFilesDir()+"/"+squadName+".sqd");
@@ -76,6 +90,10 @@ public class Squad {
 		return false;
 	}
 	
+	/**
+	 * Saves squad data stored in "squad" into file
+	 * @throws SquadNotFetchedException
+	 */
 	public void pushSquadToFile() throws SquadNotFetchedException{
 		if (!hasFetchedSquad()){
 			throw new SquadNotFetchedException("Haven't fetched squads yet.");
@@ -95,6 +113,10 @@ public class Squad {
 		}
 	}
 	
+	/**
+	 * Prints a list of members in the squad variable
+	 * @deprecated
+	 */
 	public void printSquad(){
 		if (hasFetchedSquad())
 		for(String s: squad){
@@ -102,10 +124,18 @@ public class Squad {
 		}
 	}
 	
+	/**
+	 * Checks to see if the squad variable contains squad data
+	 * @return boolean
+	 */
 	public boolean hasFetchedSquad(){
 		return fetched;
 	}
 	
+	/**
+	 * An async task used for pull the squad data down offline from
+	 * the spreadsheet.
+	 */
 	public class PullSquadData extends AsyncTask<Void, String, List<String>>{
 		
 		@Override
@@ -130,6 +160,9 @@ public class Squad {
 		
 	}
 
+	/**
+	 * Opens the spreadsheet
+	 */
 	public void openSpreadsheet(){
 		spreadsheet = gdrive.getSpreadsheet(MarkTime.settings.getString("spreadsheet", ""));
 		List<String> worksheets = spreadsheet.getWorksheetNames();
@@ -138,6 +171,9 @@ public class Squad {
 		}
 	}
 
+	/**
+	 * Fetches the squad data from the sheet
+	 */
 	public void fetchSquadData(){
 		for(int i=2; i<sheet.getSheetHeight(); i++){
 			String firstName = sheet.getCellValue(new Position(1, i));

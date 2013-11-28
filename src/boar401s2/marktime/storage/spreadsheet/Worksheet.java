@@ -10,6 +10,9 @@ import com.google.gdata.data.spreadsheet.CellFeed;
 import com.google.gdata.data.spreadsheet.WorksheetEntry;
 import com.google.gdata.util.ServiceException;
 
+/**
+ * Wrapper for handling a worksheet
+ */
 public class Worksheet {
 	
 	WorksheetEntry worksheet;

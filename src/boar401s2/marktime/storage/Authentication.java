@@ -5,6 +5,10 @@ import com.google.gdata.util.AuthenticationException;
 
 //TODO: Update this class to use OAuth2
 
+/**
+ * Used to autenticated services. At the moment it only authenticates
+ * spreadsheet services.
+ */
 public class Authentication{
 	
 	private String email;
