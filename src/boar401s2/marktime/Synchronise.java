@@ -8,6 +8,7 @@ import boar401s2.marktime.exceptions.SquadNotFetchedException;
 import boar401s2.marktime.interfaces.SynchroniseInterface;
 import boar401s2.marktime.storage.GDrive;
 import boar401s2.marktime.storage.handlers.Squad;
+import boar401s2.marktime.storage.handlers.Squads;
 import boar401s2.marktime.storage.spreadsheet.Spreadsheet;
 import android.os.Bundle;
 import android.app.Activity;
@@ -22,6 +23,7 @@ public class Synchronise extends Activity implements SynchroniseInterface{
 	
 	GDrive gdrive;
 	Spreadsheet spreadsheet;
+	Squads squads;
 	Squad squad;
 	List<String> squadsToSync;
 	
@@ -74,6 +76,7 @@ public class Synchronise extends Activity implements SynchroniseInterface{
 		Toast.makeText(MarkTime.activity.getApplicationContext(), "Connected to Google Drive!", Toast.LENGTH_LONG).show();
 		spreadsheet = gdrive.getSpreadsheet(MarkTime.settings.getString("spreadsheet", ""));
 		closeProgressDialog();
+		squads = new Squads(this, gdrive, spreadsheet);
 		
 		setContentView(R.layout.activity_synchronise);
 		setupActionBar();
@@ -100,7 +103,7 @@ public class Synchronise extends Activity implements SynchroniseInterface{
 	public void syncSquad(String squadName){
 		//System.out.println("Syncing squad "+squadName+" on thread "+android.os.Process.getThreadPriority(android.os.Process.myTid()));
 		try {
-			squad = new Squad(this, gdrive, squadName);
+			squad = squads.getSquad(squadName);
 			squad.pullSquadFromSpreadsheet();
 		} catch (NonexistantSquadException e) {
 			Toast.makeText(MarkTime.activity.getApplicationContext(), "The squad "+squad+" doesn't exist!", Toast.LENGTH_SHORT).show();
