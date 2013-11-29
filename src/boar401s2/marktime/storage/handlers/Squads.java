@@ -63,7 +63,7 @@ public class Squads {
 		List<String> localSquads = new ArrayList<String>();
 		for(String s: MarkTime.activity.getApplicationContext().getFilesDir().list()){
 			if(s.startsWith("Squad-")){
-				localSquads.add(s);
+				localSquads.add(s.replaceAll(".sqd", ""));
 			}
 		}
 		return localSquads;
