@@ -3,9 +3,9 @@ package boar401s2.marktime;
 import java.util.ArrayList;
 import java.util.List;
 
+import boar401s2.marktime.events.SynchroniseInterface;
 import boar401s2.marktime.exceptions.NonexistantSquadException;
 import boar401s2.marktime.exceptions.SquadNotFetchedException;
-import boar401s2.marktime.interfaces.events.SynchroniseInterface;
 import boar401s2.marktime.storage.GDrive;
 import boar401s2.marktime.storage.handlers.Squad;
 import boar401s2.marktime.storage.handlers.Squads;
