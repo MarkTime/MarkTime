@@ -8,7 +8,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import boar401s2.marktime.interfaces.SynchroniseInterface;
+import boar401s2.marktime.interfaces.events.SynchroniseInterface;
 import boar401s2.marktime.storage.spreadsheet.Spreadsheet;
 
 import com.google.gdata.client.spreadsheet.SpreadsheetService;
