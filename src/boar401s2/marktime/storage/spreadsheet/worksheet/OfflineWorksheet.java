@@ -15,18 +15,11 @@ public class OfflineWorksheet implements Worksheet{
 		this.parent = parent;
 	}
 	
-	/**
-	 * Used for setting the hashmap data in the worksheet
-	 * @param map
-	 */
 	@SuppressWarnings("unchecked")
 	public void setData(HashMap<String, String> map){
 		this.data = (HashMap<String, String>) map.clone();
 	}
-
-	/**
-	 * Used for getting the name of the current worksheet
-	 */
+	
 	@Override
 	public String getName() {
 		if (data.containsKey("name")){
