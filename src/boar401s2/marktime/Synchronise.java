@@ -22,9 +22,6 @@ import android.support.v4.app.NavUtils;
 public class Synchronise extends Activity implements SynchroniseInterface{
 	
 	GDrive gdrive;
-	Spreadsheet spreadsheet;
-	Squads squads;
-	Squad squad;
 	List<String> squadsToSync;
 	
 	ProgressDialog progressDialog;
@@ -215,4 +212,12 @@ public class Synchronise extends Activity implements SynchroniseInterface{
 	public void closeProgressDialog(){
 		progressDialog.dismiss();
 	}
+
+	@Override
+	public void onPostExecute() {
+		onConnected();
+	}
+
+	@Override
+	public void onPreExecute() {}
 }

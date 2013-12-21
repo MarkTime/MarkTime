@@ -27,6 +27,11 @@ public interface Worksheet {
 	public void setCell(String cell, String data);
 	
 	/**
+	 * Returns bool if cell contains information
+	 */
+	public boolean cellHasInformation(String cell);
+	
+	/**
 	 * Sets the size of the current worksheet
 	 * @param width
 	 * @param height

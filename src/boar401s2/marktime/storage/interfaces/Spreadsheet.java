@@ -11,6 +11,11 @@ public interface Spreadsheet {
 	public String getName();
 	
 	/**
+	 * Gets the parent folder
+	 */
+	public String getParentFolder();
+	
+	/**
 	 * Gets a worksheet in the spreadsheet
 	 * @param name
 	 * @return
@@ -37,7 +42,7 @@ public interface Spreadsheet {
 	/**
 	 * Saves spreadsheet to source
 	 */
-	public void save();
+	public void save(String address);
 	
 	/**
 	 * Loads spreadsheet from source

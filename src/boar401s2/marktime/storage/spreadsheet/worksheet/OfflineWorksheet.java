@@ -20,6 +20,10 @@ public class OfflineWorksheet implements Worksheet{
 		this.data = (HashMap<String, String>) map.clone();
 	}
 	
+	public HashMap<String, String> getData(){
+		return data;
+	}
+	
 	@Override
 	public String getName() {
 		if (data.containsKey("name")){
@@ -31,7 +35,7 @@ public class OfflineWorksheet implements Worksheet{
 	public Spreadsheet getParent() {
 		return parent;
 	}
-
+	
 	@Override
 	public String getCell(String cell) {
 		return data.get(cell);

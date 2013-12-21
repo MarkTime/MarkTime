@@ -3,7 +3,6 @@ package boar401s2.marktime;
 import java.util.ArrayList;
 import java.util.List;
 
-import boar401s2.marktime.storage.handlers.Squads;
 import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,7 +20,7 @@ public class Roll extends FragmentActivity implements
 		ActionBar.OnNavigationListener {
 	
 	private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
-	static Squads squads;
+	//static Squads squads;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +32,13 @@ public class Roll extends FragmentActivity implements
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
-		squads = new Squads(null, null, null);
+		/*squads = new Squads(null, null, null);
 		List<String> sqds = squads.getLocalSquads();
 		
 		actionBar.setListNavigationCallbacks(
 				new ArrayAdapter<String>(this,
 						android.R.layout.simple_list_item_1,
-						android.R.id.text1, sqds), this);
+						android.R.id.text1, sqds), this);*/
 	}
 
 	@Override
@@ -100,7 +99,7 @@ public class Roll extends FragmentActivity implements
 			dummyTextView.setText(Integer.toString(getArguments().getInt(
 					ARG_SECTION_NUMBER)));
 			
-			dummyTextView.setText(squads.getLocalSquads().get(getArguments().getInt(ARG_SECTION_NUMBER)-1));
+			//dummyTextView.setText(squads.getLocalSquads().get(getArguments().getInt(ARG_SECTION_NUMBER)-1));
 			
 			return rootView;
 		}
