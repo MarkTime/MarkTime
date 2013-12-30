@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import boar401s2.marktime.storage.interfaces.Spreadsheet;
 import boar401s2.marktime.storage.interfaces.Worksheet;
+import boar401s2.marktime.util.Position;
 
 public class OfflineWorksheet implements Worksheet{
 
@@ -42,8 +43,9 @@ public class OfflineWorksheet implements Worksheet{
 	}
 
 	@Override
-	public void setCell(String cell, String value) {
-		data.put(cell, value);
+	public void setCell(Position pos, String value) {
+		pos.convertToSpreadsheetNotation();
+		data.put(pos.getCell(), value);
 	}
 
 	@Override
@@ -64,5 +66,11 @@ public class OfflineWorksheet implements Worksheet{
 		if (data.containsKey("width")){
 			return Integer.valueOf(data.get("height"));
 		} else { return -1; }
+	}
+
+	@Override
+	public boolean cellHasInformation(Position pos) {
+		//TODO stub
+		return false;
 	}
 }

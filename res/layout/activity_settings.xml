@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Spreadsheet Names:"
+        android:text="Spreadsheets"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
@@ -40,35 +40,14 @@
     </EditText>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/settings_auth_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/settings_spreadsheet_template"
         android:layout_below="@+id/settings_spreadsheet_template"
         android:layout_marginTop="24dp"
-        android:text="Login Details:"
+        android:text="Account"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/settings_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/settings_username"
-        android:layout_below="@+id/settings_username"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword" />
-
-    <EditText
-        android:id="@+id/settings_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="18dp"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="textEmailAddress" />
 
     <Button
         android:id="@+id/settings_submit"
@@ -78,5 +57,17 @@
         android:layout_centerHorizontal="true"
         android:onClick="onSubmit"
         android:text="Submit" />
+
+    <EditText
+        android:id="@+id/settings_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/settings_auth_label"
+        android:layout_below="@+id/settings_auth_label"
+        android:ems="10"
+        android:hint="Account"
+        android:layout_marginTop="24dp"
+        android:inputType="textEmailAddress"
+        android:onClick="onAccountEditorClicked" />
 
 </RelativeLayout>

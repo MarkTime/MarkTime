@@ -15,9 +15,11 @@ public class OnlineSpreadsheet implements Spreadsheet{
 	HashMap<String, OnlineWorksheet> map = new HashMap<String, OnlineWorksheet>();
 	SpreadsheetService service;
     GDrive parent;
+    public AuthenticatedSpreadsheetService spreadsheetService;
 	
-	public OnlineSpreadsheet(GDrive parent){
+	public OnlineSpreadsheet(GDrive parent, AuthenticatedSpreadsheetService spreadsheetService){
 		this.parent = parent;
+		this.spreadsheetService = spreadsheetService;
 	}
 
 	@Override

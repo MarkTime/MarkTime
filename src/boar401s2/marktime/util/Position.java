@@ -20,39 +20,42 @@ public class Position{
 		return String.valueOf(x)+", "+String.valueOf(y);
 	}
 	
-	public void convertToCartesian(String cell) throws Exception{
+	public String getCell(){
+		return cell;
+	}
+	
+	public void convertToCartesian(){
 		int x = 0;
 		int y = 0;
 		ArrayList<Character> xlist = new ArrayList<Character>();
 		String ychars = "";
-		for (int i = 0; i < cell.length(); i++){
+		for (int i = 0; i < cell.length()-1; i++){
 		    char c = cell.charAt(i); 
 		    if (isChar(c)){
 		    	xlist.add(c);
+		    	System.out.println(c);
 		    } else if (isNumber(c)){
 		    	ychars = ychars + c;
-		    } else {
-		    	throw new Exception("Invalid number entered");
 		    }
 		}
 		
 		int cnt = 0;
-		for (int i=xlist.size(); i>-1; i--){
-			x = (int) (x + Math.pow(26, cnt)*xlist.get(i));
+		for (int i=xlist.size()-1; i>-1; i--){
+			x = (int) (x + Math.pow(26, cnt)*((int)xlist.get(i)-64));
 			cnt += 1;
 		}
-		this.x = x;
+		this.x = x-1;
 		this.y = y;
 		this.cell = "";
 	}
 	
-	public void convertToSpreadsheetNotation(String cell){
+	public void convertToSpreadsheetNotation(){
 		int col_num = x;
 		int row_num = y;
 		row_num++;
 		col_num++;
 		String col_str = "";
-		while(col_num>1){
+		while(col_num>0){
 			int remainder = col_num % 26;
 			if (remainder == 0){
 				remainder = 26;
@@ -88,5 +91,13 @@ public class Position{
 		} else {
 			return false;
 		}
+	}
+
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
 	}
 }

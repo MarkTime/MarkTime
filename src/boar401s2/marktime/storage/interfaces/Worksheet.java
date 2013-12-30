@@ -1,5 +1,7 @@
 package boar401s2.marktime.storage.interfaces;
 
+import boar401s2.marktime.util.Position;
+
 public interface Worksheet {
 
 	/**
@@ -24,12 +26,12 @@ public interface Worksheet {
 	 * @param cell
 	 * @param data
 	 */
-	public void setCell(String cell, String data);
+	public void setCell(Position pos, String data);
 	
 	/**
 	 * Returns bool if cell contains information
 	 */
-	public boolean cellHasInformation(String cell);
+	public boolean cellHasInformation(Position pos);
 	
 	/**
 	 * Sets the size of the current worksheet

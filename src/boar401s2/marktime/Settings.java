@@ -1,7 +1,14 @@
 package boar401s2.marktime;
 
+import java.util.Arrays;
+
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.services.drive.DriveScopes;
+
 import android.os.Bundle;
+import android.accounts.AccountManager;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +21,8 @@ public class Settings extends Activity {
 	MarkTime parent;
 	SharedPreferences settings;
 	SharedPreferences.Editor editor;
+	
+	GoogleAccountCredential credential;
 	
 	public Settings(){
 		settings = MarkTime.settings;
@@ -34,12 +43,10 @@ public class Settings extends Activity {
 	public void fillTextBoxes(){
 		EditText spreadsheet = (EditText) findViewById(R.id.settings_spreadsheet_name);
 		EditText template = (EditText) findViewById(R.id.settings_spreadsheet_template);
-		EditText username = (EditText) findViewById(R.id.settings_username);
-		EditText password = (EditText) findViewById(R.id.settings_password);
+		EditText account = (EditText) findViewById(R.id.settings_account);
 		spreadsheet.setText(settings.getString("spreadsheet", ""));
 		template.setText(settings.getString("template", ""));
-		username.setText(settings.getString("username", ""));
-		password.setText(settings.getString("password", ""));
+		account.setText(settings.getString("account", ""));
 	}
 	
 	private void setupActionBar() {
@@ -69,34 +76,30 @@ public class Settings extends Activity {
 	public void onSubmit(View view){
 		EditText spreadsheet = (EditText) findViewById(R.id.settings_spreadsheet_name);
 		EditText template = (EditText) findViewById(R.id.settings_spreadsheet_template);
-		EditText username = (EditText) findViewById(R.id.settings_username);
-		EditText password = (EditText) findViewById(R.id.settings_password);
+		EditText account = (EditText) findViewById(R.id.settings_account);
 		editor.putString("spreadsheet", spreadsheet.getText().toString());
 		editor.putString("template", template.getText().toString());
-		editor.putString("username", username.getText().toString());
-		editor.putString("password", password.getText().toString());
+		editor.putString("account", account.getText().toString());
 		editor.apply();
 		finish();
 	}
 	
-	/*
-	 * 	private void getAccountNames() {
-		Intent intent = AccountPicker.newChooseAccountIntent(null, null,
-				new String[] { "com.google" }, false, null, null, null, null);
-		parentActivity.startActivityForResult(intent, ACCOUNT_PICKER);
+	/**
+	 * Callback for the textbox "Account". This opens 
+	 * an account selector dialog.
+	 * @param view
+	 */
+	public void onAccountEditorClicked(View view){
+		credential = GoogleAccountCredential.usingOAuth2(this, Arrays.asList(DriveScopes.DRIVE_FILE));
+	    startActivityForResult(credential.newChooseAccountIntent(), 1);
 	}
-
+	
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == ACCOUNT_PICKER && resultCode == RESULT_OK) {
+	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+		if(resultCode==RESULT_OK){
 			String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
-			txtAccount = accountName;
-		} else if (requestCode == USER_RECOVERABLE_AUTH && resultCode == RESULT_OK) {
-			new GetAuthToken(parentActivity, txtAccount).execute();
-		} else if (requestCode == USER_RECOVERABLE_AUTH && resultCode == RESULT_CANCELED) {
-			Toast.makeText(parentActivity, "User rejected authorization.",
-					Toast.LENGTH_SHORT).show();
+			EditText txt = (EditText) findViewById(R.id.settings_account);
+			txt.setText(accountName);
 		}
-	}*/
-
+	}
 }

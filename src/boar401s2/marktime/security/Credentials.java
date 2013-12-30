@@ -17,5 +17,13 @@ public class Credentials {
 	public String getPassword(){
 		return password;
 	}
-
+	
+	public boolean isEmpty(){
+		if (email.equalsIgnoreCase("") && password.equalsIgnoreCase("")){
+			return true;
+		} else {
+			return false;
+		}
+	}
+		
 }

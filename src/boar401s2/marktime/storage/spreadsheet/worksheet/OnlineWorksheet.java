@@ -11,6 +11,7 @@ import com.google.gdata.util.ServiceException;
 import boar401s2.marktime.storage.interfaces.Spreadsheet;
 import boar401s2.marktime.storage.interfaces.Worksheet;
 import boar401s2.marktime.storage.spreadsheet.OnlineSpreadsheet;
+import boar401s2.marktime.util.Position;
 
 public class OnlineWorksheet implements Worksheet{
 	
@@ -24,7 +25,7 @@ public class OnlineWorksheet implements Worksheet{
         this.parent = parent;
         cellFeedURL = worksheet.getCellFeedUrl();
         try {
-                feed = parent.parent.spreadsheetService.getFeed(cellFeedURL, CellFeed.class);
+                feed = parent.spreadsheetService.getSpreadsheetService().getFeed(cellFeedURL, CellFeed.class);
         } catch (IOException e) {
                 e.printStackTrace();
         } catch (ServiceException e) {
@@ -53,9 +54,9 @@ public class OnlineWorksheet implements Worksheet{
 	}
 
 	@Override
-	public void setCell(String cell, String data) {
+	public void setCell(Position pos, String data) {
         try {
-	        CellEntry entry = new CellEntry(pos.x, pos.y, value);
+	        CellEntry entry = new CellEntry(pos.getX(), pos.getY(), data);
 	        feed.insert(entry);
 	    } catch (ServiceException e) {
             e.printStackTrace();
@@ -84,6 +85,12 @@ public class OnlineWorksheet implements Worksheet{
 
 	public boolean cellHasInformation(String cell){
         return getCell(cell).length()>0;
+	}
+
+	@Override
+	public boolean cellHasInformation(Position pos) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
