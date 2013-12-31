@@ -25,12 +25,12 @@ public class OnlineWorksheet implements Worksheet{
         this.parent = parent;
         cellFeedURL = worksheet.getCellFeedUrl();
         try {
-                feed = parent.spreadsheetService.getSpreadsheetService().getFeed(cellFeedURL, CellFeed.class);
+        	feed = parent.spreadsheetService.getSpreadsheetService().getFeed(cellFeedURL, CellFeed.class);
         } catch (IOException e) {
                 e.printStackTrace();
         } catch (ServiceException e) {
-                e.printStackTrace();
-        }
+			e.printStackTrace();
+		}
 	}
 
 	@Override

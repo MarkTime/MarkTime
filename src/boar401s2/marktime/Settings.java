@@ -2,6 +2,7 @@ package boar401s2.marktime;
 
 import java.util.Arrays;
 
+import com.google.android.gms.common.AccountPicker;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.services.drive.DriveScopes;
 
@@ -91,12 +92,14 @@ public class Settings extends Activity {
 	 */
 	public void onAccountEditorClicked(View view){
 		credential = GoogleAccountCredential.usingOAuth2(this, Arrays.asList(DriveScopes.DRIVE_FILE));
-	    startActivityForResult(credential.newChooseAccountIntent(), 1);
+		Intent intent = AccountPicker.newChooseAccountIntent(null, null, new String[]{"com.google"},
+		         false, null, null, null, null);
+		 startActivityForResult(intent, 1);
 	}
 	
 	@Override
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-		if(resultCode==RESULT_OK){
+		if(requestCode==1 && resultCode==RESULT_OK){
 			String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
 			EditText txt = (EditText) findViewById(R.id.settings_account);
 			txt.setText(accountName);
