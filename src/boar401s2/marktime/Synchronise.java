@@ -1,11 +1,12 @@
 package boar401s2.marktime;
 
 import boar401s2.marktime.events.AsyncTaskParent;
-import boar401s2.marktime.security.Credentials;
 import boar401s2.marktime.storage.GDrive;
+import boar401s2.marktime.storage.tasks.ResultIDList;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -25,13 +26,12 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 			Toast.makeText(MarkTime.activity.getApplicationContext(), "Please enter spreadsheet name in 'Settings'", Toast.LENGTH_LONG).show();
 			finish();
 		}
-		Credentials creds = new Credentials(MarkTime.settings.getString("username", ""), MarkTime.settings.getString("password", ""));
-		if (creds.isEmpty()){
-			Toast.makeText(MarkTime.activity.getApplicationContext(), "Please enter login details in 'Settings'", Toast.LENGTH_LONG).show();
+		if (MarkTime.settings.getString("username", "").length()==0){
+			Toast.makeText(MarkTime.activity.getApplicationContext(), "Please enter username details in 'Settings'", Toast.LENGTH_LONG).show();
 			finish();
 		} else {
 			openProgressDialog("Connecting to GDrive...");
-			gdrive = new GDrive(this, this, creds);
+			gdrive = new GDrive(this, this, MarkTime.settings.getString("username", ""));
 		}
 	}
 	
@@ -63,7 +63,8 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 	@Override
 	public void onStatusChange(String status) {
 		if(!(progressDialog==null)){
-			progressDialog.dismiss();
+			progressDialog.setMessage(status);
+		} else {
 			openProgressDialog(status);
 		}
 	}
@@ -96,9 +97,21 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 	 * Called when spreadsheet service has been authenticated
 	 */
 	@Override
-	public void onPostExecute() {
+	public void onPostExecute(Integer taskID, Integer status) {
 		closeProgressDialog();
-		Toast.makeText(MarkTime.activity.getApplicationContext(), "Connected to Google Drive!", Toast.LENGTH_SHORT).show();
-		setContentView(R.layout.activity_synchronise);
+		if(status==ResultIDList.RESULT_OK){
+			Toast.makeText(MarkTime.activity.getApplicationContext(), "Connected!", Toast.LENGTH_SHORT).show();
+			setContentView(R.layout.activity_synchronise);
+		} else {
+			Toast.makeText(MarkTime.activity.getApplicationContext(), "Internal Error!", Toast.LENGTH_SHORT).show();
+			finish();
+		}
+	}
+	
+	@Override
+	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+		System.out.println(requestCode);
+		System.out.println(resultCode);
+		System.out.println(data);
 	}
 }
