@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
@@ -26,12 +27,12 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 			Toast.makeText(MarkTime.activity.getApplicationContext(), "Please enter spreadsheet name in 'Settings'", Toast.LENGTH_LONG).show();
 			finish();
 		}
-		if (MarkTime.settings.getString("username", "").length()==0){
-			Toast.makeText(MarkTime.activity.getApplicationContext(), "Please enter username details in 'Settings'", Toast.LENGTH_LONG).show();
+		if (MarkTime.settings.getString("account", "").length()==0){
+			Toast.makeText(MarkTime.activity.getApplicationContext(), "Please enter account details in 'Settings'", Toast.LENGTH_LONG).show();
 			finish();
 		} else {
 			openProgressDialog("Connecting to GDrive...");
-			gdrive = new GDrive(this, this, MarkTime.settings.getString("username", ""));
+			gdrive = new GDrive(this, this, MarkTime.settings.getString("account", ""));
 		}
 	}
 	
@@ -55,13 +56,14 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 		return super.onOptionsItemSelected(item);
 	}
 
-	//==========[Status Stuff]==========//
+	//==========[Callbacks]==========//
 	
 	/**
 	 * 'Callback' to update the status message
 	 */
 	@Override
 	public void onStatusChange(String status) {
+		System.out.println(status);
 		if(!(progressDialog==null)){
 			progressDialog.setMessage(status);
 		} else {
@@ -105,13 +107,54 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 		} else {
 			Toast.makeText(MarkTime.activity.getApplicationContext(), "Internal Error!", Toast.LENGTH_SHORT).show();
 			finish();
+			return;
 		}
 	}
 	
+	/**
+	 * Callback for when an activity returns
+	 */
 	@Override
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		System.out.println(requestCode);
 		System.out.println(resultCode);
 		System.out.println(data);
+	}
+	
+	/**
+	 * Callback for "Sync Local" button
+	 * @param view
+	 */
+	public void onSyncLocalClick(View view){
+		syncLocalWithRemote();
+	}
+	
+	/**
+	 * Callback for "Sync Remote" button
+	 * @param view
+	 */
+	public void onSyncRemoteClick(View view){
+		syncRemoteWithLocal();
+	}
+	
+	/**
+	 * Callback for "Sync" button
+	 * @param view
+	 */
+	public void onSyncClick(View view){
+		onSyncLocalClick(view);
+		onSyncRemoteClick(view);
+	}
+	
+	//==========[Sync Stuff]==========//
+	
+	public void syncRemoteWithLocal(){
+		for (String s: gdrive.getFiles()){
+			System.out.println(s);
+		}
+	}
+	
+	public void syncLocalWithRemote(){
+		
 	}
 }

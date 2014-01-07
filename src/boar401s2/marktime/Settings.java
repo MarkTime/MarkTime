@@ -45,9 +45,12 @@ public class Settings extends Activity {
 		EditText spreadsheet = (EditText) findViewById(R.id.settings_spreadsheet_name);
 		EditText template = (EditText) findViewById(R.id.settings_spreadsheet_template);
 		EditText account = (EditText) findViewById(R.id.settings_account);
+		EditText company = (EditText) findViewById(R.id.settings_company);
 		spreadsheet.setText(settings.getString("spreadsheet", ""));
 		template.setText(settings.getString("template", ""));
 		account.setText(settings.getString("account", ""));
+		company.setText(settings.getString("company", ""));
+		
 	}
 	
 	private void setupActionBar() {
@@ -78,9 +81,11 @@ public class Settings extends Activity {
 		EditText spreadsheet = (EditText) findViewById(R.id.settings_spreadsheet_name);
 		EditText template = (EditText) findViewById(R.id.settings_spreadsheet_template);
 		EditText account = (EditText) findViewById(R.id.settings_account);
+		EditText company = (EditText) findViewById(R.id.settings_company);
 		editor.putString("spreadsheet", spreadsheet.getText().toString());
 		editor.putString("template", template.getText().toString());
 		editor.putString("account", account.getText().toString());
+		editor.putString("company", company.getText().toString());
 		editor.apply();
 		finish();
 	}

@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="HardcodedText">
+        <ignore path="res/layout/activity_settings.xml" />
+        <ignore path="res/layout/activity_synchronise.xml" />
+    </issue>
 </lint>

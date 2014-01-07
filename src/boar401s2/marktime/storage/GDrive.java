@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.api.services.drive.Drive;
+import com.google.gdata.data.docs.DocumentListEntry;
 import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
 import android.app.Activity;
 import android.widget.Toast;
 import boar401s2.marktime.MarkTime;
 import boar401s2.marktime.events.AsyncTaskParent;
+import boar401s2.marktime.storage.spreadsheet.AuthenticatedDocsService;
 import boar401s2.marktime.storage.spreadsheet.AuthenticatedSpreadsheetService;
 import boar401s2.marktime.storage.spreadsheet.OnlineSpreadsheet;
 import boar401s2.marktime.storage.tasks.GetAuthToken;
@@ -25,8 +27,11 @@ public class GDrive implements AsyncTaskParent{
 	AsyncTaskParent eventsParent;
 	Activity activityParent;
 	String token;
+	
 	Drive driveService;
 	AuthenticatedSpreadsheetService authedSpreadsheetService;
+	AuthenticatedDocsService authedDocsService;
+	
 	String account;
 	
 	GetDriveService driveTask;
@@ -36,10 +41,7 @@ public class GDrive implements AsyncTaskParent{
 		this.eventsParent = eventsParent;
 		this.activityParent = activityParent;
 		this.account = account;
-		//Get drive service
-		//Get auth token
-		//Get authenticated spreadsheet service
-		driveTask = new GetDriveService(this, account);
+		driveTask = new GetDriveService(activityParent, this, account);
 		driveTask.run();
 	}
 	
@@ -49,6 +51,24 @@ public class GDrive implements AsyncTaskParent{
 	public AuthenticatedSpreadsheetService getAuthenticatedSpreadsheetService(){
 		return authedSpreadsheetService;
 	}
+	
+	/**
+	 * @return drive service
+	 */
+	public Drive getDriveService(){
+		return driveService;
+	}
+	
+	//==========[Document List stuff]==========//
+	public List<String> getFiles(){
+		List<String> files = new ArrayList<String>();
+		for (DocumentListEntry entry : authedDocsService.getDocsFeed().getEntries()) {
+			files.add(entry.getFilename());
+		}
+		return files;
+	}
+	
+	//==========[Spreadsheet Stuff]==========//
 	
 	/**
 	 * Gets a list of the spreadsheet names
@@ -71,22 +91,13 @@ public class GDrive implements AsyncTaskParent{
 		return new OnlineSpreadsheet(this, authedSpreadsheetService);
 	}
 	
-	//==========[Spreadsheet Stuff]==========//
-	
-	
-	//==========[Util]==========//
+	//==========[Events]==========//
 
 	@Override
 	public void onStatusChange(String status) {
 		eventsParent.onStatusChange(status);
 	}
-
-	@Override
-	public void openProgressDialog(String message) {}
-
-	@Override
-	public void closeProgressDialog() {}
-
+	
 	@Override
 	public void onPostExecute(Integer taskid, Integer result) {
 		if(taskid==TaskIDList.TASK_GET_DRIVE_SERVICE){ //If the finished task was getting the google drive service...
@@ -97,21 +108,23 @@ public class GDrive implements AsyncTaskParent{
 				Toast.makeText(MarkTime.activity.getApplicationContext(), "Internal error!", Toast.LENGTH_SHORT).show();
 				activityParent.finish();
 			}
-		} else if (taskid==TaskIDList.TASK_GET_AUTH_TOKEN){ //If the finished task was getting the auth token...
-			if (result==ResultIDList.RESULT_OK){ //If it finished fine then
+		} else if (taskid==TaskIDList.TASK_GET_AUTH_TOKEN){//When finished getting the docs service...
+			if (result==ResultIDList.RESULT_OK){ //If it got the docs successfully...
 				authedSpreadsheetService = new AuthenticatedSpreadsheetService(eventsParent);
 				authedSpreadsheetService.authenticate(authTask.getToken());
-			} else { //If it errored then
+			} else { //If it didn't then..
 				Toast.makeText(MarkTime.activity.getApplicationContext(), "Internal error!", Toast.LENGTH_SHORT).show();
+				activityParent.finish();
 			}
 		}
 	}
 
 	@Override
-	public void onPreExecute() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	//==========[Authentication]==========//
+	public void openProgressDialog(String message) {}
+
+	@Override
+	public void closeProgressDialog() {}
+
+	@Override
+	public void onPreExecute() {}
 }

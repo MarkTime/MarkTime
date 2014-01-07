@@ -1,5 +1,6 @@
 package boar401s2.marktime.security;
 
+@Deprecated
 public class Credentials {
 	
 	String email;

@@ -58,9 +58,12 @@ public class GetAuthToken {
 		
 		@Override
 		protected Integer doInBackground(Void... params) {
-			final Collection<String> SCOPES = new ArrayList<String>();   
+			final Collection<String> SCOPES = new ArrayList<String>();  
+			
 	        SCOPES.add("https://spreadsheets.google.com/feeds/");  
 	        SCOPES.add("https://docs.google.com/feeds/"); 
+	        SCOPES.add("https://docs.googleusercontent.com/");
+	        
 	        GACredential = GoogleAccountCredential.usingOAuth2(MarkTime.activity.getApplicationContext(), SCOPES);  
 	        am = AccountManager.get(MarkTime.activity.getApplicationContext());
 			publishProgress("Getting token...");

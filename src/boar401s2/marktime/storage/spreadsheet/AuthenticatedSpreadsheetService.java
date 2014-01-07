@@ -17,6 +17,7 @@ import com.google.gdata.data.spreadsheet.SpreadsheetFeed;
  * Used to autenticated services. At the moment it only authenticates
  * spreadsheet services.
  */
+@SuppressWarnings("deprecation")
 public class AuthenticatedSpreadsheetService{
 	
 	private String email;
