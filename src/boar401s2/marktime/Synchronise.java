@@ -3,6 +3,7 @@ package boar401s2.marktime;
 import boar401s2.marktime.events.AsyncTaskParent;
 import boar401s2.marktime.storage.GDrive;
 import boar401s2.marktime.storage.tasks.ResultIDList;
+import boar401s2.marktime.storage.tasks.SyncLocalTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -148,13 +149,11 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 	
 	//==========[Sync Stuff]==========//
 	
-	public void syncRemoteWithLocal(){
-		for (String s: gdrive.getFiles()){
-			System.out.println(s);
-		}
+	public void syncLocalWithRemote(){
+		 new SyncLocalTask(this).run();
 	}
 	
-	public void syncLocalWithRemote(){
+	public void syncRemoteWithLocal(){
 		
 	}
 }
