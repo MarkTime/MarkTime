@@ -16,11 +16,7 @@ public class TaskTemplate {
 		new TemplateTask().execute();
 	}
 	
-	/**
-	 * Task that gets the oauth2 token for a user
-	 */
 	class TemplateTask extends AsyncTask<Void, String, Integer> {	
-		boolean doneTask = false;
 		
 		@Override
 		protected void onPreExecute(){
