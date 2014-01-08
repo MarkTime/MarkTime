@@ -2,6 +2,8 @@ package boar401s2.marktime.storage.spreadsheet.worksheet;
 
 import java.util.HashMap;
 
+import com.google.gdata.data.DateTime;
+
 import boar401s2.marktime.storage.interfaces.Spreadsheet;
 import boar401s2.marktime.storage.interfaces.Worksheet;
 import boar401s2.marktime.util.Position;
@@ -41,6 +43,16 @@ public class OfflineWorksheet implements Worksheet{
 	public String getCell(String cell) {
 		return data.get(cell);
 	}
+	
+	@Override
+	public String getCell(Position pos) {
+		return null;
+	}
+
+	@Override
+	public void setCell(String cell, String data) {
+
+	}
 
 	@Override
 	public void setCell(Position pos, String value) {
@@ -53,6 +65,8 @@ public class OfflineWorksheet implements Worksheet{
 		data.put("width", String.valueOf(width));
 		data.put("height", String.valueOf(height));
 	}
+	
+	
 	
 	@Override
 	public int getHeight() {
@@ -70,7 +84,16 @@ public class OfflineWorksheet implements Worksheet{
 
 	@Override
 	public boolean cellHasInformation(Position pos) {
-		//TODO stub
 		return false;
+	}
+
+	@Override
+	public DateTime getModificationDate() {
+		return DateTime.parseDate(data.get("moddate"));
+	}
+
+	@Override
+	public void setModificationDate(DateTime date) {
+		data.put("moddate", date.toString());
 	}
 }

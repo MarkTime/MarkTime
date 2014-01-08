@@ -1,5 +1,9 @@
 package boar401s2.marktime.storage.interfaces;
 
+
+
+import com.google.gdata.data.DateTime;
+
 import boar401s2.marktime.util.Position;
 
 public interface Worksheet {
@@ -17,9 +21,14 @@ public interface Worksheet {
 	public Spreadsheet getParent();
 	
 	/**
-	 * Gets the specified cell's value
+	 * Gets the specified cell's value using it's string value
 	 */
 	public String getCell(String cell);
+	
+	/**
+	 * Gets the specified cell's value using it's XY value
+	 */
+	public String getCell(Position pos);
 	
 	/**
 	 * Sets the specified cell's value
@@ -27,6 +36,13 @@ public interface Worksheet {
 	 * @param data
 	 */
 	public void setCell(Position pos, String data);
+	
+	/**
+	 * Sets the cell's data
+	 * @param cell
+	 * @param data
+	 */
+	public void setCell(String cell, String data);
 	
 	/**
 	 * Returns bool if cell contains information
@@ -51,5 +67,15 @@ public interface Worksheet {
 	 * @return
 	 */
 	public int getWidth();
+	
+	/**
+	 * Gets the date of last modification
+	 */
+	public DateTime getModificationDate();
+	
+	/**
+	 * Sets the date of last modification
+	 */
+	public void setModificationDate(DateTime date);
 
 }

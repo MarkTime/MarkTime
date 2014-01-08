@@ -43,11 +43,11 @@ public class Settings extends Activity {
 	 */
 	public void fillTextBoxes(){
 		EditText spreadsheet = (EditText) findViewById(R.id.settings_spreadsheet_name);
-		EditText template = (EditText) findViewById(R.id.settings_spreadsheet_template);
+		EditText register = (EditText) findViewById(R.id.settings_spreadsheet_template);
 		EditText account = (EditText) findViewById(R.id.settings_account);
 		EditText company = (EditText) findViewById(R.id.settings_company);
 		spreadsheet.setText(settings.getString("spreadsheet", ""));
-		template.setText(settings.getString("template", ""));
+		register.setText(settings.getString("register", ""));
 		account.setText(settings.getString("account", ""));
 		company.setText(settings.getString("company", ""));
 		
@@ -79,11 +79,11 @@ public class Settings extends Activity {
 	 */
 	public void onSubmit(View view){
 		EditText spreadsheet = (EditText) findViewById(R.id.settings_spreadsheet_name);
-		EditText template = (EditText) findViewById(R.id.settings_spreadsheet_template);
+		EditText register = (EditText) findViewById(R.id.settings_spreadsheet_template);
 		EditText account = (EditText) findViewById(R.id.settings_account);
 		EditText company = (EditText) findViewById(R.id.settings_company);
 		editor.putString("spreadsheet", spreadsheet.getText().toString());
-		editor.putString("template", template.getText().toString());
+		editor.putString("register", register.getText().toString());
 		editor.putString("account", account.getText().toString());
 		editor.putString("company", company.getText().toString());
 		editor.apply();

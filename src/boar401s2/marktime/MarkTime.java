@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
@@ -96,5 +97,9 @@ public class MarkTime extends Activity {
 	 */
 	public void onExit(View view){
 		finish();
+	}
+	
+	public static void print(String string){
+		Log.i("General", string);
 	}
 }

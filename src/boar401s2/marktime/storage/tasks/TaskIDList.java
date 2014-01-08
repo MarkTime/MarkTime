@@ -11,5 +11,6 @@ public class TaskIDList {
 	public static int TASK_SYNC_LOCAL = 7;
 	public static int TASK_SYNC_REMOTE = 8;
 	public static int TASK_TEMPLATE = 9;
+	public static int TASK_GDRIVE_CONNECTED = 10;
 
 }

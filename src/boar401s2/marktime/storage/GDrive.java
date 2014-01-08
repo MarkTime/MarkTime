@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.api.services.drive.Drive;
-import com.google.gdata.data.docs.DocumentListEntry;
 import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
 import android.app.Activity;
 import android.widget.Toast;
 import boar401s2.marktime.MarkTime;
 import boar401s2.marktime.events.AsyncTaskParent;
-import boar401s2.marktime.storage.spreadsheet.AuthenticatedDocsService;
 import boar401s2.marktime.storage.spreadsheet.AuthenticatedSpreadsheetService;
 import boar401s2.marktime.storage.spreadsheet.OnlineSpreadsheet;
 import boar401s2.marktime.storage.tasks.GetAuthToken;
@@ -30,7 +28,6 @@ public class GDrive implements AsyncTaskParent{
 	
 	Drive driveService;
 	AuthenticatedSpreadsheetService authedSpreadsheetService;
-	AuthenticatedDocsService authedDocsService;
 	
 	String account;
 	
@@ -59,15 +56,6 @@ public class GDrive implements AsyncTaskParent{
 		return driveService;
 	}
 	
-	//==========[Document List stuff]==========//
-	public List<String> getFiles(){
-		List<String> files = new ArrayList<String>();
-		for (DocumentListEntry entry : authedDocsService.getDocsFeed().getEntries()) {
-			files.add(entry.getFilename());
-		}
-		return files;
-	}
-	
 	//==========[Spreadsheet Stuff]==========//
 	
 	/**
@@ -88,7 +76,20 @@ public class GDrive implements AsyncTaskParent{
 	 * @return OnlineSpreadsheet
 	 */
 	public OnlineSpreadsheet getSpreadsheet(String name){
-		return new OnlineSpreadsheet(this, authedSpreadsheetService);
+		for (SpreadsheetEntry e: authedSpreadsheetService.getSpreadsheetFeed().getEntries()){
+			if (e.getTitle().getPlainText().equalsIgnoreCase(name)){
+				return new OnlineSpreadsheet(this, e);
+			}
+		}
+		return null;
+	}
+	
+	public boolean spreadsheetExists(String name){
+		if (getSpreadsheet(name)==null){
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	//==========[Events]==========//
@@ -110,10 +111,17 @@ public class GDrive implements AsyncTaskParent{
 			}
 		} else if (taskid==TaskIDList.TASK_GET_AUTH_TOKEN){//When finished getting the docs service...
 			if (result==ResultIDList.RESULT_OK){ //If it got the docs successfully...
-				authedSpreadsheetService = new AuthenticatedSpreadsheetService(eventsParent);
+				authedSpreadsheetService = new AuthenticatedSpreadsheetService(this);
 				authedSpreadsheetService.authenticate(authTask.getToken());
 			} else { //If it didn't then..
 				Toast.makeText(MarkTime.activity.getApplicationContext(), "Internal error!", Toast.LENGTH_SHORT).show();
+				activityParent.finish();
+			}
+		} else if (taskid==TaskIDList.TASK_AUTH_SPREADSHEET_SERVICE){
+			if (result==ResultIDList.RESULT_OK){
+				eventsParent.onPostExecute(TaskIDList.TASK_GDRIVE_CONNECTED, ResultIDList.RESULT_OK);
+			} else {
+				Toast.makeText(MarkTime.activity.getApplicationContext(), "Internal Error!", Toast.LENGTH_SHORT).show();
 				activityParent.finish();
 			}
 		}

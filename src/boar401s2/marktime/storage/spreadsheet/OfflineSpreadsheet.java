@@ -47,6 +47,10 @@ public class OfflineSpreadsheet implements Spreadsheet{
 	public int getNumberOfWorksheets() {
 		return worksheets.size();
 	}
+	
+	public void insertWorksheet(OfflineWorksheet worksheet){
+		worksheets.put(worksheet.getName(), worksheet);
+	}
 
 	@Override
 	public void refresh() {

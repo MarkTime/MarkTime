@@ -67,7 +67,6 @@ public class GetAuthToken {
 	        GACredential = GoogleAccountCredential.usingOAuth2(MarkTime.activity.getApplicationContext(), SCOPES);  
 	        am = AccountManager.get(MarkTime.activity.getApplicationContext());
 			publishProgress("Getting token...");
-			System.out.println(account);
 			GACredential.setSelectedAccountName(account);
 	        am.getAuthToken(GACredential.getSelectedAccount(), GACredential.getScope(),  
 	                 null, activityParent, new AccountManagerCallback<Bundle>() {  
@@ -78,7 +77,6 @@ public class GetAuthToken {
 		    }, null);
 	        while(doneTask==false){}
 			if(token!=null){
-				System.out.println("Got token successfully!");
 				return ResultIDList.RESULT_OK;
 			} else {
 				return ResultIDList.RESULT_ERROR;

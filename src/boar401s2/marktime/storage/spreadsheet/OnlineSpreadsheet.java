@@ -1,9 +1,16 @@
 package boar401s2.marktime.storage.spreadsheet;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gdata.client.spreadsheet.SpreadsheetService;
+import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
+import com.google.gdata.data.spreadsheet.WorksheetEntry;
+import com.google.gdata.util.ServiceException;
 
 import boar401s2.marktime.storage.GDrive;
 import boar401s2.marktime.storage.interfaces.Spreadsheet;
@@ -12,61 +19,105 @@ import boar401s2.marktime.storage.spreadsheet.worksheet.OnlineWorksheet;
 
 public class OnlineSpreadsheet implements Spreadsheet{
 	
-	HashMap<String, OnlineWorksheet> map = new HashMap<String, OnlineWorksheet>();
 	SpreadsheetService service;
     GDrive parent;
     public AuthenticatedSpreadsheetService spreadsheetService;
+    SpreadsheetEntry spreadsheet;
 	
-	public OnlineSpreadsheet(GDrive parent, AuthenticatedSpreadsheetService spreadsheetService){
+	HashMap<String, OnlineWorksheet> mapOfWorksheets = new HashMap<String, OnlineWorksheet>();
+    List<Worksheet> listOfWorksheets = new ArrayList<Worksheet>();
+	
+	public OnlineSpreadsheet(GDrive parent, SpreadsheetEntry spreadsheet){
 		this.parent = parent;
-		this.spreadsheetService = spreadsheetService;
+		this.spreadsheetService = parent.getAuthenticatedSpreadsheetService();
+		this.spreadsheet = spreadsheet;
+		try {
+			compileMapOfWorksheets();
+			compileListOfWorksheets();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public String getName() {
-		
-		return null;
+		return spreadsheet.getTitle().getPlainText();
 	}
 
 	@Override
 	public Worksheet getWorksheet(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapOfWorksheets.get(name);
 	}
 
 	@Override
 	public List<Worksheet> getWorksheets() {
-		// TODO Auto-generated method stub
-		return null;
+		return listOfWorksheets;
 	}
 
 	@Override
 	public int getNumberOfWorksheets() {
-		// TODO Auto-generated method stub
-		return 0;
+		return mapOfWorksheets.size();
 	}
 
 	@Override
 	public void refresh() {
-		// TODO Auto-generated method stub
-		
+		try {
+			compileMapOfWorksheets();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ServiceException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void save(String address) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void load(String source) {
-		// TODO Auto-generated method stub
-		
 	}
 
+	/**
+	 * Not implemented yet!
+	 */
 	@Override
 	public String getParentFolder() {
 		return null;
+	}
+	
+	/**
+	 * Fills out mapOfWorksheets with Title,Worksheet pairs
+	 * @throws IOException
+	 * @throws ServiceException
+	 */
+	public void compileMapOfWorksheets() throws IOException, ServiceException{
+		for(WorksheetEntry worksheet: spreadsheet.getWorksheets()){
+			mapOfWorksheets.put(worksheet.getTitle().getPlainText(), new OnlineWorksheet(worksheet, this));
+		}
+		compileListOfWorksheets();
+	}
+	
+	/**
+	 * Populates listOfWorksheets with worksheets
+	 * Pre-req: mapOfWorksheets to have been populated
+	 * @throws IOException
+	 * @throws ServiceException
+	 */
+	@SuppressWarnings("rawtypes")
+	public void compileListOfWorksheets() throws IOException, ServiceException{
+		Iterator it = mapOfWorksheets.entrySet().iterator();
+	    while (it.hasNext()) {
+	        Map.Entry pairs = (Map.Entry)it.next();
+	        listOfWorksheets.add((Worksheet) pairs.getValue()); 
+	        it.remove();
+	    }
+	}
+	
+	public AuthenticatedSpreadsheetService getService(){
+		return spreadsheetService;
 	}
 
 }

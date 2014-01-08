@@ -4,6 +4,7 @@ import boar401s2.marktime.events.AsyncTaskParent;
 import boar401s2.marktime.storage.GDrive;
 import boar401s2.marktime.storage.tasks.ResultIDList;
 import boar401s2.marktime.storage.tasks.SyncLocalTask;
+import boar401s2.marktime.storage.tasks.TaskIDList;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -64,7 +65,6 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 	 */
 	@Override
 	public void onStatusChange(String status) {
-		System.out.println(status);
 		if(!(progressDialog==null)){
 			progressDialog.setMessage(status);
 		} else {
@@ -102,13 +102,17 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 	@Override
 	public void onPostExecute(Integer taskID, Integer status) {
 		closeProgressDialog();
-		if(status==ResultIDList.RESULT_OK){
+		if (taskID==TaskIDList.TASK_GDRIVE_CONNECTED){
 			Toast.makeText(MarkTime.activity.getApplicationContext(), "Connected!", Toast.LENGTH_SHORT).show();
+			closeProgressDialog();
 			setContentView(R.layout.activity_synchronise);
-		} else {
-			Toast.makeText(MarkTime.activity.getApplicationContext(), "Internal Error!", Toast.LENGTH_SHORT).show();
-			finish();
-			return;
+		} else if(taskID==TaskIDList.TASK_SYNC_LOCAL){
+			closeProgressDialog();
+			if (status==ResultIDList.RESULT_OK){
+				Toast.makeText(MarkTime.activity.getApplicationContext(), "Sync'ed local device!", Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(MarkTime.activity.getApplicationContext(), "Internal Error!", Toast.LENGTH_SHORT).show();
+			}
 		}
 	}
 	
@@ -117,9 +121,6 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 	 */
 	@Override
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-		System.out.println(requestCode);
-		System.out.println(resultCode);
-		System.out.println(data);
 	}
 	
 	/**
@@ -150,10 +151,12 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 	//==========[Sync Stuff]==========//
 	
 	public void syncLocalWithRemote(){
-		 new SyncLocalTask(this).run();
+		MarkTime.print("Sync local with remote");
+		new SyncLocalTask(this, gdrive).run();
 	}
 	
 	public void syncRemoteWithLocal(){
-		
+		MarkTime.print("Sync remote with local");
 	}
+	
 }

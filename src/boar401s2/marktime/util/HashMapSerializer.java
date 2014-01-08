@@ -16,7 +16,6 @@ public class HashMapSerializer {
 			Map.Entry pairs = (Map.Entry)it.next();
 			result = result + (String)pairs.getKey()+","+(String)pairs.getValue()+";";
 		}
-		System.out.println(result);
 		return new String(Base64.encode(result.getBytes(), Base64.DEFAULT));
 	}
 	
