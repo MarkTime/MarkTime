@@ -1,7 +1,6 @@
 package boar401s2.marktime.storage.tasks;
 
 import java.io.IOException;
-
 import com.google.gdata.data.spreadsheet.CellEntry;
 import com.google.gdata.util.ServiceException;
 
@@ -43,15 +42,34 @@ public class SyncLocalTask {
 		
 		@Override
 		protected Integer doInBackground(Void... params) {
-			publishProgress("Opening spreadsheet...");
+			downloadRegister();
+			downloadAttendance();
+			parent.closeProgressDialog();
+			return ResultIDList.RESULT_OK;
+		}
+		
+		@Override
+		protected void onPostExecute(Integer result){
+			if (result!=ResultIDList.RESULT_NO_RETURN){
+				parent.onPostExecute(TaskIDList.TASK_SYNC_LOCAL, result);
+			}
+		}
+		
+		@Override
+		public void onProgressUpdate(String... text){
+			parent.onStatusChange(text[0]);
+		}
+		
+		public void downloadRegister(){
+			publishProgress("Opening Register Spreadsheet...");
 			
 			//Initalize spreadsheets
 			OnlineSpreadsheet onlineSpreadsheet = drive.getSpreadsheet(MarkTime.settings.getString("register", ""));
-			OfflineSpreadsheet offlineSpreadsheet = new OfflineSpreadsheet("Register");
+			OfflineSpreadsheet offlineSpreadsheet = new OfflineSpreadsheet(onlineSpreadsheet.getName());
 			
 			//Loop through all the online spreadsheet's worksheets
 			for(Worksheet worksheet: onlineSpreadsheet.getWorksheets()){
-				publishProgress("Updating '"+"Register:"+worksheet.getName()+"'!");
+				publishProgress("Updating '"+onlineSpreadsheet.getName()+":"+worksheet.getName()+"'!");
 				
 				//Initalize worksheets
 				OnlineWorksheet onlineWorksheet = (OnlineWorksheet) worksheet;
@@ -70,22 +88,40 @@ public class SyncLocalTask {
 				offlineWorksheet.setModificationDate(onlineWorksheet.getModificationDate());
 				offlineSpreadsheet.insertWorksheet(offlineWorksheet);
 			}
-			publishProgress("Saving 'Register'...");
-			offlineSpreadsheet.save(MarkTime.activity.getFilesDir().getAbsolutePath()+"Register.db");
-			parent.closeProgressDialog();
-			return ResultIDList.RESULT_OK;
+			publishProgress("Saving '"+onlineSpreadsheet.getName()+"'...");
+			offlineSpreadsheet.save(MarkTime.activity.getFilesDir()+"/"+onlineSpreadsheet.getName()+".db");
 		}
 		
-		@Override
-		protected void onPostExecute(Integer result){
-			if (result!=ResultIDList.RESULT_NO_RETURN){
-				parent.onPostExecute(TaskIDList.TASK_SYNC_LOCAL, result);
+		public void downloadAttendance(){
+			publishProgress("Opening Attendance Spreadsheet...");
+			
+			//Initalize spreadsheets
+			OnlineSpreadsheet onlineSpreadsheet = drive.getSpreadsheet(MarkTime.settings.getString("spreadsheet", ""));
+			OfflineSpreadsheet offlineSpreadsheet = new OfflineSpreadsheet(onlineSpreadsheet.getName());
+			
+			//Loop through all the online spreadsheet's worksheets
+			for(Worksheet worksheet: onlineSpreadsheet.getWorksheets()){
+				publishProgress("Updating '"+onlineSpreadsheet.getName()+":"+worksheet.getName()+"'!");
+				
+				//Initalize worksheets
+				OnlineWorksheet onlineWorksheet = (OnlineWorksheet) worksheet;
+				OfflineWorksheet offlineWorksheet = new OfflineWorksheet(onlineWorksheet.getName(), offlineSpreadsheet);
+				
+				try {
+					for(CellEntry cell: onlineWorksheet.getCellFeed().getEntries()){
+						offlineWorksheet.setCell(cell.getTitle().getPlainText(), cell.getPlainTextContent());
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (ServiceException e) {
+					e.printStackTrace();
+				}
+				offlineWorksheet.setSize(onlineWorksheet.getWidth(), onlineWorksheet.getHeight());
+				offlineWorksheet.setModificationDate(onlineWorksheet.getModificationDate());
+				offlineSpreadsheet.insertWorksheet(offlineWorksheet);
 			}
-		}
-		
-		@Override
-		public void onProgressUpdate(String... text){
-			parent.onStatusChange(text[0]);
+			publishProgress("Saving '"+onlineSpreadsheet.getName()+"'...");
+			offlineSpreadsheet.save(MarkTime.activity.getFilesDir()+"/"+onlineSpreadsheet.getName()+".db");
 		}
 	}
 

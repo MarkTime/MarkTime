@@ -35,14 +35,14 @@ public interface Worksheet {
 	 * @param cell
 	 * @param data
 	 */
-	public void setCell(Position pos, String data);
+	public void setCell(Position pos, String value);
 	
 	/**
 	 * Sets the cell's data
 	 * @param cell
 	 * @param data
 	 */
-	public void setCell(String cell, String data);
+	public void setCell(String cell, String value);
 	
 	/**
 	 * Returns bool if cell contains information

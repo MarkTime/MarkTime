@@ -50,14 +50,14 @@ public class OfflineWorksheet implements Worksheet{
 	}
 
 	@Override
-	public void setCell(String cell, String data) {
-
+	public void setCell(String cell, String value) {
+		data.put(cell, value);
 	}
 
 	@Override
 	public void setCell(Position pos, String value) {
 		pos.convertToSpreadsheetNotation();
-		data.put(pos.getCell(), value);
+		setCell(pos.getCell(), value);
 	}
 
 	@Override

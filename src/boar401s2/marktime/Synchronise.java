@@ -94,6 +94,7 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 	 */
 	@Override
 	public void onPreExecute() {
+		
 	}
 	
 	/**
@@ -109,7 +110,7 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 		} else if(taskID==TaskIDList.TASK_SYNC_LOCAL){
 			closeProgressDialog();
 			if (status==ResultIDList.RESULT_OK){
-				Toast.makeText(MarkTime.activity.getApplicationContext(), "Sync'ed local device!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(MarkTime.activity.getApplicationContext(), "Synced local device!", Toast.LENGTH_SHORT).show();
 			} else {
 				Toast.makeText(MarkTime.activity.getApplicationContext(), "Internal Error!", Toast.LENGTH_SHORT).show();
 			}
