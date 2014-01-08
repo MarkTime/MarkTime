@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 public class Roll extends FragmentActivity implements
@@ -29,27 +30,19 @@ public class Roll extends FragmentActivity implements
 	Company company;
 	Section section;
 	Squad squad;
+	
+	CharSequence[] sectionChoices;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Company company = new Company(this);
-		
-		List<String> sections = company.getSections();
-		final CharSequence[] items = sections.toArray(new CharSequence[sections.size()]);
+		company = new Company(this);
+		List<String> sections = company.getSectionNames();
+		sectionChoices = sections.toArray(new CharSequence[sections.size()]);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Section to Mark");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
+        builder.setItems(sectionChoices, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-            	section = new Section();
-            	selectedSection = (String) items[item];
-            	
-            	/*squads = new Squads(null, null, null);
-        		List<String> sqds = squads.getLocalSquads();
-        		
-        		actionBar.setListNavigationCallbacks(
-        				new ArrayAdapter<String>(this,
-        						android.R.layout.simple_list_item_1,
-        						android.R.id.text1, sqds), this);*/
+            	setupSquadList(item);
             }
         });
         AlertDialog alert = builder.create();
@@ -57,12 +50,20 @@ public class Roll extends FragmentActivity implements
         
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_roll);
-
+	}
+	
+	public void setupSquadList(int item){
+		String choice = (String) sectionChoices[item];
+		section = company.getSection(choice);
+		List<String> sqds = section.getSquadNames();
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		actionBar.setDisplayHomeAsUpEnabled(true);
-		
+		actionBar.setListNavigationCallbacks(
+				new ArrayAdapter<String>(this,
+						android.R.layout.simple_list_item_1,
+						android.R.id.text1, sqds), this);
 	}
 
 	@Override

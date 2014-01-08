@@ -41,12 +41,19 @@ public class OfflineWorksheet implements Worksheet{
 	
 	@Override
 	public String getCell(String cell) {
-		return data.get(cell);
+		if(!data.containsKey(cell)){
+			return "";
+		} else {
+			return data.get(cell);
+		}
 	}
 	
+	@Deprecated
 	@Override
+	//TODO Need to fix, not working at last check
 	public String getCell(Position pos) {
-		return null;
+		pos.convertToSpreadsheetNotation();
+		return getCell(pos.getCell());
 	}
 
 	@Override

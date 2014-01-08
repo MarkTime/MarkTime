@@ -27,17 +27,33 @@ public class Company {
 		register.load(MarkTime.activity.getFilesDir()+"/"+register.getName()+".db");
 	}
 	
+	public Section getSection(String name){
+		if (getSectionNames().contains(name)){
+			return new Section(name, this);
+		} else {
+			return null;
+		}
+	}
+	
 	/**
 	 * Gets a list of the sections
 	 */
-	public List<String> getSections(){
-		List<String> sections = new ArrayList<String>();
+	public List<Section> getSections(){
+		List<Section> sections = new ArrayList<Section>();
 		for (Worksheet sheet: attendance.getWorksheets()){
 			if(sheet.getName().startsWith("Section-")){
-				sections.add(sheet.getName());
+				sections.add(new Section(sheet.getName(), this));
 			}
 		}
 		return sections;
+	}
+	
+	public List<String> getSectionNames(){
+		List<String> result = new ArrayList<String>();
+		for (Section s: getSections()){
+			result.add(s.getName());
+		}
+		return result;
 	}
 	
 	//==========[Spreadsheet Stuff]==========//
