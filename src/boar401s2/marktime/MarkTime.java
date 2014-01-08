@@ -1,7 +1,9 @@
 package boar401s2.marktime;
  
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -28,6 +30,8 @@ public class MarkTime extends Activity {
 	public static SharedPreferences settings;
 	public static SharedPreferences.Editor editor;
 	public static Activity activity;
+	
+	public static String selectedSection = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

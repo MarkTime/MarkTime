@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gdata.client.spreadsheet.SpreadsheetService;
+import com.google.gdata.data.Person;
 import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
 import com.google.gdata.data.spreadsheet.WorksheetEntry;
 import com.google.gdata.util.ServiceException;
@@ -44,6 +45,14 @@ public class OnlineSpreadsheet implements Spreadsheet{
 	@Override
 	public String getName() {
 		return spreadsheet.getTitle().getPlainText();
+	}
+	
+	public List<String> getAuthors(){
+		List<String> authors = new ArrayList<String>();
+		for (Person p: spreadsheet.getAuthors()){
+			authors.add(p.getName());
+		}
+		return authors;
 	}
 
 	@Override
