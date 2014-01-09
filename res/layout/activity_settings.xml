@@ -9,7 +9,7 @@
     tools:context=".Settings" >
 
     <ScrollView
-        android:id="@+id/scrollView1"
+        android:id="@+id/roll_list"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true" >
@@ -20,7 +20,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/boy_boys_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Spreadsheets"

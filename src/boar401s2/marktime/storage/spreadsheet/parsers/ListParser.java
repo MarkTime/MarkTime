@@ -19,7 +19,6 @@ public class ListParser {
 	}
 	
 	public List<String> parse(Position pos){// TODO When getCell(pos) is updated, use it here
-		System.out.println("Parsing...");
 		List<String> result = new ArrayList<String>();
 		int yCounter = 0;
 		while(true){

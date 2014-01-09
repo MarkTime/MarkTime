@@ -39,7 +39,6 @@ public class Section {
 		
 	}
 	public List<Squad> getSquads(){
-		System.out.println(getName());
 		Worksheet worksheet = getCompany().getAttendanceSpreadsheet().getWorksheet(getName());
 		ListParser listParser = new ListParser(worksheet);
 		List<String> squadNames = listParser.parse(new Position(0, 1));

@@ -7,9 +7,10 @@
     tools:ignore="MergeRootFrame" >
 
     <ScrollView
-        android:id="@+id/scrollView1"
+        android:id="@+id/roll_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
+
     </ScrollView>
 
 </FrameLayout>

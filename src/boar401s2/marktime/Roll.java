@@ -1,12 +1,16 @@
 package boar401s2.marktime;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import boar401s2.marktime.events.AsyncTaskParent;
 import boar401s2.marktime.handlers.Company;
 import boar401s2.marktime.handlers.Section;
 import boar401s2.marktime.handlers.Squad;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -19,7 +23,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 public class Roll extends FragmentActivity implements
 		ActionBar.OnNavigationListener, AsyncTaskParent{
@@ -30,40 +35,15 @@ public class Roll extends FragmentActivity implements
 	Company company;
 	Section section;
 	Squad squad;
-	
+	List<String> squads;
 	CharSequence[] sectionChoices;
+	Activity activity = this;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		company = new Company(this);
-		List<String> sections = company.getSectionNames();
-		sectionChoices = sections.toArray(new CharSequence[sections.size()]);
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Section to Mark");
-        builder.setItems(sectionChoices, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-            	setupSquadList(item);
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.show();
-        
+		showSectionSelector();
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_roll);
-	}
-	
-	public void setupSquadList(int item){
-		String choice = (String) sectionChoices[item];
-		section = company.getSection(choice);
-		List<String> sqds = section.getSquadNames();
-		final ActionBar actionBar = getActionBar();
-		actionBar.setDisplayShowTitleEnabled(false);
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setListNavigationCallbacks(
-				new ArrayAdapter<String>(this,
-						android.R.layout.simple_list_item_1,
-						android.R.id.text1, sqds), this);
 	}
 
 	@Override
@@ -97,21 +77,27 @@ public class Roll extends FragmentActivity implements
 	}
 
 	@Override
-	public boolean onNavigationItemSelected(int position, long id) {
-		Fragment fragment = new DummySectionFragment();
+	public boolean onNavigationItemSelected(int position, long id) { //Show fragment when item selected
+		Fragment fragment = new BoysInSquadFragment();
+		
 		Bundle args = new Bundle();
-		args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-		args.putString("Title", "");
+		System.out.println("positions!");
+		System.out.println(position);
+		System.out.println(squads.get(position));
+		args.putString("selection", squads.get(position));
 		fragment.setArguments(args);
+		
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.container, fragment).commit();
 		return true;
 	}
 
-	public static class DummySectionFragment extends Fragment {
-		public static final String ARG_SECTION_NUMBER = "section_number";
+	class BoysInSquadFragment extends Fragment {
 
-		public DummySectionFragment() {}
+		List<Map<String, String>> boysNames = new ArrayList<Map<String, String>>();
+		Squad squad;
+		
+		public BoysInSquadFragment() {}
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,45 +105,68 @@ public class Roll extends FragmentActivity implements
 			View rootView = inflater.inflate(R.layout.fragment_roll_dummy,
 					container, false);
 			
-			TextView dummyTextView = (TextView) rootView
-					.findViewById(R.id.section_label);
-			dummyTextView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
-			
-			//dummyTextView.setText(squads.getLocalSquads().get(getArguments().getInt(ARG_SECTION_NUMBER)-1));
+			ListView boysListView = (ListView) rootView.findViewById(R.id.roll_list);
+			//Add in code to populate boysNames
+			squad = section.getSquad(getArguments().getString("selection"));
+			System.out.println(squad);
+			for(String boy: squad.getBoysNames()){
+				boysNames.add(createBoyEntry(boy));
+			}
+			boysNames.add(createBoyEntry("Create new boy..."));
+			SimpleAdapter simpleAdpt = new SimpleAdapter(activity, boysNames, android.R.layout.simple_list_item_1, new String[] {"boy"}, new int[] {android.R.id.text1});
+			boysListView.setAdapter(simpleAdpt);
 			
 			return rootView;
 		}
+		
+		public HashMap<String, String> createBoyEntry(String name){
+			HashMap<String, String> entry = new HashMap<String, String>();
+			entry.put("boy", name);
+			return entry;
+		}
+	}
+	
+	public void showSectionSelector(){
+		company = new Company(this); //Put up a list asking between sections
+		List<String> sections = company.getSectionNames();
+		sectionChoices = sections.toArray(new CharSequence[sections.size()]);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Section to Mark");
+        builder.setItems(sectionChoices, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+            	populateSquadList(item);
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+	}
+	
+	public void populateSquadList(int item){
+		String choice = (String) sectionChoices[item];
+		section = company.getSection(choice);
+		squads = section.getSquadNames();
+		final ActionBar actionBar = getActionBar();
+		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setListNavigationCallbacks(
+				new ArrayAdapter<String>(this,
+						android.R.layout.simple_list_item_1,
+						android.R.id.text1, squads), this);
 	}
 
 	@Override
-	public void onStatusChange(String status) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onStatusChange(String status) {}
 
 	@Override
-	public void openProgressDialog(String message) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void openProgressDialog(String message) {}
 
 	@Override
-	public void closeProgressDialog() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void closeProgressDialog() {}
 
 	@Override
-	public void onPostExecute(Integer taskid, Integer result) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onPostExecute(Integer taskid, Integer result) {}
 
 	@Override
-	public void onPreExecute() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void onPreExecute() {}
 }
