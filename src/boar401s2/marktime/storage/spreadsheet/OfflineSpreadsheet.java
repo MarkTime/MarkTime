@@ -37,6 +37,15 @@ public class OfflineSpreadsheet implements Spreadsheet{
 	public Worksheet getWorksheet(String name) {
 		return worksheets.get(name);
 	}
+	
+	@Override
+	public List<String> getWorksheetNames(){
+		List<String> names = new ArrayList<String>();
+		for(Worksheet worksheet: getWorksheets()){
+			names.add(worksheet.getName());
+		}
+		return names;
+	}
 
 	@Override
 	public List<Worksheet> getWorksheets() {
@@ -114,6 +123,24 @@ public class OfflineSpreadsheet implements Spreadsheet{
 		return null;
 	}
 
-	
+	@Override
+	public void duplicateSheet(String sheet, String name) {
+		OfflineWorksheet a = (OfflineWorksheet) getWorksheet(sheet);
+		OfflineWorksheet b = new OfflineWorksheet(name, this);
+		b.setData(a.getData());
+		b.setName(name);
+		worksheets.put(name, b);
+	}
+
+	@Override
+	public boolean worksheetExists(String name) {
+		return worksheets.containsKey(name);
+	}
+
+	@Override
+	public void createWorksheet(String name) {
+		OfflineWorksheet worksheet = new OfflineWorksheet(name, this);
+		worksheets.put(name, worksheet);
+	}
 	
 }

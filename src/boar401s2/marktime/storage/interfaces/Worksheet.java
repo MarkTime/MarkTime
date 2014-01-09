@@ -15,6 +15,12 @@ public interface Worksheet {
 	public String getName();
 	
 	/**
+	 * Sets the name of the worksheet
+	 * @param name
+	 */
+	public void setName(String name);
+	
+	/**
 	 * Gets the worksheet's parent
 	 * @return
 	 */

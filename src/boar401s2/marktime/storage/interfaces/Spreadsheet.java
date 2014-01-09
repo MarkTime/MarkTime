@@ -23,6 +23,12 @@ public interface Spreadsheet {
 	public Worksheet getWorksheet(String name);
 	
 	/**
+	 * Get list of the worksheet names
+	 * @return
+	 */
+	public List<String> getWorksheetNames();
+	
+	/**
 	 * Gets a list of the current worksheets
 	 * @return
 	 */
@@ -33,6 +39,19 @@ public interface Spreadsheet {
 	 * @return
 	 */
 	public int getNumberOfWorksheets();
+	
+	/**
+	 * Returns of the specified worksheet exists
+	 * @param name Name of spreadsheet to find out if exists
+	 * @return
+	 */
+	public boolean worksheetExists(String name);
+	
+	/**
+	 * Creates a worksheet
+	 * @param name Name of the worksheet to create
+	 */
+	public void createWorksheet(String name);
 	
 	/**
 	 * Refreshes the spreadsheet from the source
@@ -49,5 +68,12 @@ public interface Spreadsheet {
 	 * @param address
 	 */
 	public void load(String source);
+	
+	/**
+	 * Used to duplicate a certain sheet
+	 * @param sheet Sheet to duplicate
+	 * @param name Name of the new sheet
+	 */
+	public void duplicateSheet(String sheet, String name);
 
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import com.google.gdata.data.DateTime;
+import com.google.gdata.data.TextConstruct;
 import com.google.gdata.data.spreadsheet.CellEntry;
 import com.google.gdata.data.spreadsheet.CellFeed;
 import com.google.gdata.data.spreadsheet.WorksheetEntry;
@@ -113,5 +114,10 @@ public class OnlineWorksheet implements Worksheet{
 	@Override
 	public void setModificationDate(DateTime date) {
 		worksheet.setEdited(date);
+	}
+
+	@Override
+	public void setName(String name) {
+		
 	}
 }

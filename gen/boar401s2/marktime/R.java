@@ -251,7 +251,7 @@ containing a value of this type.
         public static final int google_play_services_version=0x7f070000;
     }
     public static final class layout {
-        public static final int activity_boy=0x7f030000;
+        public static final int activity_mark_boy=0x7f030000;
         public static final int activity_mark_time=0x7f030001;
         public static final int activity_roll=0x7f030002;
         public static final int activity_settings=0x7f030003;

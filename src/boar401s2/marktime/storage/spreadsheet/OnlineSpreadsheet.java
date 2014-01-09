@@ -64,6 +64,15 @@ public class OnlineSpreadsheet implements Spreadsheet{
 	public List<Worksheet> getWorksheets() {
 		return listOfWorksheets;
 	}
+	
+	@Override
+	public List<String> getWorksheetNames(){
+		List<String> names = new ArrayList<String>();
+		for(Worksheet worksheet: getWorksheets()){
+			names.add(worksheet.getName());
+		}
+		return names;
+	}
 
 	@Override
 	public int getNumberOfWorksheets() {
@@ -127,6 +136,24 @@ public class OnlineSpreadsheet implements Spreadsheet{
 	
 	public AuthenticatedSpreadsheetService getService(){
 		return spreadsheetService;
+	}
+
+	@Override
+	public void duplicateSheet(String sheet, String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean worksheetExists(String name) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void createWorksheet(String name) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -33,6 +33,11 @@ public class OfflineWorksheet implements Worksheet{
 			return data.get("name");
 		} else { return null; }
 	}
+	
+	@Override
+	public void setName(String name){
+		data.put("name", name);
+	}
 
 	@Override
 	public Spreadsheet getParent() {

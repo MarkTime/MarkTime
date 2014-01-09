@@ -53,7 +53,7 @@
                 android:value="boar401s2.marktime.MarkTime" />
         </activity>
         <activity
-            android:name="boar401s2.marktime.Boy"
+            android:name="boar401s2.marktime.MarkBoy"
             android:label="@string/title_activity_boy" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

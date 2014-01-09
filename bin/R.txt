@@ -96,7 +96,7 @@ int id synchronise_synchronise 0x7f050024
 int id terrain 0x7f050003
 int id textView2 0x7f05001f
 int integer google_play_services_version 0x7f070000
-int layout activity_boy 0x7f030000
+int layout activity_mark_boy 0x7f030000
 int layout activity_mark_time 0x7f030001
 int layout activity_roll 0x7f030002
 int layout activity_settings 0x7f030003
