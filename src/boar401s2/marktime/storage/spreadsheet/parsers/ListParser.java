@@ -25,7 +25,7 @@ public class ListParser {
 			yCounter++;
 			Position newPos = new Position(0, yCounter);
 			newPos.convertToSpreadsheetNotation();
-			if(worksheet.getCell(newPos.getCell()).equalsIgnoreCase("")){
+			if(worksheet.getCell(newPos.getCell())==null){
 				break;
 			} else {
 				String value = worksheet.getCell(newPos.getCell());

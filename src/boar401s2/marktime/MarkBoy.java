@@ -14,14 +14,17 @@ import android.support.v4.app.NavUtils;
 
 public class MarkBoy extends Activity {
 
+	String name;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mark_boy);
 		// Show the Up button in the action bar.
 		setupActionBar();
-		TextView name = (TextView) findViewById(R.id.boy_name);
-		name.setText(getIntent().getExtras().getString("name"));
+		name = getIntent().getExtras().getString("name");
+		TextView nameBox = (TextView) findViewById(R.id.boy_name);
+		nameBox.setText(name);
 	}
 
 	/**
@@ -83,15 +86,17 @@ public class MarkBoy extends Activity {
 		CheckBox socks = (CheckBox) findViewById(R.id.boy_socks);
 		CheckBox shoes = (CheckBox) findViewById(R.id.boy_shoes);
 		Intent resultIntent = new Intent();
-		resultIntent.putExtra("church", church.isChecked());
-		resultIntent.putExtra("hat", hat.isChecked());
-		resultIntent.putExtra("tie", tie.isChecked());
-		resultIntent.putExtra("havasac", havasac.isChecked());
-		resultIntent.putExtra("badges", badges.isChecked());
-		resultIntent.putExtra("belt", belt.isChecked());
-		resultIntent.putExtra("pants", pants.isChecked());
-		resultIntent.putExtra("socks", socks.isChecked());
-		resultIntent.putExtra("shoes", shoes.isChecked());
+		resultIntent.putExtra("name", name);
+		
+		resultIntent.putExtra("church", String.valueOf(church.isChecked()));
+		resultIntent.putExtra("hat", String.valueOf(hat.isChecked()));
+		resultIntent.putExtra("tie", String.valueOf(tie.isChecked()));
+		resultIntent.putExtra("havasac", String.valueOf(havasac.isChecked()));
+		resultIntent.putExtra("badges", String.valueOf(badges.isChecked()));
+		resultIntent.putExtra("belt", String.valueOf(belt.isChecked()));
+		resultIntent.putExtra("pants", String.valueOf(pants.isChecked()));
+		resultIntent.putExtra("socks", String.valueOf(socks.isChecked()));
+		resultIntent.putExtra("shoes", String.valueOf(shoes.isChecked()));
 		resultIntent.putExtra("attendance", getAttendanceRating());
 		setResult(ResultIDList.RESULT_OK, resultIntent);
 		finish();

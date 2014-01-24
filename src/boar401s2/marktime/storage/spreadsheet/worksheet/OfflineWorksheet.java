@@ -47,7 +47,7 @@ public class OfflineWorksheet implements Worksheet{
 	@Override
 	public String getCell(String cell) {
 		if(!data.containsKey(cell)){
-			return "";
+			return null;
 		} else {
 			return data.get(cell);
 		}
@@ -58,7 +58,9 @@ public class OfflineWorksheet implements Worksheet{
 	//TODO Need to fix, not working at last check
 	public String getCell(Position pos) {
 		pos.convertToSpreadsheetNotation();
-		return getCell(pos.getCell());
+		String data = getCell(pos.getCell());
+		pos.convertToCartesian();
+		return data;
 	}
 
 	@Override
@@ -96,7 +98,17 @@ public class OfflineWorksheet implements Worksheet{
 
 	@Override
 	public boolean cellHasInformation(Position pos) {
-		return false;
+		pos.convertToSpreadsheetNotation();
+		if (getCell(pos.getCell()).equalsIgnoreCase("") || !data.containsKey(pos.getCell())){
+			return false;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean cellExists(Position pos){
+		pos.convertToSpreadsheetNotation();
+		return data.containsKey(pos.getCell());
 	}
 
 	@Override

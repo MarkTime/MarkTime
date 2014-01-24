@@ -1,6 +1,7 @@
 package boar401s2.marktime.storage.spreadsheet;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -8,9 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gdata.client.spreadsheet.SpreadsheetService;
+import com.google.gdata.data.BaseFeed;
 import com.google.gdata.data.Person;
+import com.google.gdata.data.PlainTextConstruct;
 import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
 import com.google.gdata.data.spreadsheet.WorksheetEntry;
+import com.google.gdata.data.spreadsheet.WorksheetFeed;
 import com.google.gdata.util.ServiceException;
 
 import boar401s2.marktime.storage.GDrive;
@@ -32,6 +36,7 @@ public class OnlineSpreadsheet implements Spreadsheet{
 		this.parent = parent;
 		this.spreadsheetService = parent.getAuthenticatedSpreadsheetService();
 		this.spreadsheet = spreadsheet;
+		
 		try {
 			compileMapOfWorksheets();
 			compileListOfWorksheets();
@@ -151,9 +156,32 @@ public class OnlineSpreadsheet implements Spreadsheet{
 	}
 
 	@Override
-	public void createWorksheet(String name) {
-		// TODO Auto-generated method stub
-		
+	public WorksheetEntry createWorksheet(String name) {
+		WorksheetEntry worksheet = new WorksheetEntry();
+	    worksheet.setTitle(new PlainTextConstruct(name));
+	    worksheet.setColCount(10);
+	    worksheet.setRowCount(10);
+	    URL worksheetFeedUrl = spreadsheet.getWorksheetFeedUrl();
+	    
+	    try {
+			parent.getAuthenticatedSpreadsheetService().getSpreadsheetService().insert(worksheetFeedUrl, worksheet);
+			parent.getAuthenticatedSpreadsheetService().getSpreadsheetFeed().get
+	    } catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (ServiceException e1) {
+			e1.printStackTrace();
+		}
+	    
+	    OnlineWorksheet onlineWorksheet = new OnlineWorksheet(worksheet, this);
+	    mapOfWorksheets.put(name, onlineWorksheet);
+	    try {
+			compileListOfWorksheets();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ServiceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

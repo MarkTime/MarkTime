@@ -21,6 +21,13 @@ public interface Worksheet {
 	public void setName(String name);
 	
 	/**
+	 * Returns boolean for if cell exists
+	 * @param pos
+	 * @return
+	 */
+	public boolean cellExists(Position pos);
+	
+	/**
 	 * Gets the worksheet's parent
 	 * @return
 	 */

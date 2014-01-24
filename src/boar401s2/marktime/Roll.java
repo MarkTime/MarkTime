@@ -64,7 +64,6 @@ public class Roll extends FragmentActivity implements
 		
 		
 		spreadsheet = new OfflineSpreadsheet(MarkTime.settings.getString("spreadsheet", ""));
-		spreadsheet.load(MarkTime.activity.getFilesDir()+"/"+spreadsheet.getName()+".db");
 	}
 
 	@Override
@@ -161,15 +160,31 @@ public class Roll extends FragmentActivity implements
 	
 	@Override
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+		spreadsheet.load(MarkTime.activity.getFilesDir()+"/"+spreadsheet.getName()+".db");
 		System.out.println("Updating spreadsheet...");
 		String worksheetName = squad.getName()+" - "+getDate();
 		if (!spreadsheet.worksheetExists(worksheetName)){
+			System.out.println("Duplicating!");
 			spreadsheet.duplicateSheet("Night Template", worksheetName);
 		}
 		worksheet = spreadsheet.getWorksheet(worksheetName);
 		parser = new TableParser(worksheet);
-		parser.parse();
 		
+		Bundle extras = data.getExtras();
+		String name = extras.getString("name");
+		parser.setValue(name, "Church", extras.getString("church"));
+		parser.setValue(name, "Hat", extras.getString("hat"));
+		parser.setValue(name, "Tie", extras.getString("tie"));
+		parser.setValue(name, "Havasac", extras.getString("havasac"));
+		parser.setValue(name, "Badges", extras.getString("badges"));
+		parser.setValue(name, "Belt", extras.getString("belt"));
+		parser.setValue(name, "Pants", extras.getString("pants"));
+		parser.setValue(name, "Socks", extras.getString("socks"));
+		parser.setValue(name, "Shoes", extras.getString("shoes"));
+		parser.setValue(name, "Attendance", Integer.toString(extras.getInt("attendance")));
+		System.out.println(parser.getValue(name, "Shoes"));
+		spreadsheet.save(MarkTime.activity.getFilesDir()+"/"+spreadsheet.getName()+".db");
+		System.out.println("Saved!");
 	}
 	
 	public void showSectionSelector(){

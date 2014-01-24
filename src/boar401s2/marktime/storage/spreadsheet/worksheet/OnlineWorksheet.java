@@ -1,10 +1,7 @@
 package boar401s2.marktime.storage.spreadsheet.worksheet;
 
 import java.io.IOException;
-import java.net.URL;
-
 import com.google.gdata.data.DateTime;
-import com.google.gdata.data.TextConstruct;
 import com.google.gdata.data.spreadsheet.CellEntry;
 import com.google.gdata.data.spreadsheet.CellFeed;
 import com.google.gdata.data.spreadsheet.WorksheetEntry;
@@ -19,13 +16,11 @@ public class OnlineWorksheet implements Worksheet{
 	
     WorksheetEntry worksheet;
     CellFeed feed;
-    URL cellFeedURL;
     OnlineSpreadsheet parent;
 	
 	public OnlineWorksheet(WorksheetEntry worksheet, OnlineSpreadsheet parent){
         this.worksheet = worksheet;
         this.parent = parent;
-        cellFeedURL = worksheet.getCellFeedUrl();
         try {
         	feed = getCellFeed();
         } catch (IOException e) {
@@ -81,7 +76,10 @@ public class OnlineWorksheet implements Worksheet{
 	}
 
 	@Override
-	public void setSize(int width, int height) {}
+	public void setSize(int width, int height) {
+		worksheet.setColCount(width);
+		worksheet.setRowCount(height);
+	}
 
 	@Override
 	public int getHeight() {
@@ -119,5 +117,10 @@ public class OnlineWorksheet implements Worksheet{
 	@Override
 	public void setName(String name) {
 		
+	}
+
+	@Override
+	public boolean cellExists(Position pos) {
+		return false;
 	}
 }
