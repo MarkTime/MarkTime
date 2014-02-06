@@ -9,12 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gdata.client.spreadsheet.SpreadsheetService;
-import com.google.gdata.data.BaseFeed;
 import com.google.gdata.data.Person;
 import com.google.gdata.data.PlainTextConstruct;
 import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
 import com.google.gdata.data.spreadsheet.WorksheetEntry;
-import com.google.gdata.data.spreadsheet.WorksheetFeed;
 import com.google.gdata.util.ServiceException;
 
 import boar401s2.marktime.storage.GDrive;
@@ -27,9 +25,9 @@ public class OnlineSpreadsheet implements Spreadsheet{
 	SpreadsheetService service;
     GDrive parent;
     public AuthenticatedSpreadsheetService spreadsheetService;
-    SpreadsheetEntry spreadsheet;
+    public SpreadsheetEntry spreadsheet;
 	
-	HashMap<String, OnlineWorksheet> mapOfWorksheets = new HashMap<String, OnlineWorksheet>();
+	public HashMap<String, OnlineWorksheet> mapOfWorksheets = new HashMap<String, OnlineWorksheet>();
     List<Worksheet> listOfWorksheets = new ArrayList<Worksheet>();
 	
 	public OnlineSpreadsheet(GDrive parent, SpreadsheetEntry spreadsheet){
@@ -39,7 +37,6 @@ public class OnlineSpreadsheet implements Spreadsheet{
 		
 		try {
 			compileMapOfWorksheets();
-			compileListOfWorksheets();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ServiceException e) {
@@ -131,10 +128,13 @@ public class OnlineSpreadsheet implements Spreadsheet{
 	 */
 	@SuppressWarnings("rawtypes")
 	public void compileListOfWorksheets() throws IOException, ServiceException{
-		Iterator it = mapOfWorksheets.entrySet().iterator();
+		listOfWorksheets.clear();
+		@SuppressWarnings("unchecked")
+		HashMap<String, OnlineWorksheet> cloned = (HashMap<String, OnlineWorksheet>) mapOfWorksheets.clone();
+		Iterator it = cloned.entrySet().iterator();
 	    while (it.hasNext()) {
 	        Map.Entry pairs = (Map.Entry)it.next();
-	        listOfWorksheets.add((Worksheet) pairs.getValue()); 
+	        listOfWorksheets.add((OnlineWorksheet) pairs.getValue());
 	        it.remove();
 	    }
 	}
@@ -156,30 +156,27 @@ public class OnlineSpreadsheet implements Spreadsheet{
 	}
 
 	@Override
-	public WorksheetEntry createWorksheet(String name) {
+	public void createWorksheet(String name) {
 		WorksheetEntry worksheet = new WorksheetEntry();
 	    worksheet.setTitle(new PlainTextConstruct(name));
 	    worksheet.setColCount(10);
 	    worksheet.setRowCount(10);
 	    URL worksheetFeedUrl = spreadsheet.getWorksheetFeedUrl();
-	    
+
 	    try {
 			parent.getAuthenticatedSpreadsheetService().getSpreadsheetService().insert(worksheetFeedUrl, worksheet);
-			parent.getAuthenticatedSpreadsheetService().getSpreadsheetFeed().get
+			parent.getAuthenticatedSpreadsheetService().getSpreadsheetFeed();
 	    } catch (IOException e1) {
 			e1.printStackTrace();
 		} catch (ServiceException e1) {
 			e1.printStackTrace();
 		}
 	    
-	    OnlineWorksheet onlineWorksheet = new OnlineWorksheet(worksheet, this);
-	    mapOfWorksheets.put(name, onlineWorksheet);
 	    try {
-			compileListOfWorksheets();
+			compileMapOfWorksheets();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

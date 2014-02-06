@@ -3,8 +3,6 @@ package boar401s2.marktime.storage.tasks;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.google.gdata.data.spreadsheet.WorksheetEntry;
-
 import android.os.AsyncTask;
 import boar401s2.marktime.MarkTime;
 import boar401s2.marktime.events.AsyncTaskParent;
@@ -77,15 +75,14 @@ public class SyncRemoteTask {
 				OnlineWorksheet onlineWorksheet;
 				
 				if (!onlineSpreadsheet.getWorksheetNames().contains(offlineWorksheet.getName())){
-					WorksheetEntry worksheetEntry = new WorksheetEntry();
-					onlineWorksheet = new OnlineWorksheet(worksheetEntry, onlineSpreadsheet);
-					//onlineWorksheet = (OnlineWorksheet) onlineSpreadsheet.getWorksheet(offlineWorksheet.getName());
+					String name = offlineWorksheet.getName();
+					onlineSpreadsheet.createWorksheet(name);
+					onlineWorksheet = (OnlineWorksheet) onlineSpreadsheet.getWorksheet(name);
 					onlineWorksheet.setSize(offlineWorksheet.getWidth(), offlineWorksheet.getHeight());
-					onlineWorksheet.setModificationDate(offlineWorksheet.getModificationDate());
 				} else {
+					System.out.println("Worksheet exists!");
 					onlineWorksheet = (OnlineWorksheet) onlineSpreadsheet.getWorksheet(offlineWorksheet.getName());
 					onlineWorksheet.setSize(offlineWorksheet.getWidth(), offlineWorksheet.getHeight());
-					onlineWorksheet.setModificationDate(offlineWorksheet.getModificationDate());
 				}
 				
 				@SuppressWarnings("rawtypes")

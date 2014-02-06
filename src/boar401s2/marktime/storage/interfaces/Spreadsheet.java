@@ -2,6 +2,8 @@ package boar401s2.marktime.storage.interfaces;
 
 import java.util.List;
 
+import com.google.gdata.data.spreadsheet.WorksheetEntry;
+
 public interface Spreadsheet {
 	
 	/**
@@ -50,6 +52,7 @@ public interface Spreadsheet {
 	/**
 	 * Creates a worksheet
 	 * @param name Name of the worksheet to create
+	 * @return 
 	 */
 	public void createWorksheet(String name);
 	

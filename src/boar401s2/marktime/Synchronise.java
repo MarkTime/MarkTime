@@ -79,6 +79,7 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 	 */
 	public void openProgressDialog(String message){
 		progressDialog = new ProgressDialog(this);
+		progressDialog.setCancelable(false);
 		progressDialog.setMessage(message);
 		progressDialog.show();
 	}
