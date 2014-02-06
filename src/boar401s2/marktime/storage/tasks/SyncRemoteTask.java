@@ -75,14 +75,14 @@ public class SyncRemoteTask {
 				OnlineWorksheet onlineWorksheet;
 				
 				if (!onlineSpreadsheet.getWorksheetNames().contains(offlineWorksheet.getName())){
+					System.out.println("Creating "+offlineWorksheet.getName());
 					String name = offlineWorksheet.getName();
 					onlineSpreadsheet.createWorksheet(name);
 					onlineWorksheet = (OnlineWorksheet) onlineSpreadsheet.getWorksheet(name);
 					onlineWorksheet.setSize(offlineWorksheet.getWidth(), offlineWorksheet.getHeight());
 				} else {
-					System.out.println("Worksheet exists!");
-					onlineWorksheet = (OnlineWorksheet) onlineSpreadsheet.getWorksheet(offlineWorksheet.getName());
-					onlineWorksheet.setSize(offlineWorksheet.getWidth(), offlineWorksheet.getHeight());
+					System.out.println("Worksheet '"+offlineWorksheet.getName()+"' exists!");
+					continue;
 				}
 				
 				@SuppressWarnings("rawtypes")

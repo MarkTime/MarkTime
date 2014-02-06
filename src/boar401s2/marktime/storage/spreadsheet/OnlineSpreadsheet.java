@@ -159,8 +159,8 @@ public class OnlineSpreadsheet implements Spreadsheet{
 	public void createWorksheet(String name) {
 		WorksheetEntry worksheet = new WorksheetEntry();
 	    worksheet.setTitle(new PlainTextConstruct(name));
-	    worksheet.setColCount(10);
-	    worksheet.setRowCount(10);
+	    worksheet.setColCount(20);
+	    worksheet.setRowCount(20);
 	    URL worksheetFeedUrl = spreadsheet.getWorksheetFeedUrl();
 
 	    try {
@@ -171,7 +171,6 @@ public class OnlineSpreadsheet implements Spreadsheet{
 		} catch (ServiceException e1) {
 			e1.printStackTrace();
 		}
-	    
 	    try {
 			compileMapOfWorksheets();
 		} catch (IOException e) {

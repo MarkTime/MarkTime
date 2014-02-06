@@ -26,14 +26,12 @@ public class Position{
 	
 	public void convertToCartesian(){
 		int x = 0;
-		int y = 0;
 		ArrayList<Character> xlist = new ArrayList<Character>();
 		String ychars = "";
-		for (int i = 0; i < cell.length()-1; i++){
-		    char c = cell.charAt(i); 
+		for (int i = 0; i < cell.length(); i++){
+		    char c = cell.charAt(i);
 		    if (isChar(c)){
 		    	xlist.add(c);
-		    	System.out.println(c);
 		    } else if (isNumber(c)){
 		    	ychars = ychars + c;
 		    }
@@ -45,7 +43,7 @@ public class Position{
 			cnt += 1;
 		}
 		this.x = x-1;
-		this.y = y;
+		try{this.y = Integer.parseInt(ychars);} catch (NumberFormatException ex){this.y=0;}
 		this.cell = "";
 	}
 	
