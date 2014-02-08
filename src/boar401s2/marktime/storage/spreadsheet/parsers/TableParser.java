@@ -11,7 +11,7 @@ import boar401s2.marktime.storage.interfaces.Worksheet;
 import boar401s2.marktime.util.Position;
 
 /**
- * 2D array parser
+ * 2D spreadsheet array parser
  * @author student
  */
 public class TableParser {
@@ -30,7 +30,6 @@ public class TableParser {
 	public void mapCells(){
 		int xCounter = 0;
 		for(int i=0; i<worksheet.getWidth(); i++){ //Scan through columns adding their titles to the hashmap
-			xCounter++;
 			Position pos = new Position(xCounter, 0);
 			pos.convertToSpreadsheetNotation();
 			if(worksheet.getCell(pos.getCell())==null){
@@ -38,17 +37,17 @@ public class TableParser {
 			} else {
 				columnLookup.put(worksheet.getCell(pos.getCell()), Integer.toString(xCounter));
 			}
+			xCounter++;
 		}
 		
 		int yCounter = 0;
-		for(int i=worksheet.getHeight(); i<30; i++){ //Scan down the rows adding them to the hashmap
+		for(int i=0; i<30; i++){ //Scan down the rows adding them to the hashmap
 			yCounter++;
 			Position pos = new Position(0, yCounter);
 			pos.convertToSpreadsheetNotation();
 			if(worksheet.getCell(pos.getCell())==null){
 				break;
 			} else {
-				System.out.println(worksheet.getCell(pos.getCell()));
 				rowLookup.put(worksheet.getCell(pos.getCell()), Integer.toString(yCounter));
 			}
 		}
@@ -74,7 +73,7 @@ public class TableParser {
 	    Iterator it = rowLookup.entrySet().iterator();
 	    while (it.hasNext()) {
 	        Map.Entry pairs = (Map.Entry)it.next();
-	        rows.add((Integer) pairs.getValue());
+	        rows.add(Integer.valueOf((String) pairs.getValue()));
 	        it.remove(); // avoids a ConcurrentModificationException
 	    }
 	    return Collections.max(rows) + 1;
@@ -82,9 +81,11 @@ public class TableParser {
 	
 	public Position getCellPosition(String row, String column){
 		if (rowLookup.containsKey(row)){
-			return new Position(Integer.getInteger(columnLookup.get(column)), Integer.getInteger(rowLookup.get(row)));
+			return new Position(Integer.parseInt((String) columnLookup.get(column)), Integer.parseInt((String) rowLookup.get(row)));
 		} else {
-			return new Position(Integer.valueOf(columnLookup.get(column)), getNextUnusedRow());
+			int r = getNextUnusedRow();
+			rowLookup.put(row, String.valueOf(r));
+			return new Position(Integer.parseInt((String) columnLookup.get(column)), r);
 		}
 	}
 	

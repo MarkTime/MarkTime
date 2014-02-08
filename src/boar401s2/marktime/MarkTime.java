@@ -1,5 +1,6 @@
 package boar401s2.marktime;
  
+import boar401s2.marktime.exceptions.UnCaughtException;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -42,6 +43,7 @@ public class MarkTime extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mark_time);
 		isNetworkAvailable = isNetworkAvailable();
+		Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.this));
 	}
 
 	@Override

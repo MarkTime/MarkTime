@@ -32,6 +32,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 //TODO LIST
 //Write code to duplicate worksheet 10min - Done
@@ -145,9 +146,13 @@ public class Roll extends FragmentActivity implements
 		
 		public void onItemSelected(int position){
 			String name = squad.getBoys().get(position).getName();
-			Intent i = new Intent(activity, MarkBoy.class);
-			i.putExtra("name", name);
-			startActivityForResult(i, 1);
+			if(!name.equalsIgnoreCase("Create new boy...")){
+				Intent i = new Intent(activity, MarkBoy.class);
+				i.putExtra("name", name);
+				startActivityForResult(i, 1);
+			} else {
+				
+			}
 			//Start intent boy activity
 		}
 		
@@ -161,10 +166,8 @@ public class Roll extends FragmentActivity implements
 	@Override
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		spreadsheet.load(MarkTime.activity.getFilesDir()+"/"+spreadsheet.getName()+".db");
-		System.out.println("Updating spreadsheet...");
 		String worksheetName = squad.getName()+" - "+getDate();
 		if (!spreadsheet.worksheetExists(worksheetName)){
-			System.out.println("Duplicating!");
 			spreadsheet.duplicateSheet("Night Template", worksheetName);
 		}
 		worksheet = spreadsheet.getWorksheet(worksheetName);
@@ -172,6 +175,7 @@ public class Roll extends FragmentActivity implements
 		
 		Bundle extras = data.getExtras();
 		String name = extras.getString("name");
+		parser.setValue(name, "Name", name);
 		parser.setValue(name, "Church", extras.getString("church"));
 		parser.setValue(name, "Hat", extras.getString("hat"));
 		parser.setValue(name, "Tie", extras.getString("tie"));
@@ -181,10 +185,9 @@ public class Roll extends FragmentActivity implements
 		parser.setValue(name, "Pants", extras.getString("pants"));
 		parser.setValue(name, "Socks", extras.getString("socks"));
 		parser.setValue(name, "Shoes", extras.getString("shoes"));
-		parser.setValue(name, "Attendance", Integer.toString(extras.getInt("attendance")));
-		System.out.println(parser.getValue(name, "Shoes"));
+		parser.setValue(name, "Attendance", String.valueOf(extras.getInt("attendance")));
+		System.out.println(String.valueOf(extras.getInt("attendance")));
 		spreadsheet.save(MarkTime.activity.getFilesDir()+"/"+spreadsheet.getName()+".db");
-		System.out.println("Saved!");
 	}
 	
 	public void showSectionSelector(){
@@ -198,8 +201,13 @@ public class Roll extends FragmentActivity implements
             	populateSquadList(item);
             }
         });
-        AlertDialog alert = builder.create();
-        alert.show();
+        if(sections.size()>0){
+        	AlertDialog alert = builder.create();
+        	alert.show();
+        } else {
+        	Toast.makeText(MarkTime.activity.getApplicationContext(), "No data avaliable, please synchronise!", Toast.LENGTH_LONG).show();
+        	finish();
+        }
 	}
 	
 	public void populateSquadList(int item){

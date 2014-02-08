@@ -82,7 +82,6 @@ public class AuthenticatedSpreadsheetService{
 				spreadsheetService = new SpreadsheetService("SpreadsheetService");
 				if (token!=null){
 					publishProgress("Authenticating using OAuth2 token...");
-					System.out.println(token);
 					spreadsheetService.setAuthSubToken(token);
 				} else {
 					publishProgress("Authenticating using credentials...");

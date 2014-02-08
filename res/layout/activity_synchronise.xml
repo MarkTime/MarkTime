@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:onClick="onSyncLocalClick"
-        android:text="Synchronise Local" />
+        android:text="Synchronise Device" />
 
     <Button
         android:id="@+id/synchronise_remote"
@@ -24,7 +24,7 @@
         android:layout_below="@+id/synchronise_local"
         android:layout_centerHorizontal="true"
         android:onClick="onSyncRemoteClick"
-        android:text="Synchronise Remote" />
+        android:text="Synchronise Spreadsheet" />
 
     <Button
         android:id="@+id/synchronise_synchronise"

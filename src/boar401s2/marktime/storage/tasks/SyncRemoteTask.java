@@ -91,6 +91,7 @@ public class SyncRemoteTask {
 			        @SuppressWarnings("rawtypes")
 					Map.Entry pairs = (Map.Entry)it.next();
 			        onlineWorksheet.setCell((String) pairs.getKey(), (String) pairs.getValue());
+			        publishProgress("Updating '"+offlineSpreadsheet.getName()+":"+worksheet.getName()+"': "+pairs.getValue());
 			        it.remove();
 			    }
 			}

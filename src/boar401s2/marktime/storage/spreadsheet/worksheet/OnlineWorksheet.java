@@ -70,7 +70,6 @@ public class OnlineWorksheet implements Worksheet{
 	@Override
 	public void setCell(Position pos, String data) {
         try {
-        	System.out.println(String.valueOf(pos.getX())+", "+String.valueOf(pos.getY())+", "+data);
 	        CellEntry entry = new CellEntry(pos.getY(), pos.getX()+1, data);
 	        parent.spreadsheetService.getSpreadsheetService().insert(worksheet.getCellFeedUrl(), entry);
 	    } catch (ServiceException e) {

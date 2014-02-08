@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.support.v4.app.NavUtils;
 
@@ -20,11 +20,11 @@ public class MarkBoy extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mark_boy);
-		// Show the Up button in the action bar.
 		setupActionBar();
 		name = getIntent().getExtras().getString("name");
 		TextView nameBox = (TextView) findViewById(R.id.boy_name);
 		nameBox.setText(name);
+		
 	}
 
 	/**
@@ -61,18 +61,9 @@ public class MarkBoy extends Activity {
 	}
 	
 	public int getAttendanceRating(){
-		RadioButton radio1 = (RadioButton) findViewById(R.id.boy_attendance1);
-		RadioButton radio2 = (RadioButton) findViewById(R.id.boy_attendance2);
-		RadioButton radio3 = (RadioButton) findViewById(R.id.boy_attendance3);
-		if(radio3.isSelected()){
-			return 3;
-		} else if (radio2.isSelected()){
-			return 2;
-		} else if (radio1.isSelected()){
-			return 1;
-		} else {
-			return 0;
-		}
+		EditText t = (EditText) findViewById(R.id.boy_attendance);
+		return Integer.parseInt(t.getText().toString());
+		
 	}
 	
 	public void onSubmitClick(View view){
@@ -98,6 +89,7 @@ public class MarkBoy extends Activity {
 		resultIntent.putExtra("socks", String.valueOf(socks.isChecked()));
 		resultIntent.putExtra("shoes", String.valueOf(shoes.isChecked()));
 		resultIntent.putExtra("attendance", getAttendanceRating());
+		System.out.println(getAttendanceRating());
 		setResult(ResultIDList.RESULT_OK, resultIntent);
 		finish();
 	}
