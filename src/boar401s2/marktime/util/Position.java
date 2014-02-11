@@ -16,6 +16,15 @@ public class Position{
 		this.cell = cell;
 	}
 	
+	public Position(Position pos){
+		if(pos.getPositionNotation().equalsIgnoreCase("CARTESIAN")){
+			this.x = pos.getX();
+			this.y = pos.getY();
+		} else {
+			this.cell = pos.getPositionNotation();
+		}
+	}
+	
 	public String getString(){
 		return String.valueOf(x)+", "+String.valueOf(y);
 	}

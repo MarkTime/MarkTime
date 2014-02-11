@@ -7,7 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import boar401s2.marktime.dialog.InputDialog;
 import boar401s2.marktime.events.AsyncTaskParent;
+import boar401s2.marktime.events.InputDialogParent;
 import boar401s2.marktime.handlers.Company;
 import boar401s2.marktime.handlers.Section;
 import boar401s2.marktime.handlers.Squad;
@@ -33,12 +35,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
-
-//TODO LIST
-//Write code to duplicate worksheet 10min - Done
-//Write Table Parser (2D array) 30min
-//Write code to save marking data to worksheet 15min
-//Write code to shift that worksheet online 30min
 
 public class Roll extends FragmentActivity implements
 		ActionBar.OnNavigationListener, AsyncTaskParent{
@@ -110,11 +106,12 @@ public class Roll extends FragmentActivity implements
 		return true;
 	}
 
-	class BoysInSquadFragment extends Fragment {
+	class BoysInSquadFragment extends Fragment implements InputDialogParent{
 
 		List<Map<String, String>> boysNames = new ArrayList<Map<String, String>>();
 		
-		public BoysInSquadFragment() {}
+		public BoysInSquadFragment() {
+		}
 
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -138,6 +135,7 @@ public class Roll extends FragmentActivity implements
 			boysListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			     public void onItemClick(AdapterView<?> parentAdapter, View view, int position,
 			                             long id) {
+			    	 System.out.println(position);
 			         onItemSelected(position);
 			     }
 			});
@@ -145,13 +143,15 @@ public class Roll extends FragmentActivity implements
 		}
 		
 		public void onItemSelected(int position){
-			String name = squad.getBoys().get(position).getName();
-			if(!name.equalsIgnoreCase("Create new boy...")){
+			if(!(position>=squad.getBoys().size())){
+				String name = squad.getBoys().get(position).getName();
 				Intent i = new Intent(activity, MarkBoy.class);
 				i.putExtra("name", name);
 				startActivityForResult(i, 1);
 			} else {
-				
+				InputDialog dialog = new InputDialog(this, "Create New Boy", "Enter the name of the new boy");
+	        	dialog.show();
+	        	System.out.println("Opened dialog?");
 			}
 			//Start intent boy activity
 		}
@@ -161,6 +161,15 @@ public class Roll extends FragmentActivity implements
 			entry.put("boy", name);
 			return entry;
 		}
+
+		@Override
+		public void onDialogReturn(String result) {
+			System.out.println(result);
+		}
+
+		@Override
+		public void onDialogCancelled() {}
+
 	}
 	
 	@Override
@@ -231,7 +240,6 @@ public class Roll extends FragmentActivity implements
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
 		return sdf.format(date);
-		
 	}
 	
 	@Override
@@ -248,4 +256,5 @@ public class Roll extends FragmentActivity implements
 
 	@Override
 	public void onPreExecute() {}
+	
 }

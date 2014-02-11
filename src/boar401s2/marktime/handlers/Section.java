@@ -5,7 +5,6 @@ import java.util.List;
 
 import boar401s2.marktime.storage.interfaces.Worksheet;
 import boar401s2.marktime.storage.spreadsheet.parsers.ListParser;
-import boar401s2.marktime.util.Position;
 
 public class Section {
 
@@ -41,7 +40,7 @@ public class Section {
 	public List<Squad> getSquads(){
 		Worksheet worksheet = getCompany().getAttendanceSpreadsheet().getWorksheet(getName());
 		ListParser listParser = new ListParser(worksheet);
-		List<String> squadNames = listParser.parse(new Position(0, 1));
+		List<String> squadNames = listParser.parse();
 		List<Squad> squads = new ArrayList<Squad>();
 		for (String squadName: squadNames){
 			squads.add(new Squad(squadName, this));

@@ -29,11 +29,13 @@ public class MarkTime extends Activity {
 	public static SharedPreferences settings;
 	public static SharedPreferences.Editor editor;
 	public static Activity activity;
+	public static MarkTime app;
 	
 	public static String selectedSection = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		app = this;
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
 		

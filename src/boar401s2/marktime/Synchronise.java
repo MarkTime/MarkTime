@@ -6,7 +6,6 @@ import boar401s2.marktime.storage.tasks.ResultIDList;
 import boar401s2.marktime.storage.tasks.SyncLocalTask;
 import boar401s2.marktime.storage.tasks.SyncRemoteTask;
 import boar401s2.marktime.storage.tasks.TaskIDList;
-import boar401s2.marktime.util.Position;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;

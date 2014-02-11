@@ -13,8 +13,16 @@ public class Boy {
 	public String getName(){
 		return name;
 	}
+	
+	public MarkingData getMarkingData(String date){
+		return null;
+	}
+	
+	public void setMarkingData(String date){
+		
+	}
 
-	//==========[Parent stuff==========//
+	//==========[Parent stuff]==========//
 	
 	public Company getCompany(){
 		return squad.getSection().getCompany();

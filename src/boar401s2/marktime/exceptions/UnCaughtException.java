@@ -8,6 +8,8 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Date;
 import java.util.Locale;
 
+import boar401s2.marktime.MarkTime;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;

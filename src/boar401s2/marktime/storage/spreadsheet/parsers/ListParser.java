@@ -18,7 +18,7 @@ public class ListParser {
 		return worksheet;
 	}
 	
-	public List<String> parse(Position pos){// TODO When getCell(pos) is updated, use it here
+	public List<String> parse(){// TODO When getCell(pos) is updated, use it here
 		List<String> result = new ArrayList<String>();
 		int yCounter = 0;
 		while(true){
