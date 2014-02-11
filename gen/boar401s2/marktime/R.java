@@ -246,11 +246,11 @@ containing a value of this type.
         public static final int boy_socks=0x7f05000f;
         public static final int boy_submit=0x7f050012;
         public static final int boy_tie=0x7f05000a;
-        public static final int button=0x7f050025;
+        public static final int button=0x7f050026;
         public static final int container=0x7f050017;
         public static final int hybrid=0x7f050004;
         public static final int item_separator=0x7f050023;
-        public static final int lv_item_header=0x7f050027;
+        public static final int lv_item_header=0x7f050025;
         public static final int lv_item_subtext=0x7f050028;
         public static final int lv_list_hdr=0x7f050024;
         public static final int menu_exit=0x7f050016;
@@ -273,7 +273,7 @@ containing a value of this type.
         public static final int template_list=0x7f050005;
         public static final int terrain=0x7f050003;
         public static final int textView2=0x7f05001d;
-        public static final int vertical_divider=0x7f050026;
+        public static final int vertical_divider=0x7f050027;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f070000;
@@ -282,20 +282,23 @@ containing a value of this type.
         public static final int activity_list_template=0x7f030000;
         public static final int activity_mark_boy=0x7f030001;
         public static final int activity_mark_time=0x7f030002;
-        public static final int activity_roll=0x7f030003;
-        public static final int activity_settings=0x7f030004;
-        public static final int activity_synchronise=0x7f030005;
-        public static final int fragment_roll_dummy=0x7f030006;
-        public static final int lv_header_layout=0x7f030007;
-        public static final int lv_layout=0x7f030008;
+        public static final int activity_navigator=0x7f030003;
+        public static final int activity_roll=0x7f030004;
+        public static final int activity_settings=0x7f030005;
+        public static final int activity_synchronise=0x7f030006;
+        public static final int fragment_roll_dummy=0x7f030007;
+        public static final int lv_header_layout=0x7f030008;
+        public static final int lv_layout=0x7f030009;
+        public static final int lv_layout_sub=0x7f03000a;
     }
     public static final class menu {
         public static final int boy=0x7f0a0000;
         public static final int list_template=0x7f0a0001;
         public static final int mark_time=0x7f0a0002;
-        public static final int roll=0x7f0a0003;
-        public static final int settings=0x7f0a0004;
-        public static final int synchronise=0x7f0a0005;
+        public static final int navigator=0x7f0a0003;
+        public static final int roll=0x7f0a0004;
+        public static final int settings=0x7f0a0005;
+        public static final int synchronise=0x7f0a0006;
     }
     public static final class string {
         public static final int action_settings=0x7f06001b;
@@ -398,6 +401,7 @@ containing a value of this type.
         public static final int hello_world=0x7f06001c;
         public static final int title_activity_boy=0x7f060023;
         public static final int title_activity_list_template=0x7f060024;
+        public static final int title_activity_navigator=0x7f060026;
         public static final int title_activity_roll=0x7f06001d;
         public static final int title_activity_settings=0x7f060021;
         public static final int title_activity_synchronise=0x7f060022;

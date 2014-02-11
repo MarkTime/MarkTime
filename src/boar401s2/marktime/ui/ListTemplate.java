@@ -1,8 +1,5 @@
 package boar401s2.marktime.ui;
 
-import java.util.Arrays;
-import java.util.HashMap;
-
 import boar401s2.marktime.R;
 import android.os.Bundle;
 import android.app.Activity;
@@ -12,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,17 +18,31 @@ public class ListTemplate extends Activity {
 
 	private static final Integer LIST_HEADER = 0;
     private static final Integer LIST_ITEM = 1;
+    int requestCode;
     
-   
-    public HashMap<String, String> items = new HashMap<String, String>();
-
+    String[] entries;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_template);
 		ListView lv = (ListView)findViewById(R.id.template_list);
-		//Intent i = getIntent();
-        lv.setAdapter(new MyListAdapter(this));
+		
+		Intent i = getIntent();
+		setTitle(i.getExtras().getString("title"));
+		entries = i.getExtras().getStringArray("entries");
+		requestCode = i.getExtras().getInt("requestCode");
+        lv.setAdapter(new ListAdapter(this));
+        
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		     public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
+		    	 System.out.println("Something was clicked!");
+		    	 Intent i = new Intent();
+		    	 i.putExtra("id", entries[position]);
+		         setResult(requestCode, i);
+		         finish();
+		     }
+		});
 	}
 
 	@Override
@@ -39,96 +51,101 @@ public class ListTemplate extends Activity {
 		return true;
 	}
 
-	 private class MyListAdapter extends BaseAdapter {
-	        public MyListAdapter(Context context) {
-	            mContext = context;
-	        }
+	 private class ListAdapter extends BaseAdapter {
+        private final Context mContext;
+        
+        public ListAdapter(Context context) {
+            mContext = context;
+        }
 
-	        @Override
-	        public int getCount() {
-	            return LIST.length;
-	        }
+        @Override
+        public int getCount() {
+            return entries.length;
+        }
 
-	        @Override
-	        public boolean areAllItemsEnabled() {
-	            return true;
-	        }
+        @Override
+        public boolean areAllItemsEnabled() {
+            return true;
+        }
 
-	        @Override
-	        public boolean isEnabled(int position) {
-	            return true;
-	        }
+        @Override
+        public boolean isEnabled(int position) {
+            return true;
+        }
 
-	        @Override
-	        public Object getItem(int position) {
-	            return position;
-	        }
+        @Override
+        public Object getItem(int position) {
+            return position;
+        }
 
-	        @Override
-	        public long getItemId(int position) {
-	            return position;
-	        }
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
 
-	        @Override
-	        public View getView(int position, View convertView, ViewGroup parent) {
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+        	String headerName = null;
+        	String entryName = null;
+        	String subtitleText = "";
+        	if(entries[position].split(",")[0].contains(":")){
+        		headerName = entries[position].split(",")[0].split(":")[0];
+        		entryName = entries[position].split(",")[0].split(":")[1];
+        	} else {
+        		headerName = entries[position].split(",")[0];
+        	}
+        	if(entries[position].split(",").length==3){
+        		subtitleText = entries[position].split(",")[2];
+        	}
+        	Integer type = Integer.parseInt(entries[position].split(",")[1]);
+        	
+        	
+            if(type == ListViewEntryTypes.HEADER) { //Am I a header?
+                View item = convertView;
+                if(convertView == null || convertView.getTag() == LIST_ITEM) {
 
-	            String headerText = getHeader(position);
-	            if(headerText != null) {
+                    item = LayoutInflater.from(mContext).inflate(
+                            R.layout.lv_header_layout, parent, false);
+                    item.setTag(LIST_HEADER);
 
-	                View item = convertView;
-	                if(convertView == null || convertView.getTag() == LIST_ITEM) {
+                }
 
-	                    item = LayoutInflater.from(mContext).inflate(
-	                            R.layout.lv_header_layout, parent, false);
-	                    item.setTag(LIST_HEADER);
-
-	                }
-
-	                TextView headerTextView = (TextView)item.findViewById(R.id.lv_list_hdr);
-	                headerTextView.setText(headerText);
-	                return item;
-	            }
-
+                TextView headerTextView = (TextView)item.findViewById(R.id.lv_list_hdr);
+                headerTextView.setText(headerName);
+                return item;
+            } else if(type == ListViewEntryTypes.BUTTON){ //Am I a button?
 	            View item = convertView;
 	            if(convertView == null || convertView.getTag() == LIST_HEADER) {
 	                item = LayoutInflater.from(mContext).inflate(
 	                        R.layout.lv_layout, parent, false);
 	                item.setTag(LIST_ITEM);
 	            }
-
-	            TextView header = (TextView)item.findViewById(R.id.lv_item_header);
-	            header.setText(LIST[position % LIST.length]);
-
-	            TextView subtext = (TextView)item.findViewById(R.id.lv_item_subtext);
-	            subtext.setText(SUBTEXTS[position % SUBTEXTS.length]);
-
-	            //Set last divider in a sublist invisible
-	            View divider = item.findViewById(R.id.item_separator);
-	            if(position == HDR_POS2 -1) {
-	                divider.setVisibility(View.INVISIBLE);
-	            }
-
-
+            	
+            	TextView header = (TextView)item.findViewById(R.id.lv_item_header);
+	            header.setText(entryName);
 	            return item;
-	        }
-
-	        private String getHeader(int position) {
-
-	        	System.out.println(position);
-	        	System.out.println(Arrays.asList(HDR_POS).contains(position));
-	        	System.out.println(contains(HDR_POS, position));
-	        	if(contains(HDR_POS, position)){
-	            //if(position == HDR_POS1  || position == HDR_POS2) {
-	                return LIST[position];
+            } else if(type == ListViewEntryTypes.BUTTON_WITH_SUB){
+            	View item = convertView;
+	            if(convertView == null || convertView.getTag() == LIST_HEADER) {
+	                item = LayoutInflater.from(mContext).inflate(
+	                        R.layout.lv_layout, parent, false);
+	                item.setTag(LIST_ITEM);
 	            }
+            	
+            	TextView header = (TextView)item.findViewById(R.id.lv_item_header);
+	            header.setText(entryName);
+	            
+	            TextView subtext = (TextView)item.findViewById(R.id.lv_item_subtext);
+	            subtext.setText(subtitleText);
+	            return item;
+            }
 
-	            return null;
-	        }
-
-	        private final Context mContext;
-	    }
-
-	 public boolean contains(final int[] array, final Integer key) {
-		 return Arrays.asList(array).contains(key);
-	 }
+            /*
+            View divider = item.findViewById(R.id.item_separator);
+            if(position == HDR_POS2 -1) {
+                divider.setVisibility(View.INVISIBLE);
+            }*/
+            return null;
+        }
+    }
 }

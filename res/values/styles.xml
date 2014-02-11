@@ -28,7 +28,6 @@
 
     <style name="listViewItem">
         <item name="android:layout_height">@dimen/lvItemHeight</item>
-        <item name="android:clickable">true</item>
     </style>
     
     <style name="listViewPrimaryDetail">

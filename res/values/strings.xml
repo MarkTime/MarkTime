@@ -13,5 +13,6 @@
     <string name="title_activity_boy">Boy</string>
     <string name="title_activity_list_template">Template</string>
     <string name="cd">Content Description</string>
+    <string name="title_activity_navigator">Navigator</string>
 
 </resources>

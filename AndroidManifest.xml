@@ -63,6 +63,13 @@
             android:name="boar401s2.marktime.ui.ListTemplate"
             android:label="@string/title_activity_list_template" >
         </activity>
+        <activity
+            android:name="boar401s2.marktime.ui.navigator.Navigator"
+            android:label="@string/title_activity_navigator" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="boar401s2.marktime.MarkTime" />
+        </activity>
     </application>
 
 </manifest>

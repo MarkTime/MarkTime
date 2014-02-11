@@ -1,7 +1,7 @@
 package boar401s2.marktime;
  
 import boar401s2.marktime.exceptions.UnCaughtException;
-import boar401s2.marktime.handlers.ListTemplateHandler;
+import boar401s2.marktime.ui.navigator.Navigator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -46,7 +46,7 @@ public class MarkTime extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mark_time);
 		isNetworkAvailable = isNetworkAvailable();
-		Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.this));
+		//Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.this));
 	}
 
 	@Override
@@ -73,14 +73,8 @@ public class MarkTime extends Activity {
 	 */
 	public void openMark(View view){
 		//Intent i = new Intent(this, Roll.class);
-		ListTemplateHandler builder = new ListTemplateHandler(this);
-		builder.addNewHeading("Section 1");
-		builder.addNewItem("Squad 1", "");
-		builder.addNewItem("Squad 2", "");
-		builder.addNewHeading("Section 2");
-		builder.addNewItem("Squad 1", "");
-		builder.addNewItem("Squad 2", "");
-		builder.show();
+		Intent i = new Intent(this, Navigator.class);
+		startActivity(i);
 	}
 	
 	/**
