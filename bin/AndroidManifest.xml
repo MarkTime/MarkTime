@@ -59,6 +59,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="boar401s2.marktime.Roll" />
         </activity>
+        <activity
+            android:name="boar401s2.marktime.ui.ListTemplate"
+            android:label="@string/title_activity_list_template" >
+        </activity>
     </application>
 
 </manifest>

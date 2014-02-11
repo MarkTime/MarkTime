@@ -11,5 +11,7 @@
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_synchronise">Synchronise</string>
     <string name="title_activity_boy">Boy</string>
+    <string name="title_activity_list_template">Template</string>
+    <string name="cd">Content Description</string>
 
 </resources>

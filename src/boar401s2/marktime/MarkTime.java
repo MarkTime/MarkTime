@@ -1,6 +1,7 @@
 package boar401s2.marktime;
  
 import boar401s2.marktime.exceptions.UnCaughtException;
+import boar401s2.marktime.handlers.ListTemplateHandler;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -71,8 +72,15 @@ public class MarkTime extends Activity {
 	 * @param view
 	 */
 	public void openMark(View view){
-		Intent i = new Intent(this, Roll.class);
-		startActivity(i);
+		//Intent i = new Intent(this, Roll.class);
+		ListTemplateHandler builder = new ListTemplateHandler(this);
+		builder.addNewHeading("Section 1");
+		builder.addNewItem("Squad 1", "");
+		builder.addNewItem("Squad 2", "");
+		builder.addNewHeading("Section 2");
+		builder.addNewItem("Squad 1", "");
+		builder.addNewItem("Squad 2", "");
+		builder.show();
 	}
 	
 	/**
