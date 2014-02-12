@@ -138,12 +138,6 @@ public class ListTemplate extends Activity {
 	            subtext.setText(subtitleText);
 	            return item;
             }
-
-            /*
-            View divider = item.findViewById(R.id.item_separator);
-            if(position == HDR_POS2 -1) {
-                divider.setVisibility(View.INVISIBLE);
-            }*/
             return null;
         }
     }

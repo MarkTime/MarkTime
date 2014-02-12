@@ -14,5 +14,6 @@
     <string name="title_activity_list_template">Template</string>
     <string name="cd">Content Description</string>
     <string name="title_activity_navigator">Navigator</string>
+    <string name="title_activity_test">Test</string>
 
 </resources>

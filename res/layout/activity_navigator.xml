@@ -8,4 +8,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Navigator" >
 
+    <ListView
+        android:id="@+id/navigator_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" >
+    </ListView>
+
 </RelativeLayout>

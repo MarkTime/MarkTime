@@ -1,6 +1,5 @@
 package boar401s2.marktime;
- 
-import boar401s2.marktime.exceptions.UnCaughtException;
+
 import boar401s2.marktime.ui.navigator.Navigator;
 import android.app.Activity;
 import android.content.Context;
