@@ -132,11 +132,10 @@ int layout activity_navigator 0x7f030003
 int layout activity_roll 0x7f030004
 int layout activity_settings 0x7f030005
 int layout activity_synchronise 0x7f030006
-int layout activity_test 0x7f030007
-int layout fragment_roll_dummy 0x7f030008
-int layout lv_header_layout 0x7f030009
-int layout lv_layout 0x7f03000a
-int layout lv_layout_sub 0x7f03000b
+int layout fragment_roll_dummy 0x7f030007
+int layout lv_header_layout 0x7f030008
+int layout lv_layout 0x7f030009
+int layout lv_layout_sub 0x7f03000a
 int menu boy 0x7f0a0000
 int menu list_template 0x7f0a0001
 int menu mark_time 0x7f0a0002

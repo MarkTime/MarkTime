@@ -287,11 +287,10 @@ containing a value of this type.
         public static final int activity_roll=0x7f030004;
         public static final int activity_settings=0x7f030005;
         public static final int activity_synchronise=0x7f030006;
-        public static final int activity_test=0x7f030007;
-        public static final int fragment_roll_dummy=0x7f030008;
-        public static final int lv_header_layout=0x7f030009;
-        public static final int lv_layout=0x7f03000a;
-        public static final int lv_layout_sub=0x7f03000b;
+        public static final int fragment_roll_dummy=0x7f030007;
+        public static final int lv_header_layout=0x7f030008;
+        public static final int lv_layout=0x7f030009;
+        public static final int lv_layout_sub=0x7f03000a;
     }
     public static final class menu {
         public static final int boy=0x7f0a0000;
