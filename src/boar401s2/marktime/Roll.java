@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import boar401s2.marktime.dialog.InputDialog;
 import boar401s2.marktime.events.AsyncTaskParent;
 import boar401s2.marktime.events.InputDialogParent;
 import boar401s2.marktime.handlers.Company;
@@ -143,16 +142,6 @@ public class Roll extends FragmentActivity implements
 		}
 		
 		public void onItemSelected(int position){
-			if(!(position>=squad.getBoys().size())){
-				String name = squad.getBoys().get(position).getName();
-				Intent i = new Intent(activity, MarkBoy.class);
-				i.putExtra("name", name);
-				startActivityForResult(i, 1);
-			} else {
-				InputDialog dialog = new InputDialog(this, "Create New Boy", "Enter the name of the new boy");
-	        	dialog.show();
-	        	System.out.println("Opened dialog?");
-			}
 			//Start intent boy activity
 		}
 		
@@ -163,7 +152,7 @@ public class Roll extends FragmentActivity implements
 		}
 
 		@Override
-		public void onDialogReturn(String result) {
+		public void onDialogReturn(String result, Integer requestID) {
 			System.out.println(result);
 		}
 

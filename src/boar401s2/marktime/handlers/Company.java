@@ -35,6 +35,14 @@ public class Company {
 		}
 	}
 	
+	public void saveAttendance(){
+		attendance.save(MarkTime.activity.getFilesDir()+"/"+attendance.getName()+".db");
+	}
+	
+	public void saveRegister(){
+		register.save(MarkTime.activity.getFilesDir()+"/"+register.getName()+".db");
+	}
+	
 	/**
 	 * Gets a list of the sections
 	 */
@@ -54,6 +62,13 @@ public class Company {
 			result.add(s.getName());
 		}
 		return result;
+	}
+	
+	public void addSection(String id){
+		String name = "Section-"+id;
+		attendance.createWorksheet(name);
+		attendance.getWorksheet(name).setSize(1, 6);
+		attendance.getWorksheet(name).setCell("A1", "Squads in Section");
 	}
 	
 	//==========[Spreadsheet Stuff]==========//

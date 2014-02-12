@@ -14,15 +14,15 @@ public class SquadNavigator {
 	public SquadNavigator(Activity parent, Section section){
 		this.parent = parent;
 		this.section = section;
-		list = new ListTemplateHandler(parent, "Section Navigator");
+		list = new ListTemplateHandler(parent, "Squad Navigator");
 		list.addHeader("Squads");
 		for(String squad: section.getSquadNames()){
 			list.addItem("Squads", squad, ListViewEntryTypes.BUTTON);
 		}
 		list.addHeader("Settings");
 		list.addItem("Settings", "New Squad", ListViewEntryTypes.BUTTON);
-		list.addItem("Settings", "Rename", ListViewEntryTypes.BUTTON);
-		list.addItem("Settings", "Delete", ListViewEntryTypes.BUTTON);
+		list.addItem("Settings", "Rename Section", ListViewEntryTypes.BUTTON);
+		list.addItem("Settings", "Delete Section", ListViewEntryTypes.BUTTON);
 	}
 	
 	public void show(){

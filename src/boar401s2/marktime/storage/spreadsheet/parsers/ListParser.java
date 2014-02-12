@@ -9,6 +9,7 @@ import boar401s2.marktime.util.Position;
 public class ListParser {
 	
 	Worksheet worksheet;
+	List<String> values;
 	
 	public ListParser(Worksheet worksheet){
 		this.worksheet = worksheet;
@@ -18,7 +19,7 @@ public class ListParser {
 		return worksheet;
 	}
 	
-	public List<String> parse(){// TODO When getCell(pos) is updated, use it here
+	public void parse(){// TODO When getCell(pos) is updated, use it here
 		List<String> result = new ArrayList<String>();
 		int yCounter = 0;
 		while(true){
@@ -32,7 +33,21 @@ public class ListParser {
 				result.add(value);
 			}
 		}
-		return result;
+		values = result;
+	}
+	
+	public List<String> getValues(){
+		return values;
+	}
+	
+	public void addValue(String value){
+		worksheet.setCell("A"+String.valueOf(values.size()+2), value);
+		parse();
+	}
+	
+	public void setValue(Integer id, String value){
+		worksheet.setCell("A"+String.valueOf(id+1), value);
+		parse();
 	}
 
 }

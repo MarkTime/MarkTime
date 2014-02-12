@@ -36,7 +36,6 @@ public class ListTemplateHandler{
 	
 	public void show(int level){
 		Intent i = new Intent(parent, ListTemplate.class);
-		System.out.println(entries.size());
 		i.putExtra("entries", entries.toArray(new String[0]));
 		i.putExtra("title", title);
 		i.putExtra("requestCode", level);

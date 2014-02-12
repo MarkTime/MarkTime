@@ -10,10 +10,14 @@ public class Squad {
 	
 	String name;
 	Section section;
+	ListParser listParser;
 	
 	public Squad(String name, Section section){
 		this.name = name;
 		this.section = section;
+		Worksheet worksheet = getCompany().getAttendanceSpreadsheet().getWorksheet(getName());
+		listParser = new ListParser(worksheet);
+		listParser.parse();
 	}
 	
 	public String getName(){
@@ -29,14 +33,16 @@ public class Squad {
 	}
 	
 	public List<Boy> getBoys(){
-		Worksheet worksheet = getCompany().getAttendanceSpreadsheet().getWorksheet(getName());
-		ListParser listParser = new ListParser(worksheet);
-		List<String> boyNames = listParser.parse();
+		List<String> boyNames = listParser.getValues();
 		List<Boy> boys = new ArrayList<Boy>();
 		for (String boy: boyNames){
 			boys.add(new Boy(boy, this));
 		}
 		return boys;
+	}
+	
+	public void addBoy(String name){
+		listParser.addValue(name);
 	}
 	
 	//==========[Parent stuff==========//

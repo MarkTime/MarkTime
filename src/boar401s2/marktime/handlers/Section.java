@@ -11,10 +11,15 @@ public class Section {
 	String name;
 	Company company;
 	List<Squad> squads = new ArrayList<Squad>();
+	ListParser listParser;
+	Worksheet worksheet;
 	
 	public Section(String name, Company company){
 		this.company = company;
 		this.name = name;
+		worksheet = getCompany().getAttendanceSpreadsheet().getWorksheet(getName());
+		listParser = new ListParser(worksheet);
+		listParser.parse();
 	}
 	
 	public String getName(){
@@ -37,15 +42,21 @@ public class Section {
 		return squadNames;
 		
 	}
+	
 	public List<Squad> getSquads(){
-		Worksheet worksheet = getCompany().getAttendanceSpreadsheet().getWorksheet(getName());
-		ListParser listParser = new ListParser(worksheet);
-		List<String> squadNames = listParser.parse();
+		List<String> squadNames = listParser.getValues();
 		List<Squad> squads = new ArrayList<Squad>();
 		for (String squadName: squadNames){
 			squads.add(new Squad(squadName, this));
 		}
 		return squads;
+	}
+	
+	public void addSquad(String name){
+		listParser.addValue(name);
+		worksheet.getParent().createWorksheet("Squad-"+name);
+		worksheet.getParent().getWorksheet("Squad-"+name).setSize(1, 21);
+		worksheet.getParent().getWorksheet("Squad-"+name).setCell("A1", "Name");
 	}
 	
 	//==========[Parent stuff==========//

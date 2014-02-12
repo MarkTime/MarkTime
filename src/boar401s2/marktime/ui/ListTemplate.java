@@ -36,7 +36,6 @@ public class ListTemplate extends Activity {
         
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 		     public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
-		    	 System.out.println("Something was clicked!");
 		    	 Intent i = new Intent();
 		    	 i.putExtra("id", entries[position]);
 		         setResult(requestCode, i);
