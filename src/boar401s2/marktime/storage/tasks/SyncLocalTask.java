@@ -6,6 +6,8 @@ import com.google.gdata.util.ServiceException;
 
 import android.os.AsyncTask;
 import boar401s2.marktime.MarkTime;
+import boar401s2.marktime.constants.ResultIDList;
+import boar401s2.marktime.constants.TaskIDList;
 import boar401s2.marktime.events.AsyncTaskParent;
 import boar401s2.marktime.storage.GDrive;
 import boar401s2.marktime.storage.interfaces.Worksheet;

@@ -1,6 +1,8 @@
 package boar401s2.marktime.storage.tasks;
 
 import android.os.AsyncTask;
+import boar401s2.marktime.constants.ResultIDList;
+import boar401s2.marktime.constants.TaskIDList;
 import boar401s2.marktime.events.AsyncTaskParent;
 
 

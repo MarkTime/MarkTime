@@ -1,11 +1,11 @@
 package boar401s2.marktime;
 
+import boar401s2.marktime.constants.ResultIDList;
+import boar401s2.marktime.constants.TaskIDList;
 import boar401s2.marktime.events.AsyncTaskParent;
 import boar401s2.marktime.storage.GDrive;
-import boar401s2.marktime.storage.tasks.ResultIDList;
 import boar401s2.marktime.storage.tasks.SyncLocalTask;
 import boar401s2.marktime.storage.tasks.SyncRemoteTask;
-import boar401s2.marktime.storage.tasks.TaskIDList;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;

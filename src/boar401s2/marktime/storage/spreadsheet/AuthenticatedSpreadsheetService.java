@@ -4,10 +4,10 @@ import java.net.URL;
 
 import android.os.AsyncTask;
 import boar401s2.marktime.MarkTime;
+import boar401s2.marktime.constants.ResultIDList;
+import boar401s2.marktime.constants.TaskIDList;
 import boar401s2.marktime.events.AsyncTaskParent;
 import boar401s2.marktime.security.Credentials;
-import boar401s2.marktime.storage.tasks.ResultIDList;
-import boar401s2.marktime.storage.tasks.TaskIDList;
 
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.gdata.client.spreadsheet.SpreadsheetService;

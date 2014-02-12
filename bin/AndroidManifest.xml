@@ -32,13 +32,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="boar401s2.marktime.Roll"
-            android:label="@string/title_activity_roll" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="boar401s2.marktime.MarkTime" />
-        </activity>
-        <activity
             android:name="boar401s2.marktime.Settings"
             android:label="@string/title_activity_settings" >
             <meta-data
@@ -53,33 +46,22 @@
                 android:value="boar401s2.marktime.MarkTime" />
         </activity>
         <activity
-            android:name="boar401s2.marktime.MarkBoy"
-            android:label="@string/title_activity_boy" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="boar401s2.marktime.Roll" />
-        </activity>
-        <activity
             android:name="boar401s2.marktime.ui.ListTemplate"
             android:label="@string/title_activity_list_template" >
         </activity>
         <activity
-            android:name="boar401s2.marktime.ui.navigator.Navigator"
+            android:name="boar401s2.marktime.ui.Navigator"
             android:label="@string/title_activity_navigator" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="boar401s2.marktime.MarkTime" />
         </activity>
         <activity
-            android:name="boar401s2.marktime.Test"
-            android:label="@string/title_activity_test" >
-        </activity>
-        <activity
-            android:name="boar401s2.marktime.ui.navigator.Navigator"
-            android:label="@string/title_activity_navigator" >
+            android:name="boar401s2.marktime.BoyUI"
+            android:label="@string/title_activity_boy" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="boar401s2.marktime.MarkTime" />
+                android:value="boar401s2.marktime.ui.navigator.Navigator" />
         </activity>
     </application>
 

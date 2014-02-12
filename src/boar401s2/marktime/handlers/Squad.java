@@ -33,6 +33,10 @@ public class Squad {
 		return names;
 	}
 	
+	public Boy getBoy(String name){
+		return new Boy(name, this);
+	}
+	
 	public List<Boy> getBoys(){
 		List<String> boyNames = listParser.getValues();
 		List<Boy> boys = new ArrayList<Boy>();

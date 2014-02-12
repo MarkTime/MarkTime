@@ -12,13 +12,13 @@ import com.google.gdata.util.ServiceException;
 import android.app.Activity;
 import android.widget.Toast;
 import boar401s2.marktime.MarkTime;
+import boar401s2.marktime.constants.ResultIDList;
+import boar401s2.marktime.constants.TaskIDList;
 import boar401s2.marktime.events.AsyncTaskParent;
 import boar401s2.marktime.storage.spreadsheet.AuthenticatedSpreadsheetService;
 import boar401s2.marktime.storage.spreadsheet.OnlineSpreadsheet;
 import boar401s2.marktime.storage.tasks.GetAuthToken;
 import boar401s2.marktime.storage.tasks.GetDriveService;
-import boar401s2.marktime.storage.tasks.ResultIDList;
-import boar401s2.marktime.storage.tasks.TaskIDList;
 
 /**
  * Handler for communicating to Google Drive and 
