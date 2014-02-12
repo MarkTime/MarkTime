@@ -1,5 +1,6 @@
 package boar401s2.marktime;
 
+import boar401s2.marktime.storage.tasks.ResultIDList;
 import boar401s2.marktime.ui.navigator.Navigator;
 import android.app.Activity;
 import android.content.Context;
@@ -73,7 +74,7 @@ public class MarkTime extends Activity {
 	public void openMark(View view){
 		//Intent i = new Intent(this, Roll.class);
 		Intent i = new Intent(this, Navigator.class);
-		startActivity(i);
+		startActivityForResult(i, 1);
 	}
 	
 	/**
@@ -108,5 +109,21 @@ public class MarkTime extends Activity {
 	
 	public static void print(String string){
 		Log.i("General", string);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == 1){
+			if(resultCode == ResultIDList.RESULT_OK){
+				//Intent i = new Intent(this, MarkBoy.class);
+				//i.putExtra("name", data.getExtras().getString("name"));
+				//startActivityForResult(i, 2);
+			} else if(resultCode == ResultIDList.RESULT_NO_RETURN){
+			} else {
+				Toast.makeText(this, "Unable to complete this task.", Toast.LENGTH_SHORT).show();
+			}
+		} else if(requestCode == 2){
+			System.out.println("Marked boy.");
+		}
 	}
 }

@@ -8,10 +8,14 @@ import boar401s2.marktime.events.AsyncTaskParent;
 import boar401s2.marktime.handlers.Company;
 import boar401s2.marktime.handlers.Section;
 import boar401s2.marktime.handlers.Squad;
+import boar401s2.marktime.storage.tasks.ResultIDList;
 import boar401s2.marktime.ui.ListViewEntryTypes;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,9 +23,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
+import android.text.InputType;
 
 public class Navigator extends Activity implements AsyncTaskParent{
 	
@@ -72,6 +79,7 @@ public class Navigator extends Activity implements AsyncTaskParent{
 		if(level == LevelIDList.SECTION){
 			currentLevel = level;
 			setTitle("Company");
+			clearItems();
 			
 			addHeader("Section");
 			for(String section: company.getSectionNames()){
@@ -81,13 +89,37 @@ public class Navigator extends Activity implements AsyncTaskParent{
 			addHeader("Settings");
 			addItem("Settings", "Create new Section...", ListViewEntryTypes.BUTTON);
 			
+			updateListView();
 		} else if(level == LevelIDList.SQUAD){
 			currentLevel = level;
 			setTitle(section.getName());
+			clearItems();
 			
+			addHeader("Squad");
+			for(String squad: section.getSquadNames()){
+				addItem("Squad", squad, ListViewEntryTypes.BUTTON);
+			}
+			
+			addHeader("Settings");
+			addItem("Settings", "Create new Squad...", ListViewEntryTypes.BUTTON);
+			addItem("Settings", "Delete Section...", ListViewEntryTypes.BUTTON);
+			
+			updateListView();
 		} else if(level == LevelIDList.BOY){
 			currentLevel = level;
 			setTitle(squad.getName());
+			clearItems();
+			
+			addHeader("Boy");
+			for(String boy: squad.getBoysNames()){
+				addItem("Boy", boy, ListViewEntryTypes.BUTTON);
+			}
+			
+			addHeader("Settings");
+			addItem("Settings", "Create new Boy...", ListViewEntryTypes.BUTTON);
+			addItem("Settings", "Delete Squad...", ListViewEntryTypes.BUTTON);
+			
+			updateListView();
 		}
 	}
 			
@@ -125,18 +157,110 @@ public class Navigator extends Activity implements AsyncTaskParent{
 	}
 	
 	public void updateListView(){
-		//adapter.notifyDataSetChanged();
+		adapter.notifyDataSetChanged();
 	}
 	
 	//==========[Events]==========//
 	
 	public void onItemClicked(String id){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		final EditText input = new EditText(this);
+		input.setInputType(InputType.TYPE_CLASS_TEXT);
+		builder.setView(input);
+		builder.setCancelable(false);
+		
 		if(currentLevel == LevelIDList.SECTION){
-			
+			if(id.startsWith("Section")){
+				section = company.getSection(id.split(":")[1]);
+				displayLevel(LevelIDList.SQUAD);
+			} else {
+				if(id.split(":")[1].startsWith("Create")){
+					
+					builder.setTitle("Create Section");
+					builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+					    @Override
+					    public void onClick(DialogInterface dialog, int which) {
+					        company.addSection(input.getText().toString().trim());
+					        displayLevel(currentLevel);
+					    }
+					});
+					builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					    @Override
+					    public void onClick(DialogInterface dialog, int which) {
+					        dialog.cancel();
+					    }
+					});
+					builder.show();
+					
+				}
+			}
 		} else if(currentLevel == LevelIDList.SQUAD){
-
+			if(id.startsWith("Squad")){
+				squad = section.getSquad(id.split(":")[1]);
+				displayLevel(LevelIDList.BOY);
+			} else {
+				if(id.split(":")[1].startsWith("Create")){
+					
+					builder.setTitle("Create Squad");
+					builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+					    @Override
+					    public void onClick(DialogInterface dialog, int which) {
+					        section.addSquad(input.getText().toString().trim());
+					        displayLevel(currentLevel);
+					    }
+					});
+					builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					    @Override
+					    public void onClick(DialogInterface dialog, int which) {
+					        dialog.cancel();
+					    }
+					});
+					builder.show();
+					
+				} else {
+					Toast.makeText(this, "Not implemented yet.", Toast.LENGTH_SHORT).show();
+				}
+			}
 		} else if(currentLevel == LevelIDList.BOY){
-
+			if(id.startsWith("Boy")){
+				Intent i = new Intent();
+				i.putExtra("name", id.split(":")[1]);
+				setResult(ResultIDList.RESULT_OK, i);
+				stop();
+			} else {
+				if(id.split(":")[1].startsWith("Create")){
+					
+					builder.setTitle("Create Boy");
+					builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
+					    @Override
+					    public void onClick(DialogInterface dialog, int which) {
+					        squad.addBoy(input.getText().toString().trim());
+					        displayLevel(currentLevel);
+					    }
+					});
+					builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					    @Override
+					    public void onClick(DialogInterface dialog, int which) {
+					        dialog.cancel();
+					    }
+					});
+					builder.show();
+					
+				} else {
+					Toast.makeText(this, "Not implemented yet.", Toast.LENGTH_SHORT).show();
+				}
+			}
+		}
+	}
+	
+	@Override
+	public void onBackPressed() {
+		if(currentLevel==LevelIDList.SECTION){
+			super.onBackPressed();
+		} else if(currentLevel==LevelIDList.SQUAD){
+			displayLevel(LevelIDList.SECTION);
+		} else if(currentLevel==LevelIDList.BOY){
+			displayLevel(LevelIDList.SQUAD);
 		}
 	}
 	

@@ -69,6 +69,7 @@ public class Company {
 		attendance.createWorksheet(name);
 		attendance.getWorksheet(name).setSize(1, 6);
 		attendance.getWorksheet(name).setCell("A1", "Squads in Section");
+		saveAttendance();
 	}
 	
 	//==========[Spreadsheet Stuff]==========//

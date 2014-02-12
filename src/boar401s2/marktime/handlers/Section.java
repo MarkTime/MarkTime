@@ -53,10 +53,12 @@ public class Section {
 	}
 	
 	public void addSquad(String name){
-		listParser.addValue(name);
+		System.out.println("'Squad-"+name+"'");
+		listParser.addValue("Squad-"+name);
 		worksheet.getParent().createWorksheet("Squad-"+name);
 		worksheet.getParent().getWorksheet("Squad-"+name).setSize(1, 21);
 		worksheet.getParent().getWorksheet("Squad-"+name).setCell("A1", "Name");
+		company.saveAttendance();
 	}
 	
 	//==========[Parent stuff==========//

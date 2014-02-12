@@ -11,11 +11,12 @@ public class Squad {
 	String name;
 	Section section;
 	ListParser listParser;
+	Worksheet worksheet;
 	
 	public Squad(String name, Section section){
 		this.name = name;
 		this.section = section;
-		Worksheet worksheet = getCompany().getAttendanceSpreadsheet().getWorksheet(getName());
+		worksheet = getCompany().getAttendanceSpreadsheet().getWorksheet(getName());
 		listParser = new ListParser(worksheet);
 		listParser.parse();
 	}
@@ -43,6 +44,7 @@ public class Squad {
 	
 	public void addBoy(String name){
 		listParser.addValue(name);
+		section.company.saveAttendance();
 	}
 	
 	//==========[Parent stuff==========//
