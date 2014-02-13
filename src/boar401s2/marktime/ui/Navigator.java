@@ -136,7 +136,22 @@ public class Navigator extends Activity implements AsyncTaskParent{
 		     }
 		});
         
-        displayLevel(LevelIDList.SECTION);
+        Intent i = getIntent();
+        if(i.hasExtra("location")){
+        	String location = i.getExtras().getString("location");
+        	String locationCopy = location;
+        	int count = locationCopy.length() - locationCopy.replace(".", "").length();
+        	if(count==0){
+        		section = company.getSection(location);
+        		displayLevel(LevelIDList.SQUAD);
+        	} else if(count==1){
+        		section = company.getSection(location.split("\\.")[0]);
+        		squad = company.getSection(location.split("\\.")[0]).getSquad(location.split("\\.")[1]);
+        		displayLevel(LevelIDList.BOY);
+        	}
+        } else {
+        	displayLevel(LevelIDList.SECTION);
+        }
 	}
 	
 	public void stop(){

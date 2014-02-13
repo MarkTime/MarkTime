@@ -4,16 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import boar401s2.marktime.constants.LevelIDList;
+import boar401s2.marktime.constants.ResultIDList;
 import boar401s2.marktime.events.AsyncTaskParent;
 import boar401s2.marktime.handlers.Boy;
 import boar401s2.marktime.handlers.Company;
 import boar401s2.marktime.ui.ListViewEntry;
 import boar401s2.marktime.ui.ListViewEntryTypes;
+import boar401s2.marktime.util.MarkingData;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,19 +24,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
-import android.support.v4.app.NavUtils;
 
 public class BoyUI extends Activity implements AsyncTaskParent {
-	
-	List<String> entries = new ArrayList<String>();
+
 	List<ListViewEntry> entries_ = new ArrayList<ListViewEntry>();
 	ListView listView;
     ListAdapter adapter;
     Integer currentLevel = -1;
     Boy boy;
+    
+    MarkingData data = new MarkingData();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +66,25 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			NavUtils.navigateUpFromSameTask(this);
-			return true;
+			navigateUp();
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public void onBackPressed(){
+		navigateUp();
+	}
+	
+	public void navigateUp(){
+		if(currentLevel==LevelIDList.BOY_MAIN){
+			Intent i = new Intent();
+			i.putExtra("location", boy.getSection().getName()+"."+boy.getSquad().getName());
+			setResult(ResultIDList.RESULT_UP, i);
+			finish();
+		} else if(currentLevel==LevelIDList.BOY_MARK){
+			displayLevel(LevelIDList.BOY_MAIN);
+		}
 	}
 	
 	public void displayLevel(Integer level){
@@ -137,7 +157,7 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 		    @Override
 		    public void onClick(DialogInterface dialog, int which) {
-		    	System.out.println(picker.getValue());
+		    	data.attendance = picker.getValue();
 		    }
 		});
 		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -177,9 +197,39 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 		} else if(currentLevel == LevelIDList.BOY_MARK){
 			if(entry.getTitle().startsWith("Attendance")){
 				showAttendanceDialog();
+				
+				
+			} else if(entry.getTitle().startsWith("Hat")){
+				data.hat = (Boolean) entry.getExtra("checkbox");
+			} else if(entry.getTitle().startsWith("Tie")){
+				data.tie = (Boolean) entry.getExtra("checkbox");
+			} else if(entry.getTitle().startsWith("Havasac")){
+				data.havasac = (Boolean) entry.getExtra("checkbox");
+			} else if(entry.getTitle().startsWith("Badges")){
+				data.badges = (Boolean) entry.getExtra("checkbox");
+			} else if(entry.getTitle().startsWith("Belt")){
+				data.belt = (Boolean) entry.getExtra("checkbox");
+			} else if(entry.getTitle().startsWith("Pants")){
+				data.pants = (Boolean) entry.getExtra("checkbox");
+			} else if(entry.getTitle().startsWith("Socks")){
+				data.socks = (Boolean) entry.getExtra("checkbox");
+			} else if(entry.getTitle().startsWith("Shoes")){
+				data.shoes = (Boolean) entry.getExtra("checkbox");
+			} else if(entry.getTitle().startsWith("Church")){
+				data.church = (Boolean) entry.getExtra("checkbox");
+				
+				
+			} else if(entry.getTitle().startsWith("Submit")){
+				data.date = data.getDate();
+				boy.setNightData(data);
+				displayLevel(LevelIDList.BOY_MAIN);
 			}
 		} else if(currentLevel == LevelIDList.BOY){
 		}
+	}
+	
+	public void onCheckBoxChange(String id){
+		
 	}
 	
 	private class ListAdapter extends BaseAdapter {
@@ -215,13 +265,48 @@ public class BoyUI extends Activity implements AsyncTaskParent {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) { //TODO: Clean this up a bit
-        	ListViewEntry entry = entries_.get(position); 	
-        	
+        public View getView(int position, View convertView, ViewGroup parent) {
+        	final ListViewEntry entry = entries_.get(position); 	
+
         	View item = convertView;
         	item = LayoutInflater.from(mContext).inflate(entry.getViewID(), parent, false);
         	TextView headerTextView = (TextView) item.findViewById(R.id.lv_title);
         	headerTextView.setText(entry.getTitle());
+        	
+        	if(entry.getTypeID() == ListViewEntryTypes.CHECKBOX){
+        		final CheckBox check = (CheckBox) item.findViewById(R.id.lv_checkbox);
+        		check.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+						entry.setExtra("checkbox", check.isChecked());
+						onItemClicked(entry);
+					}
+        		});
+        		
+        		//TODO: Quickfix
+        		if(entry.getTitle().startsWith("Hat")){
+        			check.setChecked(data.hat);
+        		} else if(entry.getTitle().startsWith("Tie")){
+        			check.setChecked(data.tie);
+        		} else if(entry.getTitle().startsWith("Havasac")){
+        			check.setChecked(data.havasac);
+        		} else if(entry.getTitle().startsWith("Badges")){
+        			check.setChecked(data.badges);
+        		} else if(entry.getTitle().startsWith("Belt")){
+        			check.setChecked(data.belt);
+        		} else if(entry.getTitle().startsWith("Pants")){
+        			check.setChecked(data.pants);
+        		} else if(entry.getTitle().startsWith("Socks")){
+        			check.setChecked(data.socks);
+        		} else if(entry.getTitle().startsWith("Shoes")){
+        			check.setChecked(data.shoes);
+        		} else if(entry.getTitle().startsWith("Church")){
+        			check.setChecked(data.church);
+        		}
+        		
+        		
+        	}
+        	
         	return item;
         }
 	}

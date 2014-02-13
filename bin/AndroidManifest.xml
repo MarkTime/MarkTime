@@ -61,7 +61,7 @@
             android:label="@string/title_activity_boy" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="boar401s2.marktime.ui.navigator.Navigator" />
+                android:value="boar401s2.marktime.ui.Navigator" />
         </activity>
     </application>
 

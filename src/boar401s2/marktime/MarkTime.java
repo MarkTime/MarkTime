@@ -120,10 +120,18 @@ public class MarkTime extends Activity {
 				startActivityForResult(i, 2);
 			} else if(resultCode == ResultIDList.RESULT_NO_RETURN){
 			} else {
-				Toast.makeText(this, "Unable to complete this task.", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(this, "Unable to complete this task.", Toast.LENGTH_SHORT).show();
 			}
 		} else if(requestCode == 2){
-			System.out.println("Marked boy.");
+			if(resultCode == ResultIDList.RESULT_OK){ //This never actually gets called!
+				System.out.println("Marked boy!");
+			} else if(resultCode == ResultIDList.RESULT_UP){
+				Intent i = new Intent(this, Navigator.class);
+				i.putExtra("location", data.getExtras().getString("location"));
+				startActivityForResult(i, 1);
+			} else {
+				System.out.println("Error!");
+			}
 		}
 	}
 }

@@ -11,7 +11,7 @@ public class ListViewEntry {
 	boolean enabled = true;
 	boolean isHeader;
 	
-	HashMap<String, String> extras = new HashMap<String, String>();
+	HashMap<String, Object> extras = new HashMap<String, Object>();
 	
 	String title;
 	
@@ -22,11 +22,11 @@ public class ListViewEntry {
 		isHeader = false;
 	}
 	
-	public void setExtra(String key, String value){
+	public void setExtra(String key, Object value){
 		extras.put(key, value);
 	}
 	
-	public String getExtra(String key){
+	public Object getExtra(String key){
 		return extras.get(key);
 	}
 	
