@@ -38,6 +38,7 @@ public class BoyUI extends Activity implements AsyncTaskParent {
     Integer currentLevel = -1;
     Boy boy;
     
+    boolean dataChanged = false;
     MarkingData data = new MarkingData();
 	
 	@Override
@@ -157,6 +158,7 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 		    @Override
 		    public void onClick(DialogInterface dialog, int which) {
+		    	dataChanged = true;
 		    	data.attendance = picker.getValue();
 		    }
 		});
@@ -190,6 +192,10 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 	}
 	
 	public void onItemClicked(ListViewEntry entry){
+		if(currentLevel == LevelIDList.BOY_MARK && entry.getTypeID()==ListViewEntryTypes.CHECKBOX){
+			dataChanged = true;
+		}
+		
 		if(currentLevel == LevelIDList.BOY_MAIN){
 			if(entry.getTitle().startsWith("Mark")){
 		       displayLevel(LevelIDList.BOY_MARK);
@@ -220,8 +226,10 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 				
 				
 			} else if(entry.getTitle().startsWith("Submit")){
-				data.date = data.getDate();
-				boy.setNightData(data);
+				if(dataChanged){
+					data.date = data.getDate();
+					boy.setNightData(data);
+				}
 				displayLevel(LevelIDList.BOY_MAIN);
 			}
 		} else if(currentLevel == LevelIDList.BOY){
@@ -283,7 +291,6 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 					}
         		});
         		
-        		//TODO: Quickfix
         		if(entry.getTitle().startsWith("Hat")){
         			check.setChecked(data.hat);
         		} else if(entry.getTitle().startsWith("Tie")){

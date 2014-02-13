@@ -2,8 +2,6 @@ package boar401s2.marktime.storage.interfaces;
 
 import java.util.List;
 
-import com.google.gdata.data.spreadsheet.WorksheetEntry;
-
 public interface Spreadsheet {
 	
 	/**

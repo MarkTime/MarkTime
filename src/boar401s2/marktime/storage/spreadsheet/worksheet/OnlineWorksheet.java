@@ -2,13 +2,10 @@ package boar401s2.marktime.storage.spreadsheet.worksheet;
 
 import java.io.IOException;
 
-import com.google.gdata.data.Content;
 import com.google.gdata.data.DateTime;
-import com.google.gdata.data.TextConstruct;
 import com.google.gdata.data.spreadsheet.CellEntry;
 import com.google.gdata.data.spreadsheet.CellFeed;
 import com.google.gdata.data.spreadsheet.WorksheetEntry;
-import com.google.gdata.model.atom.TextContent;
 import com.google.gdata.util.ServiceException;
 
 import boar401s2.marktime.storage.interfaces.Spreadsheet;

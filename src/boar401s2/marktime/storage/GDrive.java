@@ -1,14 +1,10 @@
 package boar401s2.marktime.storage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.api.services.drive.Drive;
-import com.google.gdata.client.spreadsheet.SpreadsheetService;
 import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
-import com.google.gdata.util.ServiceException;
-
 import android.app.Activity;
 import android.widget.Toast;
 import boar401s2.marktime.MarkTime;
