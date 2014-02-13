@@ -327,7 +327,7 @@ public class Navigator extends Activity implements AsyncTaskParent{
 
                 }
 
-                TextView headerTextView = (TextView)item.findViewById(R.id.lv_list_hdr);
+                TextView headerTextView = (TextView)item.findViewById(R.id.lv_title);
                 headerTextView.setText(headerName);
                 return item;
             } else if(type == ListViewEntryTypes.BUTTON){ //Am I a button?
@@ -338,7 +338,7 @@ public class Navigator extends Activity implements AsyncTaskParent{
 	                item.setTag(LIST_ITEM);
 	            }
             	
-            	TextView header = (TextView)item.findViewById(R.id.lv_item_header);
+            	TextView header = (TextView)item.findViewById(R.id.lv_title);
 	            header.setText(entryName);
 	            return item;
             } else if(type == ListViewEntryTypes.BUTTON_WITH_SUB){
@@ -349,7 +349,7 @@ public class Navigator extends Activity implements AsyncTaskParent{
 	                item.setTag(LIST_ITEM);
 	            }
             	
-            	TextView header = (TextView)item.findViewById(R.id.lv_item_header);
+            	TextView header = (TextView)item.findViewById(R.id.lv_title);
 	            header.setText(entryName);
 	            
 	            TextView subtext = (TextView)item.findViewById(R.id.lv_item_subtext);

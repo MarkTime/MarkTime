@@ -238,9 +238,9 @@ containing a value of this type.
         public static final int button=0x7f05001b;
         public static final int hybrid=0x7f050004;
         public static final int item_separator=0x7f050018;
-        public static final int lv_item_header=0x7f05001a;
+        public static final int lv_checkbox=0x7f05001a;
         public static final int lv_item_subtext=0x7f05001d;
-        public static final int lv_list_hdr=0x7f050019;
+        public static final int lv_title=0x7f050019;
         public static final int menu_exit=0x7f05000a;
         public static final int menu_mark=0x7f050007;
         public static final int menu_settings=0x7f050009;
@@ -276,7 +276,9 @@ containing a value of this type.
         public static final int activity_synchronise=0x7f030005;
         public static final int lv_header_layout=0x7f030006;
         public static final int lv_layout=0x7f030007;
-        public static final int lv_layout_sub=0x7f030008;
+        public static final int lv_layout_checkbox=0x7f030008;
+        public static final int lv_layout_sub=0x7f030009;
+        public static final int lv_submit_layout=0x7f03000a;
     }
     public static final class menu {
         public static final int boy=0x7f0a0000;

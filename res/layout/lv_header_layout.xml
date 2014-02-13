@@ -17,7 +17,7 @@
 
     <TextView
         android:textIsSelectable="false"
-        android:id="@+id/lv_list_hdr"
+        android:id="@+id/lv_title"
         android:textColor="@color/lvHeaderTextColor"
         android:gravity="bottom|left"
         android:layout_width="wrap_content"

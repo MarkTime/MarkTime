@@ -1,0 +1,24 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    tools:context=".MainActivity"
+    style="@style/listViewItem"
+    android:background="@android:drawable/list_selector_background">
+
+    <TextView
+        android:textIsSelectable="false"
+        android:id="@+id/lv_title"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:paddingTop="1dp"
+        android:paddingBottom="2dp"
+        android:textSize="25sp"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"
+	/>
+    
+</RelativeLayout>

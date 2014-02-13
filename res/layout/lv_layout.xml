@@ -4,12 +4,11 @@
     android:layout_width="match_parent"
     tools:context=".MainActivity"
     style="@style/listViewItem"
-    android:background="@android:drawable/list_selector_background"
-    >
+    android:background="@android:drawable/list_selector_background">
 
     <TextView
         android:textIsSelectable="false"
-        android:id="@+id/lv_item_header"
+        android:id="@+id/lv_title"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_alignParentTop="true"

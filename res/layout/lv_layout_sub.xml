@@ -33,7 +33,7 @@
 
     <TextView
         android:textIsSelectable="false"
-        android:id="@+id/lv_item_header"
+        android:id="@+id/lv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -49,7 +49,7 @@
         android:id="@+id/lv_item_subtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/lv_item_header"
+        android:layout_below="@id/lv_title"
         style="@style/listViewSecondaryDetail"
         android:layout_above="@id/item_separator"
         android:layout_alignParentLeft="true"
