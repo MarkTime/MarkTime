@@ -1,6 +1,6 @@
 package boar401s2.marktime.storage.interfaces;
 
-
+import java.util.Date;
 
 import com.google.gdata.data.DateTime;
 
@@ -84,11 +84,11 @@ public interface Worksheet {
 	/**
 	 * Gets the date of last modification
 	 */
-	public DateTime getModificationDate();
+	public Date getModificationDate();
 	
 	/**
 	 * Sets the date of last modification
 	 */
-	public void setModificationDate(DateTime date);
+	public void setModificationDate(Date date);
 
 }

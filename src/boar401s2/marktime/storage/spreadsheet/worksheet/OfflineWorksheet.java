@@ -1,9 +1,9 @@
 package boar401s2.marktime.storage.spreadsheet.worksheet;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
-
-import com.google.gdata.data.DateTime;
-
 import boar401s2.marktime.storage.interfaces.Spreadsheet;
 import boar401s2.marktime.storage.interfaces.Worksheet;
 import boar401s2.marktime.util.Position;
@@ -66,6 +66,7 @@ public class OfflineWorksheet implements Worksheet{
 	@Override
 	public void setCell(String cell, String value) {
 		data.put(cell, value);
+		setModified(true);
 	}
 
 	@Override
@@ -110,14 +111,30 @@ public class OfflineWorksheet implements Worksheet{
 		pos.convertToSpreadsheetNotation();
 		return data.containsKey(pos.getCell());
 	}
-
-	@Override
-	public DateTime getModificationDate() {
-		return DateTime.parseDate(data.get("moddate"));
+	
+	public boolean hasBeenModified(){
+		return Boolean.parseBoolean(data.get("modified"));
+	}
+	
+	public void setModified(boolean modified){
+		data.put("modified", String.valueOf(modified));
 	}
 
 	@Override
-	public void setModificationDate(DateTime date) {
-		data.put("moddate", date.toString());
+	public Date getModificationDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		try {
+			System.out.println("Moddate: "+data.get("moddate"));
+			return sdf.parse(data.get("moddate"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public void setModificationDate(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+		data.put("moddate", sdf.format(date));
 	}
 }

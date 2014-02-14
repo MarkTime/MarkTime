@@ -120,6 +120,7 @@ public class SyncLocalTask {
 				}
 				offlineWorksheet.setSize(onlineWorksheet.getWidth(), onlineWorksheet.getHeight());
 				offlineWorksheet.setModificationDate(onlineWorksheet.getModificationDate());
+				offlineWorksheet.setModified(false);
 				offlineSpreadsheet.insertWorksheet(offlineWorksheet);
 			}
 			publishProgress("Saving '"+onlineSpreadsheet.getName()+"'...");

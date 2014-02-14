@@ -98,7 +98,6 @@ public class GetDriveService {
 		}
 		
 		private Drive getDriveService(GoogleAccountCredential credential) {
-			System.out.println(credential.getSelectedAccountName());
 		    return new Drive.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), credential)
 		        .build();
 		}

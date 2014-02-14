@@ -1,5 +1,8 @@
 package boar401s2.marktime;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import boar401s2.marktime.constants.ResultIDList;
 import boar401s2.marktime.ui.Navigator;
 import android.app.Activity;
@@ -82,6 +85,9 @@ public class MarkTime extends Activity {
 	 * @param view
 	 */
 	public void openSynchronise(View view){
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		System.out.println(dateFormat.format(date));
 		if (isNetworkAvailable()){
 			Intent i = new Intent(this, Synchronise.class);
 			startActivity(i);
@@ -97,14 +103,6 @@ public class MarkTime extends Activity {
 	public void openSettings(View view){
 		Intent i = new Intent(this, Settings.class);
 		startActivity(i);
-	}
-	
-	/**
-	 * Callback for the "Exit" button. Used to exit the app.
-	 * @param view
-	 */
-	public void onExit(View view){
-		finish();
 	}
 	
 	public static void print(String string){

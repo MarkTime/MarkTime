@@ -21,7 +21,7 @@
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:onClick="openMark"
-		    android:text="Mark the Roll" />
+		    android:text="Organise" />
 		
 		<Button
 		    android:id="@+id/menu_synchronise"
@@ -35,13 +35,6 @@
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:onClick="openSettings"
-		    android:text="Settings" />
-		
-		<Button
-		    android:id="@+id/menu_exit"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:onClick="onExit"
-		    android:text="Exit" />     
+		    android:text="Settings" />     
     </LinearLayout>
 </ScrollView>

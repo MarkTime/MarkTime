@@ -1,6 +1,9 @@
 package boar401s2.marktime.storage.spreadsheet.worksheet;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.google.gdata.data.DateTime;
 import com.google.gdata.data.spreadsheet.CellEntry;
@@ -102,8 +105,18 @@ public class OnlineWorksheet implements Worksheet{
 	}
 
 	@Override
-	public DateTime getModificationDate() {
-		return worksheet.getEdited();
+	public Date getModificationDate() { //yyyy-MM-dd HH:mm:ss
+		//SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+		try {
+			SimpleDateFormat formatter;
+			formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+			String oldDate = worksheet.getUpdated().toString();
+			Date date = formatter.parse(oldDate.substring(0, 24));
+			return date;
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public CellFeed getCellFeed() throws IOException, ServiceException{
@@ -111,8 +124,9 @@ public class OnlineWorksheet implements Worksheet{
 	}
 
 	@Override
-	public void setModificationDate(DateTime date) {
-		worksheet.setEdited(date);
+	public void setModificationDate(Date date) {
+		DateTime dt = new DateTime(date);
+		worksheet.setEdited(dt);
 	}
 
 	@Override

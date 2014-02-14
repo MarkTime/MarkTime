@@ -116,6 +116,13 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 			} else {
 				Toast.makeText(MarkTime.activity.getApplicationContext(), "Internal Error!", Toast.LENGTH_SHORT).show();
 			}
+		} else if(taskID == TaskIDList.TASK_SYNC_REMOTE){
+			closeProgressDialog();
+			if (status==ResultIDList.RESULT_OK){
+				Toast.makeText(MarkTime.activity.getApplicationContext(), "Synced remote spreadsheet!", Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(MarkTime.activity.getApplicationContext(), "Internal Error!", Toast.LENGTH_SHORT).show();
+			}
 		}
 	}
 	
@@ -154,12 +161,10 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 	//==========[Sync Stuff]==========//
 	
 	public void syncLocalWithRemote(){
-		MarkTime.print("Sync local with remote");
 		new SyncLocalTask(this, gdrive).run();
 	}
 	
 	public void syncRemoteWithLocal(){
-		MarkTime.print("Sync remote with local");
 		new SyncRemoteTask(this, gdrive).run();
 	}
 	

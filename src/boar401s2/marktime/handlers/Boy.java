@@ -28,7 +28,7 @@ public class Boy {
 		Worksheet worksheet = spreadsheet.getWorksheet(worksheetName);
 		TableParser parser = new TableParser(worksheet);
 		
-		System.out.println(data.attendance);
+		parser.setRow(getName(), squad.getBoysNames().indexOf(getName())+2);
 		parser.setValue(getName(), "Name", getName());
 		parser.setValue(getName(), "Hat", String.valueOf(data.hat));
 		parser.setValue(getName(), "Tie", String.valueOf(data.tie));

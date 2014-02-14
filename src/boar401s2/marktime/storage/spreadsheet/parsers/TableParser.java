@@ -101,10 +101,9 @@ public class TableParser {
 		worksheet.setCell(pos.getCell(), value);
 	}
 	
-	public void insertRow(String name){
-		int y = nextAvaliableRow();
-		rowLookup.put(name, Integer.toString(y));
-		Position pos = new Position(0, y);
+	public void setRow(String name, int row){
+		rowLookup.put(name, String.valueOf(row));
+		Position pos = new Position(0, row);
 		pos.convertToSpreadsheetNotation();
 		worksheet.setCell(pos.getCell(), name);
 	}

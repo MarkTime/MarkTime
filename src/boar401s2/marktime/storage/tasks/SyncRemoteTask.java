@@ -51,7 +51,7 @@ public class SyncRemoteTask {
 		@Override
 		protected void onPostExecute(Integer result){
 			if (result!=ResultIDList.RESULT_NO_RETURN){
-				parent.onPostExecute(TaskIDList.TASK_SYNC_LOCAL, result);
+				parent.onPostExecute(TaskIDList.TASK_SYNC_REMOTE, result);
 			}
 		}
 		
@@ -83,8 +83,11 @@ public class SyncRemoteTask {
 					onlineWorksheet = (OnlineWorksheet) onlineSpreadsheet.getWorksheet(name);
 					onlineWorksheet.setSize(offlineWorksheet.getWidth(), offlineWorksheet.getHeight());
 				} else {
-					System.out.println("Worksheet '"+offlineWorksheet.getName()+"' exists!");
-					continue;
+					if(offlineWorksheet.hasBeenModified()){
+						onlineWorksheet = (OnlineWorksheet) onlineSpreadsheet.getWorksheet(offlineWorksheet.getName());
+					} else {
+						continue;
+					}
 				}
 				
 				@SuppressWarnings("rawtypes")
