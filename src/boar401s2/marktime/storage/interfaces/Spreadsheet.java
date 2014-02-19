@@ -77,4 +77,6 @@ public interface Spreadsheet {
 	 */
 	public void duplicateSheet(String sheet, String name);
 
+	public void deleteSheet(String name);
+	
 }

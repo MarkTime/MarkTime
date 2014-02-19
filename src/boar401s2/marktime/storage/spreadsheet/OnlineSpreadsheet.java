@@ -179,5 +179,10 @@ public class OnlineSpreadsheet implements Spreadsheet{
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void deleteSheet(String name){
+		
+	}
 
 }

@@ -51,6 +51,10 @@ public class Squad {
 		section.company.saveAttendance();
 	}
 	
+	public void removeBoy(String name){
+		listParser.removeValue(name);
+	}
+	
 	//==========[Parent stuff==========//
 	
 	public Company getCompany(){

@@ -99,40 +99,8 @@ public class SyncRemoteTask {
 			        publishProgress("Updating '"+offlineSpreadsheet.getName()+":"+worksheet.getName()+"': "+pairs.getValue());
 			        it.remove();
 			    }
+			    offlineWorksheet.setModified(false);
 			}
 		}
-		
-		/*public void downloadAttendance(){
-			publishProgress("Opening Attendance Spreadsheet...");
-			
-			//Initalize spreadsheets
-			OnlineSpreadsheet onlineSpreadsheet = drive.getSpreadsheet(MarkTime.settings.getString("spreadsheet", ""));
-			OfflineSpreadsheet offlineSpreadsheet = new OfflineSpreadsheet(onlineSpreadsheet.getName());
-			
-			//Loop through all the online spreadsheet's worksheets
-			for(Worksheet worksheet: onlineSpreadsheet.getWorksheets()){
-				publishProgress("Updating '"+onlineSpreadsheet.getName()+":"+worksheet.getName()+"'!");
-				
-				//Initalize worksheets
-				OnlineWorksheet onlineWorksheet = (OnlineWorksheet) worksheet;
-				OfflineWorksheet offlineWorksheet = new OfflineWorksheet(onlineWorksheet.getName(), offlineSpreadsheet);
-				
-				try {
-					for(CellEntry cell: onlineWorksheet.getCellFeed().getEntries()){
-						offlineWorksheet.setCell(cell.getTitle().getPlainText(), cell.getPlainTextContent());
-					}
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (ServiceException e) {
-					e.printStackTrace();
-				}
-				offlineWorksheet.setSize(onlineWorksheet.getWidth(), onlineWorksheet.getHeight());
-				offlineWorksheet.setModificationDate(onlineWorksheet.getModificationDate());
-				offlineSpreadsheet.insertWorksheet(offlineWorksheet);
-			}
-			publishProgress("Saving '"+onlineSpreadsheet.getName()+"'...");
-			offlineSpreadsheet.save(MarkTime.activity.getFilesDir()+"/"+onlineSpreadsheet.getName()+".db");
-		}*/
 	}
-
 }

@@ -17,7 +17,7 @@ public class MarkingData {
 	public int attendance = 0;
 	public boolean church = false;
 	
-	public String getDate(){
+	public static String getDate(){
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
 		return sdf.format(date);

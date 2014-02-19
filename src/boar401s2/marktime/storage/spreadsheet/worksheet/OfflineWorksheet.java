@@ -137,4 +137,9 @@ public class OfflineWorksheet implements Worksheet{
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		data.put("moddate", sdf.format(date));
 	}
+	
+	@Override
+	public void deleteCell(String name){
+		data.remove(name);
+	}
 }

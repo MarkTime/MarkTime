@@ -143,4 +143,9 @@ public class OfflineSpreadsheet implements Spreadsheet{
 		worksheets.put(name, worksheet);
 	}
 	
+	@Override
+	public void deleteSheet(String name){
+		worksheets.remove(name);
+	}
+	
 }

@@ -91,4 +91,6 @@ public interface Worksheet {
 	 */
 	public void setModificationDate(Date date);
 
+	
+	public void deleteCell(String cell);
 }

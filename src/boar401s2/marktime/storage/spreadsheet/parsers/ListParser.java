@@ -66,17 +66,45 @@ public class ListParser {
 		values = vals;
 	}
 	
+	public int findFirstAvaliableSlot(){
+		int yCounter = 0;
+		while(true){
+			yCounter++;
+			Position newPos = new Position(0, yCounter);
+			newPos.convertToSpreadsheetNotation();
+			try{
+				if(worksheet.getCell(newPos.getCell())==null){
+					break;
+				} else {
+					String value = worksheet.getCell(newPos.getCell());
+					if(value.equalsIgnoreCase("")){
+						return yCounter+1;
+					}
+				}
+			} catch (Exception ex){
+				break;
+			}
+		}
+		return values.size()+2;
+	}
+	
 	public List<String> getValues(){
 		return values;
 	}
 	
 	public void addValue(String value){
-		worksheet.setCell("A"+String.valueOf(values.size()+2), value);
+		System.out.println("A"+String.valueOf(findFirstAvaliableSlot()));
+		worksheet.setCell("A"+String.valueOf(findFirstAvaliableSlot()), value);
 		parse();
 	}
 	
 	public void setValue(Integer id, String value){
 		worksheet.setCell("A"+String.valueOf(id+1), value);
+		parse();
+	}
+	
+	public void removeValue(String value){
+		worksheet.setCell("A"+String.valueOf(values.indexOf(value)+2), "");
 		parse();
 	}
 

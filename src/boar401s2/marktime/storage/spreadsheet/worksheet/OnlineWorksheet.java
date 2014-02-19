@@ -138,4 +138,9 @@ public class OnlineWorksheet implements Worksheet{
 	public boolean cellExists(Position pos) {
 		return false;
 	}
+	
+	@Override
+	public void deleteCell(String cell){
+		
+	}
 }

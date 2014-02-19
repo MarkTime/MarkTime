@@ -72,6 +72,11 @@ public class Company {
 		saveAttendance();
 	}
 	
+	public void deleteSection(String id){
+		attendance.deleteSheet(id);
+		saveAttendance();
+	}
+	
 	//==========[Spreadsheet Stuff]==========//
 	
 	public Spreadsheet getAttendanceSpreadsheet(){

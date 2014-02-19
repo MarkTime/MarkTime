@@ -81,14 +81,13 @@ int drawable ic_plusone_medium_off_client 0x7f02001a
 int drawable ic_plusone_small_off_client 0x7f02001b
 int drawable ic_plusone_standard_off_client 0x7f02001c
 int drawable ic_plusone_tall_off_client 0x7f02001d
-int id action_settings 0x7f05001c
+int id action_settings 0x7f05001a
 int id boy_boys_name 0x7f05000b
 int id boy_list_view 0x7f050005
-int id button 0x7f050019
 int id hybrid 0x7f050004
 int id item_separator 0x7f050016
 int id lv_checkbox 0x7f050018
-int id lv_item_subtext 0x7f05001b
+int id lv_subtext 0x7f050019
 int id lv_title 0x7f050017
 int id menu_mark 0x7f050006
 int id menu_settings 0x7f050008
@@ -109,7 +108,6 @@ int id synchronise_remote 0x7f050014
 int id synchronise_synchronise 0x7f050015
 int id terrain 0x7f050003
 int id textView2 0x7f050010
-int id vertical_divider 0x7f05001a
 int integer google_play_services_version 0x7f070000
 int layout activity_boy 0x7f030000
 int layout activity_mark_time 0x7f030001

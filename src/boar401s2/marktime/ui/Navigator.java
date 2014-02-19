@@ -233,6 +233,26 @@ public class Navigator extends Activity implements AsyncTaskParent{
 					});
 					builder.show();
 					
+				} else if(id.split(":")[1].startsWith("Delete")){
+					
+					DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+					    @Override
+					    public void onClick(DialogInterface dialog, int which) {
+					        switch (which){
+					        case DialogInterface.BUTTON_POSITIVE:
+					        	company.deleteSection(section.getName());
+					        	displayLevel(LevelIDList.SECTION);
+					            break;
+					        case DialogInterface.BUTTON_NEGATIVE:
+					            break;
+					        }
+					    }
+					};
+
+					AlertDialog.Builder confirmDeleteDialog = new AlertDialog.Builder(this);
+					confirmDeleteDialog.setMessage("Are you sure you want to remove "+section.getName()+" permanantly?").setPositiveButton("Yes", dialogClickListener)
+					    .setNegativeButton("No", dialogClickListener).show();
+					
 				} else {
 					Toast.makeText(this, "Not implemented yet.", Toast.LENGTH_SHORT).show();
 				}
@@ -262,6 +282,27 @@ public class Navigator extends Activity implements AsyncTaskParent{
 					    }
 					});
 					builder.show();
+					
+				} else if (id.split(":")[1].startsWith("Delete")){
+					
+					DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+					    @Override
+					    public void onClick(DialogInterface dialog, int which) {
+					        switch (which){
+					        case DialogInterface.BUTTON_POSITIVE:
+					        	section.deleteSquad(squad.getName());
+					        	section.getCompany().saveAttendance();
+					        	displayLevel(LevelIDList.SQUAD);
+					            break;
+					        case DialogInterface.BUTTON_NEGATIVE:
+					            break;
+					        }
+					    }
+					};
+
+					AlertDialog.Builder confirmDeleteDialog = new AlertDialog.Builder(this);
+					confirmDeleteDialog.setMessage("Are you sure you want to remove "+squad.getName()+" permanantly?").setPositiveButton("Yes", dialogClickListener)
+					    .setNegativeButton("No", dialogClickListener).show();
 					
 				} else {
 					Toast.makeText(this, "Not implemented yet.", Toast.LENGTH_SHORT).show();
@@ -367,7 +408,7 @@ public class Navigator extends Activity implements AsyncTaskParent{
             	TextView header = (TextView)item.findViewById(R.id.lv_title);
 	            header.setText(entryName);
 	            
-	            TextView subtext = (TextView)item.findViewById(R.id.lv_item_subtext);
+	            TextView subtext = (TextView)item.findViewById(R.id.lv_subtext);
 	            subtext.setText(subtitleText);
 	            return item;
             }

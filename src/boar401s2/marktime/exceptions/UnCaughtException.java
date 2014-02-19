@@ -8,6 +8,8 @@ import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.Date;
 import java.util.Locale;
 
+import boar401s2.marktime.util.MarkingData;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -137,8 +139,8 @@ public class UnCaughtException implements UncaughtExceptionHandler
                     public void onClick(DialogInterface dialog, int which)
                     {
                         Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                        String subject = "Your App crashed! Fix it!";
-                        StringBuilder body = new StringBuilder("Yoddle");
+                        String subject = "Crash Report - "+MarkingData.getDate();
+                        StringBuilder body = new StringBuilder("");
                         body.append('\n').append('\n');
                         body.append(errorContent).append('\n').append('\n');
                         // sendIntent.setType("text/plain");
@@ -151,7 +153,7 @@ public class UnCaughtException implements UncaughtExceptionHandler
                         System.exit(0);
                     }
                 });
-                builder.setMessage("Oops,Your application has crashed");
+                builder.setMessage("Oops, looks like John overlooked a bug! Would you like to help him fix it by submitting a bug report?");
                 builder.show();
                 Looper.loop();
             }

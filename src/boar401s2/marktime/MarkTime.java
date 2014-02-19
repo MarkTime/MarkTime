@@ -4,7 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import boar401s2.marktime.constants.ResultIDList;
+import boar401s2.marktime.exceptions.UnCaughtException;
+import boar401s2.marktime.handlers.Boy;
+import boar401s2.marktime.ui.BoyUI;
 import boar401s2.marktime.ui.Navigator;
+import boar401s2.marktime.ui.Settings;
+import boar401s2.marktime.ui.Synchronise;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -49,7 +54,7 @@ public class MarkTime extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mark_time);
 		isNetworkAvailable = isNetworkAvailable();
-		//Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.this));
+		Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.this));
 	}
 
 	@Override
@@ -75,7 +80,8 @@ public class MarkTime extends Activity {
 	 * @param view
 	 */
 	public void openMark(View view){
-		//Intent i = new Intent(this, Roll.class);
+		//Boy b = null; //#Induceacrash
+		//b.getCompany();
 		Intent i = new Intent(this, Navigator.class);
 		startActivityForResult(i, 1);
 	}

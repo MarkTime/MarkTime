@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="boar401s2.marktime"
-    android:versionCode="09"
-    android:versionName="v0.9dev" >
+    android:versionCode="1"
+    android:versionName="v1.0b" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -32,14 +32,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="boar401s2.marktime.Settings"
+            android:name="boar401s2.marktime.ui.Settings"
             android:label="@string/title_activity_settings" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="boar401s2.marktime.MarkTime" />
         </activity>
         <activity
-            android:name="boar401s2.marktime.Synchronise"
+            android:name="boar401s2.marktime.ui.Synchronise"
             android:label="@string/title_activity_synchronise" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -57,7 +57,7 @@
                 android:value="boar401s2.marktime.MarkTime" />
         </activity>
         <activity
-            android:name="boar401s2.marktime.BoyUI"
+            android:name="boar401s2.marktime.ui.BoyUI"
             android:label="@string/title_activity_boy" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

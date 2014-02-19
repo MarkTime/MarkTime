@@ -25,6 +25,12 @@ public class HashMapSerializer {
 		HashMap<String, String> result = new HashMap<String, String>();
 		for (String s: parts){
 			String[] pair = s.split(",");
+			if(pair.length==1){
+				String[] oldPair = pair;
+				pair = new String[2];
+				pair[0] = oldPair[0];
+				pair[1] = "";
+			}
 			result.put(pair[0], pair[1]);
 		}
 		return result;

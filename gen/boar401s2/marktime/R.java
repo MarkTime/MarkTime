@@ -232,14 +232,13 @@ containing a value of this type.
         public static final int ic_plusone_tall_off_client=0x7f02001d;
     }
     public static final class id {
-        public static final int action_settings=0x7f05001c;
+        public static final int action_settings=0x7f05001a;
         public static final int boy_boys_name=0x7f05000b;
         public static final int boy_list_view=0x7f050005;
-        public static final int button=0x7f050019;
         public static final int hybrid=0x7f050004;
         public static final int item_separator=0x7f050016;
         public static final int lv_checkbox=0x7f050018;
-        public static final int lv_item_subtext=0x7f05001b;
+        public static final int lv_subtext=0x7f050019;
         public static final int lv_title=0x7f050017;
         public static final int menu_mark=0x7f050006;
         public static final int menu_settings=0x7f050008;
@@ -260,7 +259,6 @@ containing a value of this type.
         public static final int synchronise_synchronise=0x7f050015;
         public static final int terrain=0x7f050003;
         public static final int textView2=0x7f050010;
-        public static final int vertical_divider=0x7f05001a;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f070000;
