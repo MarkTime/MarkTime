@@ -5,7 +5,6 @@ import java.util.Date;
 
 import boar401s2.marktime.constants.ResultIDList;
 import boar401s2.marktime.exceptions.UnCaughtException;
-import boar401s2.marktime.handlers.Boy;
 import boar401s2.marktime.ui.BoyUI;
 import boar401s2.marktime.ui.Navigator;
 import boar401s2.marktime.ui.Settings;

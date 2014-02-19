@@ -82,13 +82,17 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 	
 	public void navigateUp(){
 		if(currentLevel==LevelIDList.BOY_MAIN){
-			Intent i = new Intent();
-			i.putExtra("location", boy.getSection().getName()+"."+boy.getSquad().getName());
-			setResult(ResultIDList.RESULT_UP, i);
-			finish();
+			navigateBack();
 		} else if(currentLevel==LevelIDList.BOY_MARK){
 			displayLevel(LevelIDList.BOY_MAIN);
 		}
+	}
+	
+	public void navigateBack(){
+		Intent i = new Intent();
+		i.putExtra("location", boy.getSection().getName()+"."+boy.getSquad().getName());
+		setResult(ResultIDList.RESULT_UP, i);
+		finish();
 	}
 	
 	public void displayLevel(Integer level){
@@ -129,7 +133,7 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 			
 			addHeader("Other");
 			addItem("Church", ListViewEntryTypes.CHECKBOX);
-			addItem("Attendance", ListViewEntryTypes.BUTTON);
+			addItem("Attendance: "+String.valueOf(data.attendance), ListViewEntryTypes.BUTTON);
 			addItem("Date to Mark", MarkingData.getDate());
 			addItem("Submit", ListViewEntryTypes.SUBMIT);
 			
@@ -167,6 +171,7 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 		    public void onClick(DialogInterface dialog, int which) {
 		    	dataChanged = true;
 		    	data.attendance = picker.getValue();
+		    	displayLevel(LevelIDList.BOY_MARK);
 		    }
 		});
 		builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -286,11 +291,8 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 				
 				
 			} else if(entry.getTitle().startsWith("Submit")){
-				if(dataChanged){
-					data.date = date;
-					boy.setNightData(data);
-				}
-				displayLevel(LevelIDList.BOY_MAIN);
+				navigateBack();
+				Toast.makeText(this, "Finished marking "+boy.getName()+"!", Toast.LENGTH_SHORT).show();
 			}
 		} else if(currentLevel == LevelIDList.BOY){
 		}
