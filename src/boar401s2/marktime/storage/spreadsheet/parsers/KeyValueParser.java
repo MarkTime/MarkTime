@@ -5,6 +5,10 @@ import java.util.HashMap;
 import boar401s2.marktime.storage.interfaces.Worksheet;
 import boar401s2.marktime.util.Position;
 
+/**
+ * Parser for parsing a HashMap from a Worksheet
+ * @author boar401s2
+ */
 public class KeyValueParser {
 	
 	Worksheet worksheet;
@@ -18,6 +22,9 @@ public class KeyValueParser {
 		this.startingPos.convertToCartesian();
 	}
 	
+	/**
+	 * Map all the keys
+	 */
 	public void mapKeys(){
 		Position newPos = new Position(startingPos);
 		newPos.setY(newPos.getY()+1);
@@ -35,6 +42,11 @@ public class KeyValueParser {
 		}
 	}
 	
+	/**
+	 * Gets a value from a key
+	 * @param key
+	 * @return
+	 */
 	public String getValue(String key){
 		Position pos = new Position(keys.get(key));
 		pos.convertToCartesian();
@@ -43,6 +55,11 @@ public class KeyValueParser {
 		return worksheet.getCell(pos.getCell());
 	}
 	
+	/**
+	 * Sets a value at a key
+	 * @param key
+	 * @param value
+	 */
 	public void setValue(String key, String value){
 		Position pos = new Position(keys.get(key));
 		pos.convertToCartesian();

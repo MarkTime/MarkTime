@@ -27,6 +27,9 @@ public class TableParser {
 		mapCells();
 	}
 	
+	/**
+	 * Maps all the values
+	 */
 	public void mapCells(){
 		int xCounter = 0;
 		for(int i=0; i<worksheet.getWidth(); i++){ //Scan through columns adding their titles to the hashmap
@@ -53,6 +56,10 @@ public class TableParser {
 		}
 	}
 	
+	/**
+	 * Gets the first avalaiable row
+	 * @return
+	 */
 	public int nextAvaliableRow(){
 		int yCounter = 0;
 		for(int i=worksheet.getHeight(); i<30; i++){ //Scan down the rows adding them to the hashmap
@@ -66,6 +73,11 @@ public class TableParser {
 		return 1;
 	}
 	
+	/**
+	 * Gets the next unused row
+	 * @return
+	 */
+	//TODO What's the difference betwene this and nextAvaliableRow??
 	@SuppressWarnings("rawtypes")
 	public int getNextUnusedRow(){
 		List<Integer> rows = new ArrayList<Integer>();
@@ -79,6 +91,12 @@ public class TableParser {
 	    return Collections.max(rows) + 1;
 	}
 	
+	/**
+	 * Gets a cell position from a (named) row and column
+	 * @param row
+	 * @param column
+	 * @return
+	 */
 	public Position getCellPosition(String row, String column){
 		if (rowLookup.containsKey(row)){
 			return new Position(Integer.parseInt((String) columnLookup.get(column)), Integer.parseInt((String) rowLookup.get(row)));
@@ -89,18 +107,35 @@ public class TableParser {
 		}
 	}
 	
+	/**
+	 * Gets a value from the (named) row and column
+	 * @param row
+	 * @param column
+	 * @return
+	 */
 	public String getValue(String row, String column){
 		Position pos = getCellPosition(row, column);
 		pos.convertToSpreadsheetNotation();
 		return worksheet.getCell(pos.getCell());
 	}
 	
+	/**
+	 * Sets the value at a row and column
+	 * @param row
+	 * @param column
+	 * @param value
+	 */
 	public void setValue(String row, String column, String value){
 		Position pos = getCellPosition(row, column);
 		pos.convertToSpreadsheetNotation();
 		worksheet.setCell(pos.getCell(), value);
 	}
 	
+	/**
+	 * Sets the name of a row, at it's raw ID
+	 * @param name
+	 * @param row
+	 */
 	public void setRow(String name, int row){
 		rowLookup.put(name, String.valueOf(row));
 		Position pos = new Position(0, row);

@@ -4,10 +4,6 @@ import java.util.Arrays;
 
 import boar401s2.marktime.MarkTime;
 import boar401s2.marktime.R;
-import boar401s2.marktime.R.id;
-import boar401s2.marktime.R.layout;
-import boar401s2.marktime.R.menu;
-
 import com.google.android.gms.common.AccountPicker;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.services.drive.DriveScopes;

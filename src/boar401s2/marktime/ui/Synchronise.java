@@ -2,8 +2,6 @@ package boar401s2.marktime.ui;
 
 import boar401s2.marktime.MarkTime;
 import boar401s2.marktime.R;
-import boar401s2.marktime.R.layout;
-import boar401s2.marktime.R.menu;
 import boar401s2.marktime.constants.ResultIDList;
 import boar401s2.marktime.constants.TaskIDList;
 import boar401s2.marktime.events.AsyncTaskParent;

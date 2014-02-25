@@ -89,6 +89,11 @@ public class GDrive implements AsyncTaskParent{
 		return null;
 	}
 	
+	/**
+	 * Returns boolean whether spreadsheet exists
+	 * @param name
+	 * @return
+	 */
 	public boolean spreadsheetExists(String name){
 		if (getSpreadsheet(name)==null){
 			return false;
@@ -99,11 +104,17 @@ public class GDrive implements AsyncTaskParent{
 	
 	//==========[Events]==========//
 
+	/**
+	 * Called when the status of a sub-task changes
+	 */
 	@Override
 	public void onStatusChange(String status) {
 		eventsParent.onStatusChange(status);
 	}
 	
+	/**
+	 * Called when a task finishes
+	 */
 	@Override
 	public void onPostExecute(Integer taskid, Integer result) {
 		if(taskid==TaskIDList.TASK_GET_DRIVE_SERVICE){ //If the finished task was getting the google drive service...

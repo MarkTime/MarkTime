@@ -17,6 +17,11 @@ import boar401s2.marktime.storage.spreadsheet.worksheet.OfflineWorksheet;
 import boar401s2.marktime.storage.spreadsheet.worksheet.OnlineWorksheet;
 
 
+/**
+ * Task that synchronises the local spreadsheet to the 
+ * remote spreadsheet
+ * @author boar401s2
+ */
 public class SyncLocalTask {
 	
 	AsyncTaskParent parent;

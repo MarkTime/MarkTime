@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="boar401s2.marktime"
-    android:versionCode="1"
-    android:versionName="v1.0b" >
+    android:versionCode="0612"
+    android:versionName="v0.6b2" >
 
     <uses-sdk
         android:minSdkVersion="11"

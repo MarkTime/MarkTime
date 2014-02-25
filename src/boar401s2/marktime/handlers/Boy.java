@@ -5,6 +5,12 @@ import boar401s2.marktime.storage.interfaces.Worksheet;
 import boar401s2.marktime.storage.spreadsheet.parsers.TableParser;
 import boar401s2.marktime.util.MarkingData;
 
+
+/**
+ * This class is the handler for a Boy. It opens up the appropriate files
+ * to get the data about the boy, and then wraps it up in a nice wrapper.
+ * @author boar401s2
+ */
 public class Boy {
 	
 	String name;
@@ -15,10 +21,18 @@ public class Boy {
 		this.squad = squad;
 	}
 	
+	/**
+	 * @return The boy's name
+	 */
 	public String getName(){
 		return name;
 	}
 	
+	/**
+	 * Saves MarkingData to the appropriate attendance file.
+	 * Use this method to set the attendance data for this boy.
+	 */
+	@SuppressWarnings("static-access")
 	public void setNightData(MarkingData data){
 		Spreadsheet spreadsheet = getCompany().attendance;
 		String worksheetName = squad.getName()+" - "+data.getDate();
@@ -46,14 +60,24 @@ public class Boy {
 
 	//==========[Parent stuff]==========//
 	
+	/**
+	 * @return The boy's company
+	 */
 	public Company getCompany(){
 		return squad.getSection().getCompany();
 	}
 	
+	/**
+	 * @return The boy's section
+	 */
 	public Section getSection(){
 		return squad.getSection();
 	}
 	
+	
+	/**
+	 * @return The boy's squad
+	 */
 	public Squad getSquad(){
 		return squad;
 	}

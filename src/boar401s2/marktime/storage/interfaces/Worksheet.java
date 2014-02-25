@@ -2,8 +2,6 @@ package boar401s2.marktime.storage.interfaces;
 
 import java.util.Date;
 
-import com.google.gdata.data.DateTime;
-
 import boar401s2.marktime.util.Position;
 
 public interface Worksheet {
@@ -91,6 +89,9 @@ public interface Worksheet {
 	 */
 	public void setModificationDate(Date date);
 
-	
+	/**
+	 * Deletes a cell
+	 * @param cell
+	 */
 	public void deleteCell(String cell);
 }

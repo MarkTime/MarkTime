@@ -6,6 +6,11 @@ import java.util.List;
 import boar401s2.marktime.storage.interfaces.Worksheet;
 import boar401s2.marktime.storage.spreadsheet.parsers.ListParser;
 
+/**
+ * Class for accessing the section as defined
+ * in the attendance file.
+ * @author boar401s2
+ */
 public class Section {
 
 	String name;
@@ -13,7 +18,7 @@ public class Section {
 	List<Squad> squads = new ArrayList<Squad>();
 	ListParser listParser;
 	Worksheet worksheet;
-	
+
 	public Section(String name, Company company){
 		this.company = company;
 		this.name = name;
@@ -22,10 +27,19 @@ public class Section {
 		listParser.parse();
 	}
 	
+	/**
+	 * Gets the name of the Section
+	 * @return
+	 */
 	public String getName(){
 		return name;
 	}
 	
+	/**
+	 * Gets a squad that the section contains
+	 * @param name
+	 * @return Squad
+	 */
 	public Squad getSquad(String name){
 		if(getSquadNames().contains(name)){
 			return new Squad(name, this);
@@ -34,6 +48,11 @@ public class Section {
 		}
 	}
 	
+	/**
+	 * Gets a list of the name of the squads that this
+	 * section contains
+	 * @return List of squad names
+	 */
 	public List<String> getSquadNames(){
 		List<String> squadNames = new ArrayList<String>();
 		for (Squad squad: getSquads()){
@@ -43,6 +62,10 @@ public class Section {
 		
 	}
 	
+	/**
+	 * Gets a list of the squads
+	 * @return List of the squads
+	 */
 	public List<Squad> getSquads(){
 		List<String> squadNames = listParser.getValues();
 		List<Squad> squads = new ArrayList<Squad>();
@@ -52,6 +75,10 @@ public class Section {
 		return squads;
 	}
 	
+	/**
+	 * Adds a squad to the Section
+	 * @param name
+	 */
 	public void addSquad(String name){
 		listParser.addValue("Squad-"+name);
 		worksheet.getParent().createWorksheet("Squad-"+name);
@@ -60,6 +87,10 @@ public class Section {
 		company.saveAttendance();
 	}
 	
+	/**
+	 * Deletes a squad from the Section
+	 * @param name
+	 */
 	public void deleteSquad(String name){
 		listParser.removeValue(name);
 		worksheet.getParent().deleteSheet(name);
@@ -68,6 +99,10 @@ public class Section {
 	
 	//==========[Parent stuff==========//
 	
+	/**
+	 * Gets the parent company
+	 * @return parent company
+	 */
 	public Company getCompany(){
 		return company;
 	}

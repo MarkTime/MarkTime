@@ -1,5 +1,10 @@
 package boar401s2.marktime.constants;
 
+/**
+ * This class contains a list of constants for the different
+ * error kinds. These are often resulted from Activities.
+ * @author student
+ */
 public class ErrorIDList {
 
 	public static int EXCEPTION = 1;

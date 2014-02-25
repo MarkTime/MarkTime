@@ -1,5 +1,13 @@
 package boar401s2.marktime.constants;
 
+/**
+ * This is a list of the different "Levels" of the ListViews.
+ * For exmaple, it has constants signifying the level of "BoyUI"
+ * it's currently on, such as marking the attendance, or the badges
+ * page.
+ * @author boar401s2
+ */
+
 public class LevelIDList {
 
 	public static int SECTION = 1;

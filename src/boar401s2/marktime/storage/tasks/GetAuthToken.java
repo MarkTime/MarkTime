@@ -35,6 +35,9 @@ public class GetAuthToken {
 		this.activityParent = activityParent;
 	}
 	
+	/**
+	 * Runs the task
+	 */
 	public void run(){
 		new GetAuthTokenTask().execute();
 	}
@@ -95,6 +98,10 @@ public class GetAuthToken {
 			parent.onStatusChange(text[0]);
 		}
 		
+		/**
+		 * Unsure of the use of this method.
+		 * @param future
+		 */
 		public void auth(AccountManagerFuture<Bundle> future){
 			try {    
 				token = future.getResult().getString(AccountManager.KEY_AUTHTOKEN);  

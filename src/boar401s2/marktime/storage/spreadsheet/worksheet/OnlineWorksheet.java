@@ -16,6 +16,10 @@ import boar401s2.marktime.storage.interfaces.Worksheet;
 import boar401s2.marktime.storage.spreadsheet.OnlineSpreadsheet;
 import boar401s2.marktime.util.Position;
 
+/**
+ * Class that acts as a wrapper for the Google Drive worksheets
+ * @author boar401s2
+ */
 public class OnlineWorksheet implements Worksheet{
 	
     WorksheetEntry worksheet;
@@ -32,6 +36,14 @@ public class OnlineWorksheet implements Worksheet{
         } catch (ServiceException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Gets the google drive worksheet entry
+	 * @return
+	 */
+	public WorksheetEntry getWorksheetEntry(){
+		return worksheet;
 	}
 
 	@Override
@@ -78,6 +90,19 @@ public class OnlineWorksheet implements Worksheet{
             e.printStackTrace();
 	    }	
 	}
+	
+	/**
+	 * Creates a cell on the OnlineSpreadsheet
+	 * @param cell
+	 * @param data
+	 * @return
+	 */
+	public CellEntry createCell(String cell, String data){
+		Position pos = new Position(cell);
+		pos.convertToCartesian();
+		CellEntry entry = new CellEntry(pos.getY(), pos.getX()+1, data);
+		return entry;
+	}
 
 	@Override
 	public void setSize(int width, int height) {
@@ -119,6 +144,12 @@ public class OnlineWorksheet implements Worksheet{
 		return null;
 	}
 	
+	/**
+	 * Gets the cell feed
+	 * @return
+	 * @throws IOException
+	 * @throws ServiceException
+	 */
 	public CellFeed getCellFeed() throws IOException, ServiceException{
 		return parent.getService().getSpreadsheetService().getFeed(worksheet.getCellFeedUrl(), CellFeed.class);
 	}

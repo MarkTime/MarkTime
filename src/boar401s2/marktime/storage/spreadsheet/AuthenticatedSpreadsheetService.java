@@ -7,7 +7,6 @@ import boar401s2.marktime.MarkTime;
 import boar401s2.marktime.constants.ResultIDList;
 import boar401s2.marktime.constants.TaskIDList;
 import boar401s2.marktime.events.AsyncTaskParent;
-import boar401s2.marktime.security.Credentials;
 
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.gdata.client.spreadsheet.SpreadsheetService;
@@ -17,7 +16,6 @@ import com.google.gdata.data.spreadsheet.SpreadsheetFeed;
  * Used to autenticated services. At the moment it only authenticates
  * spreadsheet services.
  */
-@SuppressWarnings("deprecation")
 public class AuthenticatedSpreadsheetService{
 	
 	private String email;
@@ -48,9 +46,9 @@ public class AuthenticatedSpreadsheetService{
 	 * Authenticate using the self-defined credentials class. (Username/Password)
 	 * @param credentials
 	 */
-	public void authenticate(Credentials credentials){
-		this.email = credentials.getEmail();
-		this.password = credentials.getPassword();
+	public void authenticate(String email, String password){
+		this.email = email;
+		this.password = password;
 		ConnectTask task = new ConnectTask();
 		task.execute();
 	}
@@ -98,11 +96,17 @@ public class AuthenticatedSpreadsheetService{
 			}
 		}
 		
+		/**
+		 * Called when sub-task finishes
+		 */
 		@Override
 		protected void onPostExecute(Integer result){
 			parent.onPostExecute(TaskIDList.TASK_AUTH_SPREADSHEET_SERVICE, result);
 		}
 		
+		/**
+		 * Called when a sub-task progress updates
+		 */
 		@Override
 		public void onProgressUpdate(String... text){
 			parent.onStatusChange(text[0]);

@@ -15,6 +15,8 @@ import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
 import com.google.gdata.data.spreadsheet.WorksheetEntry;
 import com.google.gdata.util.ServiceException;
 
+import android.widget.Toast;
+import boar401s2.marktime.MarkTime;
 import boar401s2.marktime.storage.GDrive;
 import boar401s2.marktime.storage.interfaces.Spreadsheet;
 import boar401s2.marktime.storage.interfaces.Worksheet;
@@ -145,14 +147,13 @@ public class OnlineSpreadsheet implements Spreadsheet{
 
 	@Override
 	public void duplicateSheet(String sheet, String name) {
-		// TODO Auto-generated method stub
-		
+		Toast.makeText(MarkTime.activity.getApplicationContext(), "OnlineSpreadsheet.duplicateSheet not implemented yet.", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
 	public boolean worksheetExists(String name) {
-		// TODO Auto-generated method stub
-		return false;
+		Toast.makeText(MarkTime.activity.getApplicationContext(), "OnlineSpreadsheet.worksheetExists not implemented yet.", Toast.LENGTH_SHORT).show();
+		return true;
 	}
 
 	@Override
@@ -182,7 +183,7 @@ public class OnlineSpreadsheet implements Spreadsheet{
 	
 	@Override
 	public void deleteSheet(String name){
-		
+		Toast.makeText(MarkTime.activity.getApplicationContext(), "OnlineSpreadsheet.deleteSheet not implemented yet.", Toast.LENGTH_SHORT).show();
 	}
 
 }

@@ -18,7 +18,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.InputType;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,12 +57,6 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 
 	private void setupActionBar() {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.boy, menu);
-		return true;
 	}
 
 	@Override
@@ -291,6 +284,7 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 				
 				
 			} else if(entry.getTitle().startsWith("Submit")){
+				boy.setNightData(data);
 				navigateBack();
 				Toast.makeText(this, "Finished marking "+boy.getName()+"!", Toast.LENGTH_SHORT).show();
 			}

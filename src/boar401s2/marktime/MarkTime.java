@@ -18,7 +18,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
@@ -56,13 +55,6 @@ public class MarkTime extends Activity {
 		Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.this));
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.mark_time, menu);
-		return true;
-	}
-	
 	/**
 	 * Checks to see if the device is connected to a network.
 	 * @return
@@ -114,6 +106,9 @@ public class MarkTime extends Activity {
 		Log.i("General", string);
 	}
 	
+	/**
+	 * Called when an opened activity, such as BoyUI has returned.
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == 1){

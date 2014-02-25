@@ -1,5 +1,10 @@
 package boar401s2.marktime.constants;
 
+/**
+ * Contains constants for the different Activity 
+ * or AsyncTask result types
+ * @author student
+ */
 public class ResultIDList {
 
 	public static int RESULT_OK = 1;

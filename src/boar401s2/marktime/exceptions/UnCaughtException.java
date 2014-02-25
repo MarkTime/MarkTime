@@ -21,6 +21,12 @@ import android.os.Looper;
 import android.os.StatFs;
 import android.util.Log;
 
+/**
+ * Exception that is thrown when no errors are caught.
+ * Compiles the error and other useful information into
+ * an email, and launches a send-email intent with the message.
+ * @author boar401s2
+ */
 public class UnCaughtException implements UncaughtExceptionHandler
 {
     private Context context;

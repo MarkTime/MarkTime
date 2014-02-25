@@ -15,6 +15,10 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 
+/**
+ * Task that gets the google drive service
+ * @author boar401s2
+ */
 public class GetDriveService {
 	
 	String account;
@@ -31,14 +35,25 @@ public class GetDriveService {
 		this.activityParent = activityParent;
 	}
 	
+	/**
+	 * Runs the task
+	 */
 	public void run(){
 		new GetDriveServiceTask().execute();
 	}
 	
+	/**
+	 * Gets the credentials
+	 * @return
+	 */
 	public GoogleAccountCredential getCredential(){
 		return credential;
 	}
 	
+	/**
+	 * Gets the drive service
+	 * @return
+	 */
 	public Drive getDriveService(){
 		return driveService;
 	}
@@ -97,12 +112,24 @@ public class GetDriveService {
 			parent.onStatusChange(text[0]);
 		}
 		
+		/**
+		 * Actually builds and runs a request to get the drive service
+		 * @param credential
+		 * @return
+		 */
 		private Drive getDriveService(GoogleAccountCredential credential) {
 		    return new Drive.Builder(AndroidHttp.newCompatibleTransport(), new GsonFactory(), credential)
 		        .build();
 		}
 	}
 	
+	/**
+	 * Called when an activity returns, which in this case
+	 * is the "Google OAuth2.0 permission request" activity
+	 * @param requestCode
+	 * @param resultCode
+	 * @param data
+	 */
 	protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
 		if(requestCode==TaskIDList.TASK_GET_AUTH_PERMISSION && resultCode==Activity.RESULT_OK){
 			run();

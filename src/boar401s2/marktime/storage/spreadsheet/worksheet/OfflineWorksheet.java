@@ -8,6 +8,10 @@ import boar401s2.marktime.storage.interfaces.Spreadsheet;
 import boar401s2.marktime.storage.interfaces.Worksheet;
 import boar401s2.marktime.util.Position;
 
+/**
+ * Class that acts as a wrapper for the saved worksheet file
+ * @author boar401s2
+ */
 public class OfflineWorksheet implements Worksheet{
 
 	private Spreadsheet parent;
@@ -18,11 +22,19 @@ public class OfflineWorksheet implements Worksheet{
 		this.parent = parent;
 	}
 	
+	/**
+	 * Sets the raw data of the spreadsheet from a hashmap
+	 * @param map
+	 */
 	@SuppressWarnings("unchecked")
 	public void setData(HashMap<String, String> map){
 		this.data = (HashMap<String, String>) map.clone();
 	}
 	
+	/**
+	 * Gets the spreadsheet raw data as a HashMap
+	 * @return
+	 */
 	public HashMap<String, String> getData(){
 		return data;
 	}
@@ -107,15 +119,26 @@ public class OfflineWorksheet implements Worksheet{
 		}
 	}
 	
+	/**
+	 * Checks whether a cell exists in the HashMap
+	 */
 	public boolean cellExists(Position pos){
 		pos.convertToSpreadsheetNotation();
 		return data.containsKey(pos.getCell());
 	}
 	
+	/**
+	 * Checks whether the worksheet has been modified since last upload
+	 * @return
+	 */
 	public boolean hasBeenModified(){
 		return Boolean.parseBoolean(data.get("modified"));
 	}
 	
+	/**
+	 * Sets whether the worksheet has been modified
+	 * @param modified
+	 */
 	public void setModified(boolean modified){
 		data.put("modified", String.valueOf(modified));
 	}

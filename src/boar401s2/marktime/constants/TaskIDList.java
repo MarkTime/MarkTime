@@ -1,5 +1,10 @@
 package boar401s2.marktime.constants;
 
+/**
+ * A list of constants for the different
+ * tasks there are.
+ * @author boar401s2
+ */
 public class TaskIDList {
 	
 	public static int TASK_GET_AUTH_TOKEN = 1;
