@@ -38,7 +38,6 @@ public class ListParser {
 		while(true){
 			yCounter++;
 			Position newPos = new Position(0, yCounter);
-			newPos.convertToSpreadsheetNotation();
 			try{
 				if(worksheet.getCell(newPos.getCell())==null){
 					break;
@@ -67,7 +66,6 @@ public class ListParser {
 		int yCounter = 1;
 		while(true){
 			Position newPos = new Position(0, yCounter);
-			newPos.convertToSpreadsheetNotation();
 			try{
 				if(yCounter <= vals.size()){
 					worksheet.setCell(newPos.getCell(), vals.get(yCounter-1));
@@ -91,7 +89,6 @@ public class ListParser {
 		while(true){
 			yCounter++;
 			Position newPos = new Position(0, yCounter);
-			newPos.convertToSpreadsheetNotation();
 			try{
 				if(worksheet.getCell(newPos.getCell())==null){
 					break;

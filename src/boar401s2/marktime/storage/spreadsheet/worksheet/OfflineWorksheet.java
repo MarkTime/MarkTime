@@ -69,9 +69,7 @@ public class OfflineWorksheet implements Worksheet{
 	@Override
 	//TODO Need to fix, not working at last check
 	public String getCell(Position pos) {
-		pos.convertToSpreadsheetNotation();
 		String data = getCell(pos.getCell());
-		pos.convertToCartesian();
 		return data;
 	}
 
@@ -83,7 +81,6 @@ public class OfflineWorksheet implements Worksheet{
 
 	@Override
 	public void setCell(Position pos, String value) {
-		pos.convertToSpreadsheetNotation();
 		setCell(pos.getCell(), value);
 	}
 
@@ -111,7 +108,6 @@ public class OfflineWorksheet implements Worksheet{
 
 	@Override
 	public boolean cellHasInformation(Position pos) {
-		pos.convertToSpreadsheetNotation();
 		if (getCell(pos.getCell()).equalsIgnoreCase("") || !data.containsKey(pos.getCell())){
 			return false;
 		} else {
@@ -123,7 +119,6 @@ public class OfflineWorksheet implements Worksheet{
 	 * Checks whether a cell exists in the HashMap
 	 */
 	public boolean cellExists(Position pos){
-		pos.convertToSpreadsheetNotation();
 		return data.containsKey(pos.getCell());
 	}
 	

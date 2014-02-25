@@ -68,14 +68,12 @@ public class OnlineWorksheet implements Worksheet{
 	
 	@Override
 	public String getCell(Position pos) {
-		pos.convertToSpreadsheetNotation();
 		return getCell(pos.getCell());
 	}
 
 	@Override
 	public void setCell(String cell, String data) {
 		Position pos = new Position(cell);
-		pos.convertToCartesian();
 		setCell(pos, data);
 	}
 
@@ -99,7 +97,6 @@ public class OnlineWorksheet implements Worksheet{
 	 */
 	public CellEntry createCell(String cell, String data){
 		Position pos = new Position(cell);
-		pos.convertToCartesian();
 		CellEntry entry = new CellEntry(pos.getY(), pos.getX()+1, data);
 		return entry;
 	}

@@ -34,7 +34,6 @@ public class TableParser {
 		int xCounter = 0;
 		for(int i=0; i<worksheet.getWidth(); i++){ //Scan through columns adding their titles to the hashmap
 			Position pos = new Position(xCounter, 0);
-			pos.convertToSpreadsheetNotation();
 			if(worksheet.getCell(pos.getCell())==null){
 				break;
 			} else {
@@ -47,7 +46,6 @@ public class TableParser {
 		for(int i=0; i<30; i++){ //Scan down the rows adding them to the hashmap
 			yCounter++;
 			Position pos = new Position(0, yCounter);
-			pos.convertToSpreadsheetNotation();
 			if(worksheet.getCell(pos.getCell())==null){
 				break;
 			} else {
@@ -65,7 +63,6 @@ public class TableParser {
 		for(int i=worksheet.getHeight(); i<30; i++){ //Scan down the rows adding them to the hashmap
 			yCounter++;
 			Position pos = new Position(0, yCounter);
-			pos.convertToSpreadsheetNotation();
 			if(worksheet.getCell(pos.getCell())==null){
 				return yCounter;
 			}
@@ -115,7 +112,6 @@ public class TableParser {
 	 */
 	public String getValue(String row, String column){
 		Position pos = getCellPosition(row, column);
-		pos.convertToSpreadsheetNotation();
 		return worksheet.getCell(pos.getCell());
 	}
 	
@@ -127,7 +123,6 @@ public class TableParser {
 	 */
 	public void setValue(String row, String column, String value){
 		Position pos = getCellPosition(row, column);
-		pos.convertToSpreadsheetNotation();
 		worksheet.setCell(pos.getCell(), value);
 	}
 	
@@ -139,7 +134,6 @@ public class TableParser {
 	public void setRow(String name, int row){
 		rowLookup.put(name, String.valueOf(row));
 		Position pos = new Position(0, row);
-		pos.convertToSpreadsheetNotation();
 		worksheet.setCell(pos.getCell(), name);
 	}
 }

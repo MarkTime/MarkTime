@@ -14,26 +14,17 @@ public class Position{
 	
 	public Position(String cell){
 		this.cell = cell;
+		updateCartesian();
 	}
 	
 	public Position(Position pos){
-		if(pos.getPositionNotation().equalsIgnoreCase("CARTESIAN")){
-			this.x = pos.getX();
-			this.y = pos.getY();
-		} else {
-			this.cell = pos.getPositionNotation();
-		}
+		this.x = pos.getX();
+		this.y = pos.getY();
+		updateSpreadsheetNotation();
 	}
 	
-	public String getString(){
-		return String.valueOf(x)+", "+String.valueOf(y);
-	}
 	
-	public String getCell(){
-		return cell;
-	}
-	
-	public void convertToCartesian(){
+	public void updateCartesian(){
 		int x = 0;
 		ArrayList<Character> xlist = new ArrayList<Character>();
 		String ychars = "";
@@ -53,10 +44,9 @@ public class Position{
 		}
 		this.x = x-1;
 		try{this.y = Integer.parseInt(ychars);} catch (NumberFormatException ex){this.y=0;}
-		this.cell = "";
 	}
 	
-	public void convertToSpreadsheetNotation(){
+	public void updateSpreadsheetNotation(){
 		int col_num = x;
 		int row_num = y;
 		row_num++;
@@ -72,16 +62,6 @@ public class Position{
 			col_num = (Integer) (col_num-1)/26;
 		}
 		this.cell = col_str + String.valueOf(row_num);
-		this.x = 0;
-		this.y = 0;
-	}
-	
-	public String getPositionNotation(){
-		if(this.cell == ""){
-			return "CARTESIAN";
-		} else {
-			return "SPREADSHEET";
-		}
 	}
 	
 	private boolean isChar(Character chr){
@@ -102,6 +82,7 @@ public class Position{
 
 	public int getX() {
 		return x;
+		
 	}
 	
 	public int getY() {
@@ -110,9 +91,23 @@ public class Position{
 	
 	public void setX(int x){
 		this.x = x;
+		updateSpreadsheetNotation();
 	}
 	
 	public void setY(int y){
 		this.y = y;
+		updateSpreadsheetNotation();
+	}
+	
+	public String getString(){
+		return String.valueOf(x)+", "+String.valueOf(y);
+	}
+	
+	public String getCell(){
+		return cell;
+	}
+	
+	public void setCell(String cell){
+		this.cell = cell;
 	}
 }

@@ -19,7 +19,6 @@ public class KeyValueParser {
 	public KeyValueParser(Worksheet worksheet, String startingCell){
 		this.worksheet = worksheet;
 		this.startingPos = new Position(startingCell);
-		this.startingPos.convertToCartesian();
 	}
 	
 	/**
@@ -29,7 +28,6 @@ public class KeyValueParser {
 		Position newPos = new Position(startingPos);
 		newPos.setY(newPos.getY()+1);
 		while(true){
-			newPos.convertToSpreadsheetNotation();
 			if(!worksheet.getCell(newPos.getCell()).equalsIgnoreCase("")){
 				keys.put(worksheet.getCell(newPos.getCell()), newPos.getCell());
 				System.out.println(worksheet.getCell(newPos.getCell()));
@@ -37,7 +35,6 @@ public class KeyValueParser {
 				break;
 			}
 			newPos = new Position(newPos.getCell());
-			newPos.convertToCartesian();
 			newPos.setX(newPos.getX()+1);
 		}
 	}
@@ -49,9 +46,7 @@ public class KeyValueParser {
 	 */
 	public String getValue(String key){
 		Position pos = new Position(keys.get(key));
-		pos.convertToCartesian();
 		pos.setY(pos.getY()+1);
-		pos.convertToSpreadsheetNotation();
 		return worksheet.getCell(pos.getCell());
 	}
 	
@@ -62,9 +57,7 @@ public class KeyValueParser {
 	 */
 	public void setValue(String key, String value){
 		Position pos = new Position(keys.get(key));
-		pos.convertToCartesian();
 		pos.setY(pos.getY()+1);
-		pos.convertToSpreadsheetNotation();
 		worksheet.setCell(pos.getCell(), value);
 	}
 
