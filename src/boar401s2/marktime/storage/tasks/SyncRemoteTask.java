@@ -39,6 +39,7 @@ public class SyncRemoteTask {
 		
 		@Override
 		protected void onPreExecute(){
+			Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.activity.getApplicationContext()));
 			parent.onPreExecute();
 			parent.openProgressDialog("Syncing cloud...");
 		}

@@ -32,10 +32,9 @@ public class Boy {
 	 * Saves MarkingData to the appropriate attendance file.
 	 * Use this method to set the attendance data for this boy.
 	 */
-	@SuppressWarnings("static-access")
 	public void setNightData(MarkingData data){
 		Spreadsheet spreadsheet = getCompany().attendance;
-		String worksheetName = squad.getName()+" - "+data.getDate();
+		String worksheetName = squad.getName()+" - "+MarkingData.getDate();
 		if (!spreadsheet.worksheetExists(worksheetName)){
 			spreadsheet.duplicateSheet("Night Template", worksheetName);
 		}
@@ -56,6 +55,31 @@ public class Boy {
 		parser.setValue(getName(), "Attendance", String.valueOf(data.attendance));
 		
 		getCompany().saveAttendance();
+	}
+	
+	public MarkingData getNightData(String date){
+		Spreadsheet spreadsheet = getCompany().getAttendanceSpreadsheet();
+		String worksheetName = squad.getName()+" - "+MarkingData.getDate();
+		MarkingData data = new MarkingData();
+		if(spreadsheet.worksheetExists(worksheetName)){
+			Worksheet worksheet = spreadsheet.getWorksheet(worksheetName);
+			TableParser parser = new TableParser(worksheet);
+			if(parser.hasRow(getName())){
+				System.out.println("Compiling NightData");
+				data.hat = Boolean.valueOf(parser.getValue(getName(), "Hat"));
+				data.tie = Boolean.valueOf(parser.getValue(getName(), "Tie"));
+				data.havasac = Boolean.valueOf(parser.getValue(getName(), "Havasac"));
+				data.badges = Boolean.valueOf(parser.getValue(getName(), "Badges"));
+				data.belt = Boolean.valueOf(parser.getValue(getName(), "Belt"));
+				data.pants = Boolean.valueOf(parser.getValue(getName(), "Pants"));
+				data.socks = Boolean.valueOf(parser.getValue(getName(), "Socks"));
+				data.shoes = Boolean.valueOf(parser.getValue(getName(), "Shoes"));
+				data.church = Boolean.valueOf(parser.getValue(getName(), "Church"));
+				data.attendance = Integer.parseInt(parser.getValue(getName(), "Attendance"));
+				return data;
+			}
+		}
+		return null;
 	}
 
 	//==========[Parent stuff]==========//

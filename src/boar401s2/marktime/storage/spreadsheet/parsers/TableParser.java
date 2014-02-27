@@ -136,4 +136,11 @@ public class TableParser {
 		Position pos = new Position(0, row);
 		worksheet.setCell(pos.getCell(), name);
 	}
+	
+	/**
+	 * Returns whether the table has a certain row
+	 */
+	public boolean hasRow(String row){
+		return rowLookup.containsKey(row);
+	}
 }

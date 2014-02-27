@@ -10,6 +10,7 @@ public class Position{
 	public Position(int x, int y){
 		this.x = x;
 		this.y = y;
+		updateSpreadsheetNotation();
 	}
 	
 	public Position(String cell){

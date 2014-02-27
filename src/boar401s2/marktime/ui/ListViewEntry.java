@@ -41,6 +41,8 @@ public class ListViewEntry {
 			viewID = R.layout.lv_layout_sub;
 		} else if(typeID == ListViewEntryTypes.SUBMIT){
 			viewID = R.layout.lv_submit_layout;
+		} else if(typeID == ListViewEntryTypes.BUTTON_DISABLED){
+			viewID = R.layout.lv_disabled_layout;
 		}
 	}
 	

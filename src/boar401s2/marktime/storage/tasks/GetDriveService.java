@@ -8,6 +8,7 @@ import boar401s2.marktime.MarkTime;
 import boar401s2.marktime.constants.ResultIDList;
 import boar401s2.marktime.constants.TaskIDList;
 import boar401s2.marktime.events.AsyncTaskParent;
+import boar401s2.marktime.exceptions.UnCaughtException;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
@@ -64,6 +65,7 @@ public class GetDriveService {
 	class GetDriveServiceTask extends AsyncTask<Void, String, Integer> {	
 		@Override
 		protected void onPreExecute(){
+			Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.activity.getApplicationContext()));
 			parent.onPreExecute();
 		}
 		

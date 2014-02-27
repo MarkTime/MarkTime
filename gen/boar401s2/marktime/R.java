@@ -236,10 +236,10 @@ containing a value of this type.
         public static final int boy_boys_name=0x7f05000b;
         public static final int boy_list_view=0x7f050005;
         public static final int hybrid=0x7f050004;
-        public static final int item_separator=0x7f050016;
+        public static final int item_separator=0x7f050017;
         public static final int lv_checkbox=0x7f050018;
         public static final int lv_subtext=0x7f050019;
-        public static final int lv_title=0x7f050017;
+        public static final int lv_title=0x7f050016;
         public static final int menu_mark=0x7f050006;
         public static final int menu_settings=0x7f050008;
         public static final int menu_synchronise=0x7f050007;
@@ -269,11 +269,12 @@ containing a value of this type.
         public static final int activity_navigator=0x7f030002;
         public static final int activity_settings=0x7f030003;
         public static final int activity_synchronise=0x7f030004;
-        public static final int lv_header_layout=0x7f030005;
-        public static final int lv_layout=0x7f030006;
-        public static final int lv_layout_checkbox=0x7f030007;
-        public static final int lv_layout_sub=0x7f030008;
-        public static final int lv_submit_layout=0x7f030009;
+        public static final int lv_disabled_layout=0x7f030005;
+        public static final int lv_header_layout=0x7f030006;
+        public static final int lv_layout=0x7f030007;
+        public static final int lv_layout_checkbox=0x7f030008;
+        public static final int lv_layout_sub=0x7f030009;
+        public static final int lv_submit_layout=0x7f03000a;
     }
     public static final class menu {
         public static final int boy=0x7f0a0000;

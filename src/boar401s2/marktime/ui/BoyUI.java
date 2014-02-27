@@ -58,7 +58,7 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 	private void setupActionBar() {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -96,14 +96,14 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 			
 			addHeader("Attendance");
 			addItem("Mark", ListViewEntryTypes.BUTTON);
-			addItem("Browse Attendance", ListViewEntryTypes.BUTTON);
+			addItem("Browse Attendance", ListViewEntryTypes.BUTTON_DISABLED);
 			
 			addHeader("Register");
-			addItem("General", ListViewEntryTypes.BUTTON);
-			addItem("Activity Badges", ListViewEntryTypes.BUTTON);
-			addItem("Special Badges & Awards", ListViewEntryTypes.BUTTON);
-			addItem("Uniform", ListViewEntryTypes.BUTTON);
-			addItem("Contact Information", ListViewEntryTypes.BUTTON);
+			addItem("General", ListViewEntryTypes.BUTTON_DISABLED);
+			addItem("Activity Badges", ListViewEntryTypes.BUTTON_DISABLED);
+			addItem("Special Badges & Awards", ListViewEntryTypes.BUTTON_DISABLED);
+			addItem("Uniform", ListViewEntryTypes.BUTTON_DISABLED);
+			addItem("Contact Information", ListViewEntryTypes.BUTTON_DISABLED);
 			
 			addHeader("Settings");
 			addItem("Remove from "+boy.getSquad().getName(), ListViewEntryTypes.BUTTON);
@@ -114,18 +114,22 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 			setTitle("Marking: "+boy.getName());
 			clearItems();
 			
+			if(boy.getNightData(MarkingData.getDate())!=null){
+				data = boy.getNightData(MarkingData.getDate());
+			}
+			
 			addHeader("Uniform");
-			addItem("Hat", ListViewEntryTypes.CHECKBOX);
-			addItem("Tie", ListViewEntryTypes.CHECKBOX);
-			addItem("Havasac", ListViewEntryTypes.CHECKBOX);
-			addItem("Badges", ListViewEntryTypes.CHECKBOX);
-			addItem("Belt", ListViewEntryTypes.CHECKBOX);
-			addItem("Pants", ListViewEntryTypes.CHECKBOX);
-			addItem("Socks", ListViewEntryTypes.CHECKBOX);
-			addItem("Shoes", ListViewEntryTypes.CHECKBOX);
+			addCheckBox("Hat", data.hat);
+			addCheckBox("Tie", data.tie);
+			addCheckBox("Havasac", data.havasac);
+			addCheckBox("Badges", data.badges);
+			addCheckBox("Belt", data.belt);
+			addCheckBox("Pants", data.pants);
+			addCheckBox("Socks", data.socks);
+			addCheckBox("Shoes", data.shoes);
 			
 			addHeader("Other");
-			addItem("Church", ListViewEntryTypes.CHECKBOX);
+			addCheckBox("Church", data.church);
 			addItem("Attendance: "+String.valueOf(data.attendance), ListViewEntryTypes.BUTTON);
 			addItem("Date to Mark", MarkingData.getDate());
 			addItem("Submit", ListViewEntryTypes.SUBMIT);
@@ -164,6 +168,7 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 		    public void onClick(DialogInterface dialog, int which) {
 		    	dataChanged = true;
 		    	data.attendance = picker.getValue();
+		    	boy.setNightData(data);
 		    	displayLevel(LevelIDList.BOY_MARK);
 		    }
 		});
@@ -186,6 +191,12 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 	
 	public void addItem(String title, Integer type){
 		entries_.add(new ListViewEntry(type, title));
+	}
+	
+	public void addCheckBox(String title, boolean checked){
+		ListViewEntry entry = new ListViewEntry(ListViewEntryTypes.CHECKBOX, title);
+		entry.setExtra("checked", checked);
+		entries_.add(entry);
 	}
 	
 	public void addItem(String title, String sub){
@@ -392,4 +403,4 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 		
 	}
 	
-}
+};;

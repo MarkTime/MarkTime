@@ -41,6 +41,16 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 		}
 	}
 	
+	@Override
+	public void onRestoreInstanceState(Bundle bundle){
+		
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle bundle){
+		
+	}
+	
 	private void setupActionBar() {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
@@ -156,8 +166,7 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 	 * @param view
 	 */
 	public void onSyncClick(View view){
-		onSyncLocalClick(view);
-		onSyncRemoteClick(view);
+		Toast.makeText(this, "Not implemented yet!", Toast.LENGTH_SHORT).show();
 	}
 	
 	//==========[Sync Stuff]==========//

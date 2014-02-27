@@ -43,6 +43,7 @@ public class SyncLocalTask {
 		
 		@Override
 		protected void onPreExecute(){
+			
 			parent.onPreExecute();
 			parent.openProgressDialog("Syncing local device...");
 		}
@@ -108,6 +109,15 @@ public class SyncLocalTask {
 			
 			//Loop through all the online spreadsheet's worksheets
 			for(Worksheet worksheet: onlineSpreadsheet.getWorksheets()){
+				
+				if(worksheet.getName().matches("^Squad-[^\\s]+? - [^\\s]+?")){
+					System.out.println(worksheet.getName()+"Sheet is a night data sheet, skipping.");
+					continue;
+				} else {
+					System.out.println(worksheet.getName()+"Not night data!");
+				}
+				
+				
 				publishProgress("Updating '"+onlineSpreadsheet.getName()+":"+worksheet.getName()+"'!");
 				
 				//Initalize worksheets

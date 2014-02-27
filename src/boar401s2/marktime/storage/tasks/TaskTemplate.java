@@ -1,9 +1,11 @@
 package boar401s2.marktime.storage.tasks;
 
 import android.os.AsyncTask;
+import boar401s2.marktime.MarkTime;
 import boar401s2.marktime.constants.ResultIDList;
 import boar401s2.marktime.constants.TaskIDList;
 import boar401s2.marktime.events.AsyncTaskParent;
+import boar401s2.marktime.exceptions.UnCaughtException;
 
 
 public class TaskTemplate {
@@ -22,6 +24,7 @@ public class TaskTemplate {
 		
 		@Override
 		protected void onPreExecute(){
+			Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.activity.getApplicationContext()));
 			parent.onPreExecute();
 		}
 		
