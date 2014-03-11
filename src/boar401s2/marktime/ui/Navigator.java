@@ -5,6 +5,7 @@ import java.util.List;
 
 import boar401s2.marktime.R;
 import boar401s2.marktime.constants.LevelIDList;
+import boar401s2.marktime.constants.ListViewEntryTypes;
 import boar401s2.marktime.constants.ResultIDList;
 import boar401s2.marktime.events.AsyncTaskParent;
 import boar401s2.marktime.handlers.Boy;

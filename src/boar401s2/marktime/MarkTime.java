@@ -1,5 +1,7 @@
 package boar401s2.marktime;
 
+import java.util.HashMap;
+
 import boar401s2.marktime.constants.ResultIDList;
 import boar401s2.marktime.exceptions.UnCaughtException;
 import boar401s2.marktime.ui.BoyUI;
@@ -36,6 +38,8 @@ public class MarkTime extends Activity {
 	public static MarkTime app;
 	
 	public static String selectedSection = "";
+	
+	public static HashMap<String, Object> globalObjectStorage = new HashMap<String, Object>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

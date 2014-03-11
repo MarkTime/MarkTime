@@ -3,6 +3,7 @@ package boar401s2.marktime.ui;
 import java.util.HashMap;
 
 import boar401s2.marktime.R;
+import boar401s2.marktime.constants.ListViewEntryTypes;
 
 public class ListViewEntry {
 	

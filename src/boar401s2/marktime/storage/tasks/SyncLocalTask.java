@@ -26,6 +26,7 @@ public class SyncLocalTask {
 	
 	AsyncTaskParent parent;
 	GDrive drive;
+	SyncLocal task;
 	
 	public SyncLocalTask(AsyncTaskParent parent, GDrive drive){
 		this.parent = parent;
@@ -33,7 +34,12 @@ public class SyncLocalTask {
 	}
 	
 	public void run(){
-		new SyncLocal().execute();
+		task = new SyncLocal();
+		task.execute();
+	}
+	
+	public void stop(){
+		task.cancel(true);
 	}
 	
 	/**
@@ -50,7 +56,7 @@ public class SyncLocalTask {
 		
 		@Override
 		protected Integer doInBackground(Void... params) {
-			downloadRegister();
+			//downloadRegister();
 			downloadAttendance();
 			parent.closeProgressDialog();
 			return ResultIDList.RESULT_OK;
@@ -110,11 +116,9 @@ public class SyncLocalTask {
 			//Loop through all the online spreadsheet's worksheets
 			for(Worksheet worksheet: onlineSpreadsheet.getWorksheets()){
 				
+				//Makes sure it's not downloading any night data (which it doesn't need)
 				if(worksheet.getName().matches("^Squad-[^\\s]+? - [^\\s]+?")){
-					System.out.println(worksheet.getName()+"Sheet is a night data sheet, skipping.");
 					continue;
-				} else {
-					System.out.println(worksheet.getName()+"Not night data!");
 				}
 				
 				

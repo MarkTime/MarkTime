@@ -3,6 +3,7 @@ package boar401s2.marktime.ui;
 import boar401s2.marktime.MarkTime;
 import boar401s2.marktime.R;
 import boar401s2.marktime.constants.ResultIDList;
+import boar401s2.marktime.constants.SyncStateIDList;
 import boar401s2.marktime.constants.TaskIDList;
 import boar401s2.marktime.events.AsyncTaskParent;
 import boar401s2.marktime.storage.GDrive;
@@ -23,11 +24,25 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 	GDrive gdrive;
 	
 	ProgressDialog progressDialog;
+	
+	Integer state;
+	
+	SyncLocalTask localTask;
+	SyncRemoteTask remoteTask;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setupActionBar();
+		setContentView(R.layout.activity_synchronise);
+		this.setRequestedOrientation(Math.abs(2-this.getResources().getConfiguration().orientation));
+		
+		/*if(savedInstanceState != null && savedInstanceState.containsKey("State")){
+			savedState = savedInstanceState.getInt("State");
+			System.out.println("State: "+String.valueOf(savedState));
+		}*/
+		
+		//Check to see whether the spreadsheet and account settings had been filled in
 		if(MarkTime.settings.getString("spreadsheet", "").equalsIgnoreCase("")){
 			Toast.makeText(MarkTime.activity.getApplicationContext(), "Please enter spreadsheet name in 'Settings'", Toast.LENGTH_LONG).show();
 			finish();
@@ -35,21 +50,34 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 		if (MarkTime.settings.getString("account", "").length()==0){
 			Toast.makeText(MarkTime.activity.getApplicationContext(), "Please enter account details in 'Settings'", Toast.LENGTH_LONG).show();
 			finish();
-		} else {
+		} else { //If everything was fine, then continue as per normal
+			state = SyncStateIDList.AUTHENTICATING;
 			openProgressDialog("Connecting to GDrive...");
 			gdrive = new GDrive(this, this, MarkTime.settings.getString("account", ""));
 		}
 	}
 	
-	@Override
-	public void onRestoreInstanceState(Bundle bundle){
-		
-	}
 	
-	@Override
+	/**
+	 * This is called when the app's orientation changes (among other things)
+	 * It saves the current state, like "Authenticating", or "Synchronising Local".
+	 */
+	/*@Override
 	public void onSaveInstanceState(Bundle bundle){
+		System.out.println("Saving State: "+String.valueOf(state));
+		bundle.putInt("State", state);
 		
-	}
+		//Stop any running tasks
+		if(state == SyncStateIDList.SYNCHRONISE_LOCAL){
+			System.out.println("Stopping sync local task.");
+			localTask.stop();
+		} else if(state == SyncStateIDList.SYNCHRONISE_REMOTE){
+			System.out.println("Stopping sync remote task.");
+			remoteTask.stop();
+		}
+		
+		closeProgressDialog();
+	}*/
 	
 	private void setupActionBar() {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -120,9 +148,10 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 		if (taskID==TaskIDList.TASK_GDRIVE_CONNECTED){
 			Toast.makeText(MarkTime.activity.getApplicationContext(), "Connected!", Toast.LENGTH_SHORT).show();
 			closeProgressDialog();
-			setContentView(R.layout.activity_synchronise);
+			state = SyncStateIDList.MENU;
 		} else if(taskID==TaskIDList.TASK_SYNC_LOCAL){
 			closeProgressDialog();
+			state = SyncStateIDList.MENU;
 			if (status==ResultIDList.RESULT_OK){
 				Toast.makeText(MarkTime.activity.getApplicationContext(), "Synced local device!", Toast.LENGTH_SHORT).show();
 			} else {
@@ -130,6 +159,7 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 			}
 		} else if(taskID == TaskIDList.TASK_SYNC_REMOTE){
 			closeProgressDialog();
+			state = SyncStateIDList.MENU;
 			if (status==ResultIDList.RESULT_OK){
 				Toast.makeText(MarkTime.activity.getApplicationContext(), "Synced remote spreadsheet!", Toast.LENGTH_SHORT).show();
 			} else {
@@ -172,11 +202,15 @@ public class Synchronise extends Activity implements AsyncTaskParent{
 	//==========[Sync Stuff]==========//
 	
 	public void syncLocalWithRemote(){
-		new SyncLocalTask(this, gdrive).run();
+		state = SyncStateIDList.SYNCHRONISE_LOCAL;
+		localTask = new SyncLocalTask(this, gdrive);
+		localTask.run();
 	}
 	
 	public void syncRemoteWithLocal(){
-		new SyncRemoteTask(this, gdrive).run();
+		state = SyncStateIDList.SYNCHRONISE_REMOTE;
+		remoteTask = new SyncRemoteTask(this, gdrive);
+		remoteTask.run();
 	}
 	
 }

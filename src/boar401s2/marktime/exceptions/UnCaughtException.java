@@ -159,9 +159,14 @@ public class UnCaughtException implements UncaughtExceptionHandler
                         System.exit(0);
                     }
                 });
-                builder.setMessage("Oops, looks like John overlooked a bug! Would you like to help him fix it by submitting a bug report?");
-                builder.show();
-                Looper.loop();
+                try{
+	                builder.setMessage("Oops, looks like John overlooked a bug! Would you like to help him fix it by submitting a bug report?");
+	                builder.show();
+	                Looper.loop();
+                } catch (Exception ex){
+                	System.out.println("Error caught a bug :/");
+                	ex.printStackTrace();
+                }
             }
         }.start();
     }

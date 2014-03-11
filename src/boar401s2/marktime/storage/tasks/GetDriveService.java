@@ -77,23 +77,6 @@ public class GetDriveService {
 				credential.setSelectedAccountName(account);
 				publishProgress("Getting drive service...");
 				driveService = getDriveService(credential);
-				/*try{ 	
-					List<File> result = new ArrayList<File>();
-					com.google.api.services.drive.Drive.Files.List list = driveService.files().list();
-		            //list.setQ("'" + sourcePath + "' in parents");
-		            FileList fileList = list.execute();
-		            result = fileList.getItems();
-		            for(File f: result){
-		            	System.out.println(f);
-		            }
-	
-					
-				} catch (UserRecoverableAuthIOException e) {
-					e.printStackTrace();
-					System.out.println("Error occured!");
-					activityParent.startActivityForResult(e.getIntent(), TaskIDList.TASK_GET_AUTH_PERMISSION);
-					return ResultIDList.RESULT_NO_RETURN;
-				}*/
 				
 				return ResultIDList.RESULT_OK;
 			} catch (Exception ex){
