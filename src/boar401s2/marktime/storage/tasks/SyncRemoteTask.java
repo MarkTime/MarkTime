@@ -1,22 +1,17 @@
 package boar401s2.marktime.storage.tasks;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
-import com.google.gdata.client.spreadsheet.FeedURLFactory;
 import com.google.gdata.client.spreadsheet.SpreadsheetService;
+import com.google.gdata.data.Link;
 import com.google.gdata.data.batch.BatchOperationType;
 import com.google.gdata.data.batch.BatchStatus;
 import com.google.gdata.data.batch.BatchUtils;
 import com.google.gdata.data.spreadsheet.CellEntry;
 import com.google.gdata.data.spreadsheet.CellFeed;
-import com.google.gdata.data.Link;
 import com.google.gdata.util.ServiceException;
 
 import android.os.AsyncTask;
@@ -24,7 +19,6 @@ import boar401s2.marktime.MarkTime;
 import boar401s2.marktime.constants.ResultIDList;
 import boar401s2.marktime.constants.TaskIDList;
 import boar401s2.marktime.events.AsyncTaskParent;
-import boar401s2.marktime.exceptions.UnCaughtException;
 import boar401s2.marktime.storage.GDrive;
 import boar401s2.marktime.storage.interfaces.Worksheet;
 import boar401s2.marktime.storage.spreadsheet.OfflineSpreadsheet;
@@ -40,6 +34,10 @@ public class SyncRemoteTask {
 	GDrive drive;
 	OnlineWorksheet worksheet;
 	SyncRemote task;
+	
+	CellFeed cellFeed;
+	URL cellFeedUrl;
+	SpreadsheetService service;
 	
 	boolean USING_BATCH_REQUESTS = true;
 	
@@ -64,14 +62,14 @@ public class SyncRemoteTask {
 		
 		@Override
 		protected void onPreExecute(){
-			Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.activity.getApplicationContext()));
+			//Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.activity.getApplicationContext()));
 			parent.onPreExecute();
 			parent.openProgressDialog("Syncing cloud...");
 		}
 		
 		@Override
 		protected Integer doInBackground(Void... params) {
-			Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.activity.getApplicationContext()));
+			//Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.activity.getApplicationContext()));
 			uploadAttendance();
 			parent.closeProgressDialog();
 			return ResultIDList.RESULT_OK;
@@ -87,38 +85,6 @@ public class SyncRemoteTask {
 		@Override
 		public void onProgressUpdate(String... text){
 			parent.onStatusChange(text[0]);
-		}
-		
-		public URL getBatchCellFeedURL(OnlineSpreadsheet onlineSpreadsheet){
-			URL cellFeedUrl = null;
-			FeedURLFactory urlFactory = FeedURLFactory.getDefault();
-			try{
-				cellFeedUrl = urlFactory.getCellFeedUrl(onlineSpreadsheet.spreadsheet.getKey(), "od6", "private", "full");
-			} catch (MalformedURLException ex){
-				ex.printStackTrace();
-			}
-			return cellFeedUrl;
-		}
-		
-		/**
-		 * Gets the feed used in a batch request
-		 * @param onlineSpreadsheet
-		 * @return
-		 */
-		public CellFeed getBatchCellFeed(OnlineSpreadsheet onlineSpreadsheet){
-			CellFeed cellFeed = null;
-			URL cellFeedUrl = null;
-			try {
-				cellFeedUrl = getBatchCellFeedURL(onlineSpreadsheet);
-				cellFeed = drive.getAuthenticatedSpreadsheetService().getSpreadsheetService().getFeed(cellFeedUrl, CellFeed.class);
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ServiceException e) {
-				e.printStackTrace();
-			}
-			return cellFeed;
 		}
 		
 		/**
@@ -169,6 +135,50 @@ public class SyncRemoteTask {
 		}
 		
 		/**
+		   * Writes (to stdout) a list of the entries in the batch request in a human
+		   * readable format.
+		   * 
+		   * @param batchRequest the CellFeed containing entries to display.
+		   */
+		  private void printBatchRequest(CellFeed batchRequest) {
+		    System.out.println("Current operations in batch");
+		    for (CellEntry entry : batchRequest.getEntries()) {
+		      String msg = "\tID: " + BatchUtils.getBatchId(entry) + " - "
+		          + BatchUtils.getBatchOperationType(entry) + " row: "
+		          + entry.getCell().getRow() + " col: " + entry.getCell().getCol()
+		          + " value: " + entry.getCell().getInputValue();
+		      System.out.println(msg);
+		    }
+		  }
+		  
+		  /**
+		   * Returns a CellEntry with batch id and operation type that will tell the
+		   * server to update the specified cell with the given value. The entry is
+		   * fetched from the server in order to get the current edit link (for
+		   * optimistic concurrency).
+		   * 
+		   * @param row the row number of the cell to operate on
+		   * @param col the column number of the cell to operate on
+		   * @param value the value to set in case of an update the cell to operate on
+		   * 
+		   * @throws ServiceException when the request causes an error in the Google
+		   *         Spreadsheets service.
+		   * @throws IOException when an error occurs in communication with the Google
+		   *         Spreadsheets service.
+		   */
+		  private CellEntry createUpdateOperation(int row, int col, String value)
+		      throws ServiceException, IOException {
+			String batchId = "R" + row + "C" + col;
+			URL entryUrl = new URL(cellFeedUrl.toString() + "/" + batchId);
+			CellEntry entry = service.getEntry(entryUrl, CellEntry.class);
+			entry.changeInputValueLocal(value);
+			BatchUtils.setBatchId(entry, batchId);
+			BatchUtils.setBatchOperationType(entry, BatchOperationType.UPDATE);
+			
+			return entry;
+		  }
+		
+		/**
 		 * Copies the offlineWorksheet data to the onlineWorksheet
 		 * This method is replacing updateSheet, which is using a much slower method.
 		 * @param onlineWorksheet
@@ -176,101 +186,57 @@ public class SyncRemoteTask {
 		 * @throws ServiceException 
 		 * @throws IOException 
 		 */
-		@SuppressWarnings("rawtypes")
 		public void updateSheet_(OnlineSpreadsheet onlineSpreadsheet, OnlineWorksheet onlineWorksheet, OfflineWorksheet offlineWorksheet) throws IOException, ServiceException{
 			long startTime = System.currentTimeMillis();
-			List<Position> cellAddrs = new ArrayList<Position>();
-			SpreadsheetService service = drive.getAuthenticatedSpreadsheetService().getSpreadsheetService();
-			System.out.println("Generating a list of the cells that need updating!");
+		    
+			service = drive.getAuthenticatedSpreadsheetService().getSpreadsheetService();
+			service.setProtocolVersion(SpreadsheetService.Versions.V2);
+			service.setHeader("If-Match", "*");
+			
+			cellFeedUrl = onlineWorksheet.getWorksheetEntry().getCellFeedUrl();
+			System.out.println(cellFeedUrl.toString());
+			cellFeed = service.getFeed(cellFeedUrl, CellFeed.class);
+			
+			CellFeed batchRequest = new CellFeed();
+			
+			@SuppressWarnings("rawtypes")
 			Iterator it = offlineWorksheet.getData().entrySet().iterator();
-		    while (it.hasNext()) {	   
+		    while (it.hasNext()) {
+		        @SuppressWarnings("rawtypes")
 				Map.Entry pairs = (Map.Entry)it.next();
-				cellAddrs.add(new Position((String) pairs.getKey()));				
+		        Position pos = new Position((String) pairs.getKey());
+		        if(pairs.getValue()!=null){
+		        	CellEntry batchOperation = createUpdateOperation(pos.getY()+2, pos.getX()+2, (String) pairs.getValue());
+		        	batchRequest.getEntries().add(batchOperation);
+		        }
 		        it.remove();
-		    }		
-		    
-		    Map<String, CellEntry> cellEntries = getCellEntryMap(service, onlineSpreadsheet, cellAddrs);
-		    
-		    System.out.println("Generating batch request!");
-		    CellFeed batchRequest = new CellFeed();
-		    for (Position cellAddr : cellAddrs) {
-		      URL entryUrl = new URL(getBatchCellFeedURL(onlineSpreadsheet).toString() + "/" + cellAddr.getCell());
-		      CellEntry batchEntry = new CellEntry(cellEntries.get(cellAddr.getCell()));
-		      batchEntry.changeInputValueLocal(cellAddr.getCell());
-		      BatchUtils.setBatchId(batchEntry, cellAddr.getCell());
-		      BatchUtils.setBatchOperationType(batchEntry, BatchOperationType.UPDATE);
-		      batchRequest.getEntries().add(batchEntry);
 		    }
 		    
-		    System.out.println("Submitting the request");
-		    
-		    // Submit the update
-		    Link batchLink = getBatchCellFeed(onlineSpreadsheet).getLink(Link.Rel.FEED_BATCH, Link.Type.ATOM);
-		    CellFeed batchResponse = service.batch(new URL(batchLink.getHref()), batchRequest);
+		    System.out.println("Compiled the batch request");
 
-		    System.out.println("Getting the results of our arduous efforts!");
+		    CellFeed feed = service.getFeed(cellFeedUrl, CellFeed.class);
+		    Link batchLink = feed.getLink(Link.Rel.FEED_BATCH, Link.Type.ATOM);
+		    URL batchUrl = new URL(batchLink.getHref());
+		    CellFeed batchResponse = service.batch(batchUrl, batchRequest);
+			
+		    System.out.println("Submitted the batch request.");
 		    
-		    // Check the results
 		    boolean isSuccess = true;
 		    for (CellEntry entry : batchResponse.getEntries()) {
 		      String batchId = BatchUtils.getBatchId(entry);
 		      if (!BatchUtils.isSuccess(entry)) {
 		        isSuccess = false;
 		        BatchStatus status = BatchUtils.getBatchStatus(entry);
-		        System.out.printf("%s failed (%s) %s", batchId, status.getReason(), status.getContent());
+		        System.out.println("\n" + batchId + " failed (" + status.getReason()
+		            + ") " + status.getContent());
 		      }
 		    }
-
-		    System.out.println(isSuccess ? "\nBatch operations successful." : "\nBatch operations failed");
-		    System.out.printf("\n%s ms elapsed\n", System.currentTimeMillis() - startTime);
+		    if (isSuccess) {
+		      System.out.println("Batch operations successful.");
+		    }
 		    
 		    offlineWorksheet.setModified(false);
 		}
-		
-		/**
-		   * Connects to the specified {@link SpreadsheetService} and uses a batch
-		   * request to retrieve a {@link CellEntry} for each cell enumerated in {@code
-		   * cellAddrs}. Each cell entry is placed into a map keyed by its RnCn
-		   * identifier.
-		   *
-		   * @param ssSvc the spreadsheet service to use.
-		   * @param cellFeedUrl url of the cell feed.
-		   * @param cellAddrs list of cell addresses to be retrieved.
-		   * @return a map consisting of one {@link CellEntry} for each address in {@code
-		   *         cellAddrs}
-		   */
-		  public Map<String, CellEntry> getCellEntryMap(
-		      SpreadsheetService ssSvc, OnlineSpreadsheet onlineSpreadsheet, List<Position> cellAddrs)
-		      throws IOException, ServiceException {
-			System.out.println("Generating cellEntryMap!");
-		    CellFeed batchRequest = new CellFeed();
-		    for (Position cellId : cellAddrs) {
-		      CellEntry batchEntry = new CellEntry(cellId.getY(), cellId.getX(), cellId.getCell());
-		      batchEntry.setId(String.format("%s/%s", getBatchCellFeedURL(onlineSpreadsheet).toString(), cellId.getCell()));
-		      BatchUtils.setBatchId(batchEntry, cellId.getCell());
-		      BatchUtils.setBatchOperationType(batchEntry, BatchOperationType.QUERY);
-		      batchRequest.getEntries().add(batchEntry);
-		    }
-		    
-		    System.out.println("Generated map...");
-
-		    CellFeed cellFeed = getBatchCellFeed(onlineSpreadsheet);
-		    System.out.println("Got the cell feed");
-		    CellFeed queryBatchResponse =
-		      ssSvc.batch(new URL(cellFeed.getLink(Link.Rel.FEED_BATCH, Link.Type.ATOM).getHref()),
-		                  batchRequest);
-
-		    System.out.println("Printing map!");
-		    Map<String, CellEntry> cellEntryMap = new HashMap<String, CellEntry>(cellAddrs.size());
-		    for (CellEntry entry : queryBatchResponse.getEntries()) {
-		      cellEntryMap.put(BatchUtils.getBatchId(entry), entry);
-		      System.out.printf("batch %s {CellEntry: id=%s editLink=%s inputValue=%s\n",
-		          BatchUtils.getBatchId(entry), entry.getId(), entry.getEditLink().getHref(),
-		          entry.getCell().getInputValue());
-		    }
-
-		    return cellEntryMap;
-		  }
 		
 		/**
 		 * Uploads the attendance to the spreadsheet
@@ -295,15 +261,13 @@ public class SyncRemoteTask {
 				}
 				
 				if (USING_BATCH_REQUESTS){
+					System.out.println("EXPERIMENTAL! Using batch requests to update the spreadsheet");
 					try {
-						System.out.println("EXPERIMENTAL! Using batch requests to update the spreadsheet");
 						updateSheet_(onlineSpreadsheet, onlineWorksheet, offlineWorksheet);
 					} catch (IOException e) {
 						e.printStackTrace();
-						System.out.println("Failed");
 					} catch (ServiceException e) {
 						e.printStackTrace();
-						System.out.println("Failed");
 					}
 				} else {
 					updateSheet(onlineWorksheet, offlineWorksheet);
