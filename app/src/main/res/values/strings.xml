@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MarkTime</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_roll">Roll</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_synchronise">Synchronise</string>
+    <string name="title_activity_boy">Boy</string>
+    <string name="title_activity_list_template">Template</string>
+    <string name="cd">Content Description</string>
+    <string name="title_activity_navigator">Navigator</string>
+    <string name="title_activity_test">Test</string>
+
+</resources>
