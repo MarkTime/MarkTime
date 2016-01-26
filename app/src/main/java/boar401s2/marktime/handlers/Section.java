@@ -1,5 +1,7 @@
 package boar401s2.marktime.handlers;
 
+import android.database.Cursor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +21,13 @@ public class Section {
 	ListParser listParser;
 	Worksheet worksheet;
 
-	public Section(String name, Company company){
+	public Section(String name, Company company) {
 		this.company = company;
 		this.name = name;
 		worksheet = getCompany().getAttendanceSpreadsheet().getWorksheet(getName());
 		listParser = new ListParser(worksheet);
 		listParser.parse();
+
 	}
 	
 	/**
@@ -59,7 +62,17 @@ public class Section {
 			squadNames.add(squad.getName());
 		}
 		return squadNames;
-		
+	}
+
+	public List<String> getSquadNames_(){
+		Cursor c = company.database.db.rawQuery("SELECT squadName FROM squads where squadParent=?;", new String[]{name});
+		c.moveToFirst();
+		List<String> names = new ArrayList<String>();
+		while(!c.isAfterLast()){
+			names.add(c.getString(0));
+			c.moveToNext();
+		}
+		return names;
 	}
 	
 	/**
@@ -85,6 +98,10 @@ public class Section {
 		worksheet.getParent().getWorksheet("Squad-"+name).setSize(1, 21);
 		worksheet.getParent().getWorksheet("Squad-"+name).setCell("A1", "Name");
 		company.saveAttendance();
+	}
+
+	public void addSquad_(String squadName){
+		company.database.db.execSQL("INSERT INTO squads (squadName, squadParent) VALUES (?, ?)", new String[]{squadName, name});
 	}
 	
 	/**

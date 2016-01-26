@@ -53,7 +53,7 @@ public class MarkTime extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_mark_time);
 		isNetworkAvailable = isNetworkAvailable();
-		Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.this));
+		//Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.this));
 	}
 
 	/**

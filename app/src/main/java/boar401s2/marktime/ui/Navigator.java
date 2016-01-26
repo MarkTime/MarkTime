@@ -77,7 +77,7 @@ public class Navigator extends Activity implements AsyncTaskParent{
 			clearItems();
 			
 			addHeader("Section");
-			for(String section: company.getSectionNames()){
+			for(String section: company.getSectionNames_()){
 				addItem("Section", section, ListViewEntryTypes.BUTTON);
 			}
 			
@@ -91,7 +91,7 @@ public class Navigator extends Activity implements AsyncTaskParent{
 			clearItems();
 			
 			addHeader("Squad");
-			for(String squad: section.getSquadNames()){
+			for(String squad: section.getSquadNames_()){
 				addItem("Squad", squad, ListViewEntryTypes.BUTTON);
 			}
 			
@@ -120,6 +120,7 @@ public class Navigator extends Activity implements AsyncTaskParent{
 			
 	public void start(){
 		company = new Company(this);
+
 		adapter = new ListAdapter(this);
 		listView = (ListView)findViewById(R.id.navigator_list_view);
 		listView.setAdapter(adapter);
@@ -187,18 +188,19 @@ public class Navigator extends Activity implements AsyncTaskParent{
 				if(id.split(":")[1].startsWith("Create")){
 					
 					builder.setTitle("Create Section");
-					builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
-					    @Override
-					    public void onClick(DialogInterface dialog, int which) {
-					        company.addSection(input.getText().toString().trim());
-					        displayLevel(currentLevel);
+					builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							company.addSection(input.getText().toString().trim());
+							company.addSection_(input.getText().toString().trim());
+							displayLevel(currentLevel);
 					    }
 					});
 					builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-					    @Override
-					    public void onClick(DialogInterface dialog, int which) {
-					        dialog.cancel();
-					    }
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.cancel();
+						}
 					});
 					builder.show();
 					
@@ -216,7 +218,8 @@ public class Navigator extends Activity implements AsyncTaskParent{
 					    @Override
 					    public void onClick(DialogInterface dialog, int which) {
 					        section.addSquad(input.getText().toString().trim());
-					        displayLevel(currentLevel);
+                            section.addSquad_(input.getText().toString().trim());
+                            displayLevel(currentLevel);
 					    }
 					});
 					builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
