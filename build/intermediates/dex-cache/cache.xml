@@ -2,375 +2,242 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="e5bf453b070c1e39297986144960e45afa0fdfad">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-63f5b49172cfff0b6d4b297dda9f9283713ee319.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\mail.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="428e267abff0d10802ccde86b915da2c20471160">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\mail-77261b7af04c6e72d0d6d222cee37e1c4ea3e850.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="9c9dea9e85aceb09d95df5e6f7bc8a43fc286068">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-086a9edd0fbc5995b4c21ce58604b5b261504032.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="bb36004beb02b69562cbec9aa7d6a3cf16bf5d1b">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-e3e2702ec10c6f5f01ed9ed05f181a1aca572bd8.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="6046e5cdaf799120b7c56a5a061d80e8854c4d34">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-e8fde6fcfd6a6eeda1bd3856d553cf79aae755bd.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\gdata-core-1.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="6ff0dba2ad4e59fdda638b00d6773f3e48b61e16">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\gdata-core-1.0-9d863b7dd5483b6b0463c91157bb1fd75dc64e3d.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\1.3.9\40719ea6961c0cb6afaeb6a921eaa1f6afd4cfdf\jsr305-1.3.9.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="40719ea6961c0cb6afaeb6a921eaa1f6afd4cfdf">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\jsr305-1.3.9-421c943e361b5d5f83a52a496c7d0c8a4a9a0860.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\google-api-client-android-1.16.0-rc.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="939298cc4411dec01cc26f401cd70d9fe56c5391">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\google-api-client-android-1.16.0-rc-34874ac4e6a1af68f527b9750ec60ebd92c4ccac.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\gdata-base-1.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="c2a5c4c2ac5b920de749592bc122fcd4ebd0c12c">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\gdata-base-1.0-8d1df74ac4fafa088591ba7682595274e00554fe.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\gdata-client-meta-1.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b72907f7afdc175df85c13c90808a80b17333894">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\gdata-client-meta-1.0-5ea0119e10b390423146508621c3b08b9a6c1a60.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\google-api-services-drive-v2-rev110-1.16.0-rc.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="af3a4ac094c0c022fd7048112202cad246fd7729">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\google-api-services-drive-v2-rev110-1.16.0-rc-1cf027e264b4cb093368b765af4aa688329b0a83.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\google-http-client-jackson-1.16.0-rc.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="25f202a584c10b2a06e1883ffe8abd364e7e6501">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\google-http-client-jackson-1.16.0-rc-37d72a1d95d2b187d49e8a3451bf3cb7b28056aa.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b48d5c51a9a9e329005106b4667f54948de4d4d8">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-3f94186674f68dc9f44b7a30a8c93ab07c548c48.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.1\2e66da15851f9f5b5079228f856c2f090ba98c38\gson-2.1.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2e66da15851f9f5b5079228f856c2f090ba98c38">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\gson-2.1-569748a9fccb835e48d7904bfd4c080fbe9c31f7.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\activation.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d1257cbff6faa44c1f325ae0d9413522d4644383">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\activation-64f3ab416d3bcc452f8c3d71685b685c66c03ccf.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\google-http-client-1.16.0-rc.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="73a53339b8cff19a8e3d0c1cdb6af25c93f3bf45">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\google-http-client-1.16.0-rc-3f6b071941768189e160e9c955888cf77be2f977.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\gdata-client-1.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b8dabe89dcae1a48a5bd16e899b19053193c52cc">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\gdata-client-1.0-832560f18e35dde9aa1d78ba403be53e3ee54864.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="7215ac1f2fca947b9415a6ee2a1bf991364aab24">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-3d0258dbba6e0662dea22fad8d7725626e7644fa.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\google-play-services.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="cebe8e4a3a469c4623addcca1dc571407ff3a08e">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\google-play-services-59f71d035237f186c2192dfcf4ee76342c55dce5.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client-gson\1.19.0\b3cdefb990d5212bb2a130525b20e2c44aeffc4c\google-http-client-gson-1.19.0.jar"
+        jar="C:\Users\John Board\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client-gson\1.19.0\b3cdefb990d5212bb2a130525b20e2c44aeffc4c\google-http-client-gson-1.19.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="b3cdefb990d5212bb2a130525b20e2c44aeffc4c">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\google-http-client-gson-1.19.0-d002b906b5963e0f0ead47614be4d9daa44e132a.jar" />
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\google-http-client-gson-1.19.0-6de5c0547aa39b8b87d1fce8a103538ac31c5b29.jar" />
     </item>
     <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\jackson-core-asl-1.9.11.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="e32303ef8bd18a5c9272780d49b81c95e05ddf43">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\jackson-core-asl-1.9.11-89925eee75eb5839351a4f504d2706107858c6d0.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\gdata-docs-meta-3.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="5785110152610bcd3ad8f9658a78c3b794ca9c63">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\gdata-docs-meta-3.0-c10f0c1c002974c5dd9303027656cae8c86a91ff.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.3.0\classes.jar"
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.3.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="0708ef60917bf94913fe9ef972a655b99462dca7">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-f8be5b710a2bd4c0a741c26f10a89466b4bb4979.jar" />
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-9a7c1750c3bf5dd466f943caeac1d0bd813c33f6.jar" />
     </item>
     <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\classes.jar"
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.3.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="b2c07cdb814fe988ad05f7b4d767a841514a5991">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-c644613256e25426ddb604153f324c4251b4ab18.jar" />
+        sha1="7215ac1f2fca947b9415a6ee2a1bf991364aab24">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-b69f5a993ddb5dbc907494a71115e5f859507f57.jar" />
     </item>
     <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\google-http-client-jackson2-1.16.0-rc.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="8ffc8d86f08f1dc7c56631863214560b1188fc02">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\google-http-client-jackson2-1.16.0-rc-015f858eb8e8295f0969c7521f17d8c171e50bad.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\jackson-core-2.1.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="f6c3aed1cdfa21b5c1737c915186ea93a95a58bd">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\jackson-core-2.1.3-f4d1d1b8d06028a3b697095dfb4e227c3f299143.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-2e100ca2ff1fe9e670054588e93ed6fa8fad5609.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-99e12f7bd615002589670550e3c72d7a4ddb6802.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a0ce76dfaccbfbd6c551ed2174280aaabe60fe47">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-72c720befbeea43837854a68b23031e011737490.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\gdata-media-1.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="e6ae67ce2026e91947174a88432f4cb1cfd8ae12">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\gdata-media-1.0-8614d861a924c8754526432166de548483589ac4.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\gdata-spreadsheet-3.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="13a67aaf342b9d71311e5d974bac5ececc9bd0a0">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\gdata-spreadsheet-3.0-c46d35488c120c40c05fa8db2cd166460c8650ff.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="e5b9f5b0aa8dee788beb63d23832cb29ce771343">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-462843cceaf099ee769ec7858b224c2cba0c96ae.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4f4fe3c23776540625f3c2844152a7510fddf9f1">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-f53896cd9513a778e3a1d8058fca133672c09d9e.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-312a21b00aa2a0a91f87269cb48de11eac730aa9.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\google-oauth-client-1.16.0-rc.jar"
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\libs\google-oauth-client-1.16.0-rc.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="387f2dd16c5ce756878cb6370d32c8967724f274">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\google-oauth-client-1.16.0-rc-3725d26f46661610a8407fa437bdd7a0dc76c0ff.jar" />
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\google-oauth-client-1.16.0-rc-28369cc34c5915da8cc446fe3951d64ff0260114.jar" />
     </item>
     <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="e35fae1b377c23aa5fd2d309a190c2d0f73d54ec">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-e3839b51fb822efdd0b7460323e7ac7caa9b8fac.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.3.0\classes.jar"
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.3.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="565a01f90f1529f73362707c4c185d0623a68782">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-1b7cacf237afa93ea8b97b859ce90d0d2e7a59a8.jar" />
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-3de7bb5583000f866ebda753b52e64ce1b9df3dc.jar" />
     </item>
     <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="3b4ff5c39dace8f3b4ab4cab8191785547a0815f">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-cc3c2a0bb0bd37cad9473a0fd7ba441b302db95f.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\google-http-client-android-1.16.0-rc.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="8164d4bd27c0ffe2a0f75c8fb0ffc1643a383de7">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\google-http-client-android-1.16.0-rc-8045258ba435258f96f2a7ed447bd4d6aa41ae85.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\google-api-client-1.16.0-rc.jar"
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\libs\google-api-client-1.16.0-rc.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="2ee4856b610341a1860003b9a10f192248f3a82a">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\google-api-client-1.16.0-rc-2a4d459bfa11d544151b03e4cb02e830a5bc88d4.jar" />
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\google-api-client-1.16.0-rc-5ac55b6934db1509c83b0c3d82eb8ae4c143826c.jar" />
     </item>
     <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-cd5e3793134c52611cae48e58fdd7396e0ac886d.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.3.0\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="59652857a825fff0de62166fca1bc9553cc01abb">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-c7f6b93420504a31c5cfb4cbb5e4bd4ce2416873.jar" />
-    </item>
-    <item
-        jar="C:\Users\John\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client\1.19.0\cdca49ad0977c040f603478aa2e16b2775c8fec6\google-http-client-1.19.0.jar"
+        jar="C:\Users\John Board\.gradle\caches\modules-2\files-2.1\com.google.http-client\google-http-client\1.19.0\cdca49ad0977c040f603478aa2e16b2775c8fec6\google-http-client-1.19.0.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="cdca49ad0977c040f603478aa2e16b2775c8fec6">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\google-http-client-1.19.0-99b16e5eea13a8edbf9f655773ae19b30cf3d2df.jar" />
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\google-http-client-1.19.0-f51317f35021ff31b2592efda6199774886a748f.jar" />
     </item>
     <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\jsr305.jar"
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.3.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="20d240a736e261ebc3f1e9448cb26fd75ba46154">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\jsr305-d5374a7f4354ae7ce7017638cc64777a33d9c27c.jar" />
+        sha1="e35fae1b377c23aa5fd2d309a190c2d0f73d54ec">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-6bb43b27c0ac7edfb3e2a48cd60eaaf559cf2ef9.jar" />
     </item>
     <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.3.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-3bb75b0cf086c0d67c177d63f5527c8a22804965.jar" />
+        sha1="3b4ff5c39dace8f3b4ab4cab8191785547a0815f">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-a46dd976a0d25a16cce5e80cf50637442bcebe3a.jar" />
     </item>
     <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\additionnal.jar"
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\libs\gdata-spreadsheet-3.0.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="bd9e8dc422bb8c8405359947fe9f4282b49f57f4">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\additionnal-cfb803bccd0c0c27a792f08825a1a3954f942370.jar" />
+        sha1="13a67aaf342b9d71311e5d974bac5ececc9bd0a0">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\gdata-spreadsheet-3.0-c2f389c2a5dc77fdbfa45e79f9112a2885c6d4aa.jar" />
     </item>
     <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.3.0\classes.jar"
+        jar="C:\Users\John Board\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.1\2e66da15851f9f5b5079228f856c2f090ba98c38\gson-2.1.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="5ea948d825957be6c4358c48422bee60eef2d487">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-468639805eea26f62577c4aa65eeaaf66473ae5f.jar" />
+        sha1="2e66da15851f9f5b5079228f856c2f090ba98c38">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\gson-2.1-4426f850002d4628f75eb95cc712e6c1f00721ad.jar" />
     </item>
     <item
-        jar="C:\Users\John\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\15.0\ed727a8d9f247e2050281cb083f1c77b09dcb5cd\guava-15.0.jar"
+        jar="C:\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="ed727a8d9f247e2050281cb083f1c77b09dcb5cd">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\guava-15.0-654a50a11607e8b18ac774e4ed10d887e20ee188.jar" />
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-036d4f6abf1af3a69bdd91c577da918ead884ec2.jar" />
     </item>
     <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\gdata-spreadsheet-meta-3.0.jar"
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.3.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="446a0fe46f7ac4b697a41a9cfb5984e5afcb0bb9">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\gdata-spreadsheet-meta-3.0-96cfec80f3ae44091b500bdfb390f33aacfcbaf4.jar" />
+        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-a82c589f915ecaafbff16d217d55f1b357776c93.jar" />
     </item>
     <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.3.0\classes.jar"
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="0180d031a7b54dabb93b4af3869468b55dc938bd">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-ef638451d43b0fa6f8e4dd94265ff25f6c0a8138.jar" />
+        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-565e609d2cbede93a1f8c7a2b909ee459150e903.jar" />
     </item>
     <item
-        jar="C:\Users\John\.gradle\caches\modules-2\files-2.1\joda-time\joda-time\2.3\56498efd17752898cfcc3868c1b6211a07b12b8f\joda-time-2.3.jar"
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4f4fe3c23776540625f3c2844152a7510fddf9f1">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-d293ff5bdb26176e179453acd50ac4a40da37c71.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\.gradle\caches\modules-2\files-2.1\joda-time\joda-time\2.3\56498efd17752898cfcc3868c1b6211a07b12b8f\joda-time-2.3.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="56498efd17752898cfcc3868c1b6211a07b12b8f">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\joda-time-2.3-062cdb60459fe217a54ccc8cc76a5239e9d754a8.jar" />
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\joda-time-2.3-bd25278c8c20c688aa905672aed06a20afe9d9ce.jar" />
     </item>
     <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\classes.jar"
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e5b9f5b0aa8dee788beb63d23832cb29ce771343">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-e8647bc68a81f12025243dd2d42f4799c72df5ca.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b48d5c51a9a9e329005106b4667f54948de4d4d8">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-2d6aac4b02db24c8db6cf8c1b4a33411e49ce96d.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\libs\google-http-client-android-1.16.0-rc.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="8164d4bd27c0ffe2a0f75c8fb0ffc1643a383de7">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\google-http-client-android-1.16.0-rc-3a29645c415207def2720d23e73c4f68d03d7502.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\.gradle\caches\modules-2\files-2.1\com.google.guava\guava\15.0\ed727a8d9f247e2050281cb083f1c77b09dcb5cd\guava-15.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ed727a8d9f247e2050281cb083f1c77b09dcb5cd">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\guava-15.0-13f1af6c9247d7e357572e513ccef6a5c30b2313.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b2c07cdb814fe988ad05f7b4d767a841514a5991">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-646d8e78e3fa1606022f8d303c66318f8f18ad44.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6046e5cdaf799120b7c56a5a061d80e8854c4d34">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-be326ef9e6b82dfd39d1c28764638f3b56a43847.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9c9dea9e85aceb09d95df5e6f7bc8a43fc286068">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-b47ce315761d489203c12ed356a4ca058e263921.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="5ea948d825957be6c4358c48422bee60eef2d487">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-2b9d19260ba9ded28fb335099a99d526dbeb52e7.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-0b60cdceec253b8836fce6746dd5acc258a2c154.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\jars\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="fe3e0c6de7cceed888b277487238b6af9a1cc299">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\classes-f18e2b413fc19cd86a1b9cb66d4477418abcfeec.jar" />
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-0f76d6a0938b1862cc01dc9a7ae1b1eb336f9474.jar" />
     </item>
     <item
-        jar="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\libs\gdata-docs-3.0.jar"
+        jar="C:\Users\John Board\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\1.3.9\40719ea6961c0cb6afaeb6a921eaa1f6afd4cfdf\jsr305-1.3.9.jar"
         jumboMode="false"
         revision="21.1.2"
-        sha1="c59baf05ae5bcfc03a49565c92fa0f0475897629">
-        <dex dex="C:\Users\John\AndroidStudioProjects\MarkTimeV1\app\build\intermediates\pre-dexed\debug\gdata-docs-3.0-174f128fd357fb6772d0ebc5029515d2725b4ae7.jar" />
+        sha1="40719ea6961c0cb6afaeb6a921eaa1f6afd4cfdf">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\jsr305-1.3.9-1c64c93d9fe872f465ed2ed193827514a6d1aad7.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\libs\google-api-client-android-1.16.0-rc.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="939298cc4411dec01cc26f401cd70d9fe56c5391">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\google-api-client-android-1.16.0-rc-a937c05c6c9fa4e33ce4f38beb87f2862b7d9b48.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="59652857a825fff0de62166fca1bc9553cc01abb">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-f6e76678a53477383e148d6fea965d4a57f78d9c.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a0ce76dfaccbfbd6c551ed2174280aaabe60fe47">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-87843eb49ebb6e8d97845e1891c6b230f09716c7.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\jars\libs\internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-9e7315d33068f2ff173c659d81f1e751a8603dcd.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\libs\google-api-services-drive-v2-rev110-1.16.0-rc.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="af3a4ac094c0c022fd7048112202cad246fd7729">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\google-api-services-drive-v2-rev110-1.16.0-rc-dea423fdc40f101d33a614942df7f1381f7c75eb.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e5bf453b070c1e39297986144960e45afa0fdfad">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-590e47a3fa89d014f9d9fefa8b5cc5256e62a4e1.jar" />
+    </item>
+    <item
+        jar="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.3.0\jars\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0180d031a7b54dabb93b4af3869468b55dc938bd">
+        <dex dex="C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\pre-dexed\debug\classes-dca9b1a340774fac71dee7bda752477ad7cefa69.jar" />
     </item>
 
 </items>

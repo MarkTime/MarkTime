@@ -1,300 +1,300 @@
 -- Merging decision tree log ---
 manifest
-ADDED from AndroidManifest.xml:2:1
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:2:1-68:12
 	package
-		ADDED from AndroidManifest.xml:3:5
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:3:5-33
+		INJECTED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml
 	android:versionName
-		ADDED from AndroidManifest.xml:5:5
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:5:5-33
 	android:versionCode
-		ADDED from AndroidManifest.xml:4:5
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:4:5-31
+		INJECTED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from AndroidManifest.xml:2:11
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:2:11-69
 uses-sdk
-ADDED from AndroidManifest.xml:7:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-ads:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-analytics:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-analytics:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-appindexing:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-appinvite:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-appstate:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-cast:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-drive:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-fitness:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-location:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-maps:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-games:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-drive:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-gcm:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-identity:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-location:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-maps:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-maps:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-nearby:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-panorama:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-plus:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-safetynet:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-wallet:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-identity:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-maps:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
-MERGED from com.google.android.gms:play-services-wearable:7.3.0:18:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:18:5
-MERGED from com.android.support:support-v4:22.0.0:20:5
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-ads:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-analytics:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-analytics:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-appindexing:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-appinvite:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-appstate:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-cast:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-drive:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-fitness:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-location:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-maps:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-games:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-drive:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-gcm:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-identity:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-location:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-maps:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-maps:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-nearby:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-panorama:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-plus:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-safetynet:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-wallet:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-identity:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-maps:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
+MERGED from [com.google.android.gms:play-services-wearable:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:18:5-42
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:20:5-43
 	android:targetSdkVersion
-		ADDED from AndroidManifest.xml:9:9
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:9:9-38
+		INJECTED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		ADDED from AndroidManifest.xml:8:9
-		INJECTED from AndroidManifest.xml:0:0
-		INJECTED from AndroidManifest.xml:0:0
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:8:9-35
+		INJECTED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml
 uses-permission#android.permission.INTERNET
-ADDED from AndroidManifest.xml:11:5
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:11:5-67
 	android:name
-		ADDED from AndroidManifest.xml:11:22
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:11:22-64
 uses-permission#android.permission.GET_ACCOUNTS
-ADDED from AndroidManifest.xml:12:5
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:12:5-71
 	android:name
-		ADDED from AndroidManifest.xml:12:22
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:12:22-68
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from AndroidManifest.xml:13:5
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:13:5-79
 	android:name
-		ADDED from AndroidManifest.xml:13:22
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:13:22-76
 uses-permission#android.permission.USE_CREDENTIALS
-ADDED from AndroidManifest.xml:14:5
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:14:5-74
 	android:name
-		ADDED from AndroidManifest.xml:14:22
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:14:22-71
 application
-ADDED from AndroidManifest.xml:16:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-ads:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-analytics:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-analytics:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-appindexing:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-appinvite:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-appstate:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-cast:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-drive:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-fitness:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-location:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-maps:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-games:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-drive:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-gcm:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-identity:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-location:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-maps:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-maps:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-nearby:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-panorama:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-plus:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-safetynet:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-wallet:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-identity:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-maps:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
-MERGED from com.google.android.gms:play-services-wearable:7.3.0:19:5
-MERGED from com.google.android.gms:play-services-base:7.3.0:20:5
-MERGED from com.android.support:support-v4:22.0.0:22:5
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:16:5-66:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-ads:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-analytics:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-analytics:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-appindexing:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-appinvite:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appinvite\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-appstate:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-cast:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-drive:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-fitness:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-location:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-maps:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-games:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-drive:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-gcm:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-identity:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-location:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-maps:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-maps:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-nearby:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-panorama:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-plus:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-safetynet:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-wallet:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-identity:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-maps:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-wearable:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.3.0\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.android.support:support-v4:22.0.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\AndroidManifest.xml:22:5-20
 	android:label
-		ADDED from AndroidManifest.xml:19:9
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:19:9-41
 	android:allowBackup
-		ADDED from AndroidManifest.xml:17:9
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:17:9-35
 	android:icon
-		ADDED from AndroidManifest.xml:18:9
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:18:9-45
 	android:theme
-		ADDED from AndroidManifest.xml:20:9
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:20:9-40
 meta-data#com.google.android.gms.version
-ADDED from AndroidManifest.xml:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
-MERGED from com.google.android.gms:play-services-base:7.3.0:21:9
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-base:7.3.0] C:\Users\John Board\Documents\Code\MarkTime\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.3.0\AndroidManifest.xml:21:9-23:69
 	android:value
-		ADDED from AndroidManifest.xml:23:13
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:23:13-66
 	android:name
-		ADDED from AndroidManifest.xml:22:13
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:22:13-58
 activity#boar401s2.marktime.MarkTime
-ADDED from AndroidManifest.xml:25:9
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:25:9-33:20
 	android:label
-		ADDED from AndroidManifest.xml:27:13
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:27:13-45
 	android:name
-		ADDED from AndroidManifest.xml:26:13
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:26:13-55
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:28:13
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:28:13-32:29
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:29:17
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:29:17-69
 	android:name
-		ADDED from AndroidManifest.xml:29:25
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:29:25-66
 category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:31:17
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:31:17-77
 	android:name
-		ADDED from AndroidManifest.xml:31:27
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:31:27-74
 activity#boar401s2.marktime.ui.Settings
-ADDED from AndroidManifest.xml:34:9
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:34:9-40:20
 	android:label
-		ADDED from AndroidManifest.xml:36:13
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:36:13-60
 	android:name
-		ADDED from AndroidManifest.xml:35:13
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:35:13-58
 meta-data#android.support.PARENT_ACTIVITY
-ADDED from AndroidManifest.xml:37:13
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:37:13-39:63
 	android:value
-		ADDED from AndroidManifest.xml:39:17
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:39:17-60
 	android:name
-		ADDED from AndroidManifest.xml:38:17
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:38:17-63
 activity#boar401s2.marktime.ui.Synchronise
-ADDED from AndroidManifest.xml:41:9
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:41:9-47:20
 	android:label
-		ADDED from AndroidManifest.xml:43:13
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:43:13-63
 	android:name
-		ADDED from AndroidManifest.xml:42:13
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:42:13-61
 activity#boar401s2.marktime.ui.ListTemplate
-ADDED from AndroidManifest.xml:48:9
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:48:9-51:20
 	android:label
-		ADDED from AndroidManifest.xml:50:13
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:50:13-65
 	android:name
-		ADDED from AndroidManifest.xml:49:13
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:49:13-62
 activity#boar401s2.marktime.ui.Navigator
-ADDED from AndroidManifest.xml:52:9
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:52:9-58:20
 	android:label
-		ADDED from AndroidManifest.xml:54:13
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:54:13-61
 	android:name
-		ADDED from AndroidManifest.xml:53:13
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:53:13-59
 activity#boar401s2.marktime.ui.BoyUI
-ADDED from AndroidManifest.xml:59:9
+ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:59:9-65:20
 	android:label
-		ADDED from AndroidManifest.xml:61:13
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:61:13-55
 	android:name
-		ADDED from AndroidManifest.xml:60:13
+		ADDED from C:\Users\John Board\Documents\Code\MarkTime\app\src\main\AndroidManifest.xml:60:13-55

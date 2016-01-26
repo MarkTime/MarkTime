@@ -21,7 +21,7 @@
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
 		    android:onClick="openMark"
-		    android:text="Organise" />
+		    android:text="Organize" />
 		
 		<Button
 		    android:id="@+id/menu_synchronise"
