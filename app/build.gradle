@@ -19,17 +19,6 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:21.0.3'
-    compile 'com.google.http-client:google-http-client-gson:1.19.0'
-    compile 'com.google.code.gson:gson:2.1'
-    compile 'com.google.guava:guava:15.0'
-    compile 'joda-time:joda-time:2.3'
-    compile 'com.google.android.gms:play-services:7.3.0'
-    compile files('libs/gdata-spreadsheet-3.0.jar')
-    compile files('libs/google-http-client-android-1.16.0-rc.jar')
-    compile files('libs/google-oauth-client-1.16.0-rc.jar')
-    compile files('libs/google-api-services-drive-v2-rev110-1.16.0-rc.jar')
-    compile files('libs/gdata-spreadsheet-meta-3.0.jar')
-    compile files('libs/google-api-client-1.16.0-rc.jar')
-    compile files('libs/google-api-client-android-1.16.0-rc.jar')
+    compile 'com.google.android.gms:play-services:8.3.0'
+    compile files('libs/httpmime-4.5.1.jar')
 }

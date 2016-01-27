@@ -13,6 +13,14 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+ <!-- Permissions required for GCM -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+ <!-- Optional permission for App measurement to run. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -39,13 +47,6 @@
                 android:value="boar401s2.marktime.MarkTime" />
         </activity>
         <activity
-            android:name="boar401s2.marktime.ui.Synchronise"
-            android:label="@string/title_activity_synchronise" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="boar401s2.marktime.MarkTime" />
-        </activity>
-        <activity
             android:name="boar401s2.marktime.ui.ListTemplate"
             android:label="@string/title_activity_list_template" >
         </activity>
@@ -63,6 +64,37 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="boar401s2.marktime.ui.Navigator" />
         </activity>
+        <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent" />
+        <activity
+            android:name="com.google.android.gms.ads.purchase.InAppPurchaseActivity"
+            android:theme="@style/Theme.IAPTheme" />
+        <activity
+            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <provider
+            android:name="com.google.android.gms.measurement.AppMeasurementContentProvider"
+            android:authorities="boar401s2.marktime.google_measurement_service"
+            android:exported="false" />
+
+        <receiver
+            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="com.google.android.gms.measurement.UPLOAD" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.google.android.gms.measurement.AppMeasurementService"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>
