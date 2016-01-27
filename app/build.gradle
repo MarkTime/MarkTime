@@ -4,6 +4,17 @@ android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
 
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
+
     defaultConfig {
         applicationId "boar401s2.marktime"
         minSdkVersion 11
@@ -20,5 +31,4 @@ android {
 
 dependencies {
     compile 'com.google.android.gms:play-services:8.3.0'
-    compile files('libs/httpmime-4.5.1.jar')
 }

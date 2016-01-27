@@ -3,6 +3,7 @@ package boar401s2.marktime;
 import java.util.HashMap;
 
 import boar401s2.marktime.constants.ResultIDList;
+import boar401s2.marktime.storage.database.Database;
 import boar401s2.marktime.ui.BoyUI;
 import boar401s2.marktime.ui.Navigator;
 import boar401s2.marktime.ui.Settings;
@@ -53,6 +54,7 @@ public class MarkTime extends Activity {
 		setContentView(R.layout.activity_mark_time);
 		isNetworkAvailable = isNetworkAvailable();
 		//Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.this));
+		Database.downloadFile("http://johnrobboard.com/MarkTime/MarkTime.db");
 	}
 
 	/**

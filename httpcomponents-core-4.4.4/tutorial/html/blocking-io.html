@@ -1,0 +1,529 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Chapter&nbsp;2.&nbsp;Blocking I/O model</title><link rel="stylesheet" type="text/css" href="css/hc-tutorial.css"><meta name="generator" content="DocBook XSL-NS Stylesheets V1.76.1"><link rel="home" href="index.html" title="HttpCore Tutorial"><link rel="up" href="index.html" title="HttpCore Tutorial"><link rel="prev" href="fundamentals.html" title="Chapter&nbsp;1.&nbsp;Fundamentals"><link rel="next" href="nio.html" title="Chapter&nbsp;3.&nbsp;Asynchronous I/O based on NIO"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div xmlns:fo="http://www.w3.org/1999/XSL/Format" class="banner"><a class="bannerLeft" href="http://www.apache.org/" title="Apache Software Foundation"><img style="border:none;" src="images/asf_logo_wide.gif"></a><a class="bannerRight" href="http://hc.apache.org/httpcomponents-core-ga/" title="Apache HttpComponents Core"><img style="border:none;" src="images/hc_logo.png"></a><div class="clear"></div></div><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;2.&nbsp;Blocking I/O model</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="fundamentals.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="nio.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;2.&nbsp;Blocking I/O model"><div class="titlepage"><div><div><h2 class="title"><a name="blocking-io"></a>Chapter&nbsp;2.&nbsp;Blocking I/O model</h2></div></div></div>
+    
+    <p>Blocking (or classic) I/O in Java represents a highly efficient and convenient I/O model
+    well suited for high performance applications where the number of concurrent connections is
+    relatively moderate. Modern JVMs are capable of efficient context switching and the blocking
+    I/O model should offer the best performance in terms of raw data throughput as long as
+    the number of concurrent connections is below one thousand and connections are mostly busy
+    transmitting data. However for applications where connections stay idle most of the time
+    the overhead of context switching may become substantial and a non-blocking I/O model may
+    present a better alternative.</p>
+    <div class="section" title="2.1.&nbsp;Blocking HTTP connections"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e324"></a>2.1.&nbsp;Blocking HTTP connections</h2></div></div></div>
+        
+        <p>
+        HTTP connections are responsible for HTTP message serialization and deserialization. One
+        should rarely need to use HTTP connection objects directly. There are higher level protocol
+        components intended for execution and processing of HTTP requests. However, in some cases
+        direct interaction with HTTP connections may be necessary, for instance, to access
+        properties such as the connection status, the socket timeout or the local and remote
+        addresses.
+        </p>
+        <p>
+        It is important to bear in mind that HTTP connections are not thread-safe. We strongly
+        recommend limiting all interactions with HTTP connection objects to one thread. The only
+        method of <code class="interfacename">HttpConnection</code> interface and its sub-interfaces
+        which is safe to invoke from another thread is <code class="methodname"> HttpConnection#shutdown()
+        </code>.
+        </p>
+        <div class="section" title="2.1.1.&nbsp;Working with blocking HTTP connections"><div class="titlepage"><div><div><h3 class="title"><a name="d5e330"></a>2.1.1.&nbsp;Working with blocking HTTP connections</h3></div></div></div>
+            
+            <p>
+            HttpCore does not provide full support for opening connections because the process of
+            establishing a new connection - especially on the client side - can be very complex
+            when it involves one or more authenticating or/and tunneling proxies. Instead, blocking
+            HTTP connections can be bound to any arbitrary network socket.
+            </p>
+            <pre class="programlisting">
+Socket socket = &lt;...&gt;
+
+DefaultBHttpClientConnection conn = new DefaultBHttpClientConnection(8 * 1024);
+conn.bind(socket);
+System.out.println(conn.isOpen());
+HttpConnectionMetrics metrics = conn.getMetrics();
+System.out.println(metrics.getRequestCount());
+System.out.println(metrics.getResponseCount());
+System.out.println(metrics.getReceivedBytesCount());
+System.out.println(metrics.getSentBytesCount());
+</pre>
+            <p>
+            HTTP connection interfaces, both client and server, send and receive messages in two
+            stages. The message head is transmitted first. Depending on properties of the message
+            head, a message body may follow it. Please note it is very important to always
+            close the underlying content stream in order to signal that the processing of
+            the message is complete. HTTP entities that stream out their content directly from the
+            input stream of the underlying connection must ensure they fully consume the content
+            of the message body for that connection to be potentially re-usable.
+            </p>
+            <p>
+            Over-simplified process of request execution on the client side may look like this:
+            </p>
+            <pre class="programlisting">
+Socket socket = &lt;...&gt;
+
+DefaultBHttpClientConnection conn = new DefaultBHttpClientConnection(8 * 1024);
+conn.bind(socket);
+HttpRequest request = new BasicHttpRequest("GET", "/");
+conn.sendRequestHeader(request);
+HttpResponse response = conn.receiveResponseHeader();
+conn.receiveResponseEntity(response);
+HttpEntity entity = response.getEntity();
+if (entity != null) {
+    // Do something useful with the entity and, when done, ensure all
+    // content has been consumed, so that the underlying connection
+    // can be re-used
+    EntityUtils.consume(entity);
+}
+</pre>
+            <p>
+            Over-simplified process of request handling on the server side may look like this:
+            </p>
+            <pre class="programlisting">
+Socket socket = &lt;...&gt;
+
+DefaultBHttpServerConnection conn = new DefaultBHttpServerConnection(8 * 1024);
+conn.bind(socket);
+HttpRequest request = conn.receiveRequestHeader();
+if (request instanceof HttpEntityEnclosingRequest) {
+    conn.receiveRequestEntity((HttpEntityEnclosingRequest) request);
+    HttpEntity entity = ((HttpEntityEnclosingRequest) request)
+            .getEntity();
+    if (entity != null) {
+        // Do something useful with the entity and, when done, ensure all
+        // content has been consumed, so that the underlying connection
+        // could be re-used
+        EntityUtils.consume(entity);
+    }
+}
+HttpResponse response = new BasicHttpResponse(HttpVersion.HTTP_1_1,
+        200, "OK") ;
+response.setEntity(new StringEntity("Got it") );
+conn.sendResponseHeader(response);
+conn.sendResponseEntity(response);
+</pre>
+            <p>
+            Please note that one should rarely need to transmit messages using these low level
+            methods and should normally use the appropriate higher level HTTP service implementations instead.
+            </p>
+        </div>
+        <div class="section" title="2.1.2.&nbsp;Content transfer with blocking I/O"><div class="titlepage"><div><div><h3 class="title"><a name="d5e340"></a>2.1.2.&nbsp;Content transfer with blocking I/O</h3></div></div></div>
+            
+            <p>
+            HTTP connections manage the process of the content transfer using the <code class="interfacename">
+            HttpEntity</code> interface. HTTP connections generate an entity object that
+            encapsulates the content stream of the incoming message. Please note that <code class="methodname">
+            HttpServerConnection#receiveRequestEntity()</code> and <code class="methodname">
+            HttpClientConnection#receiveResponseEntity()</code> do not retrieve or buffer any
+            incoming data. They merely inject an appropriate content codec based on the properties
+            of the incoming message. The content can be retrieved by reading from the content input
+            stream of the enclosed entity using <code class="methodname">HttpEntity#getContent()</code>.
+            The incoming data will be decoded automatically and completely transparently to the data
+            consumer. Likewise, HTTP connections rely on <code class="methodname">
+            HttpEntity#writeTo(OutputStream)</code> method to generate the content of an
+            outgoing message. If an outgoing message encloses an entity, the content will be
+            encoded automatically based on the properties of the message.
+            </p>
+        </div>
+        <div class="section" title="2.1.3.&nbsp;Supported content transfer mechanisms"><div class="titlepage"><div><div><h3 class="title"><a name="d5e348"></a>2.1.3.&nbsp;Supported content transfer mechanisms</h3></div></div></div>
+            
+            <p>
+            Default implementations of HTTP connections support three content transfer mechanisms
+            defined by the HTTP/1.1 specification:
+            </p>
+            <div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">
+                    <p title="Content-Length delimited:">
+                    <b><code class="literal">Content-Length</code> delimited:&nbsp;</b>
+                    
+                    The end of the content entity is determined by the value of the <code class="literal">
+                    Content-Length</code> header. Maximum entity length: <code class="methodname">
+                    Long#MAX_VALUE</code>.
+                    
+                    </p>
+                </li><li class="listitem">
+                    <p title="Identity coding:">
+                    <b>Identity coding:&nbsp;</b>
+                    
+                    The end of the content entity is demarcated by closing the underlying
+                    connection (end of stream condition). For obvious reasons the identity encoding
+                    can only be used on the server side. Maximum entity length: unlimited.
+                    
+                    </p>
+                </li><li class="listitem">
+                    <p title="Chunk coding:">
+                    <b>Chunk coding:&nbsp;</b>
+                    
+                    The content is sent in small chunks. Maximum entity length: unlimited.
+                    
+                    </p>
+                </li></ul></div>
+            <p>
+            The appropriate content stream class will be created automatically depending on
+            properties of the entity enclosed with the message.
+            </p>
+        </div>
+        <div class="section" title="2.1.4.&nbsp;Terminating HTTP connections"><div class="titlepage"><div><div><h3 class="title"><a name="d5e368"></a>2.1.4.&nbsp;Terminating HTTP connections</h3></div></div></div>
+            
+            <p>
+            HTTP connections can be terminated either gracefully by calling <code class="methodname">
+            HttpConnection#close()</code> or forcibly by calling <code class="methodname">
+            HttpConnection#shutdown()</code>. The former tries to flush all buffered data
+            prior to terminating the connection and may block indefinitely. The <code class="methodname">
+            HttpConnection#close()</code> method is not thread-safe. The latter terminates
+            the connection without flushing internal buffers and returns control to the caller as
+            soon as possible without blocking for long. The <code class="methodname">HttpConnection#shutdown()
+            </code> method is thread-safe.
+            </p>
+        </div>
+    </div>
+    <div class="section" title="2.2.&nbsp;HTTP exception handling"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e375"></a>2.2.&nbsp;HTTP exception handling</h2></div></div></div>
+        
+        <p>
+        All HttpCore components potentially throw two types of exceptions: <code class="classname">IOException
+        </code>in case of an I/O failure such as socket timeout or an socket reset and
+        <code class="classname">HttpException</code> that signals an HTTP failure such as a violation of
+        the HTTP protocol. Usually I/O errors are considered non-fatal and recoverable, whereas
+        HTTP protocol errors are considered fatal and cannot be automatically recovered from.
+        </p>
+        <div class="section" title="2.2.1.&nbsp;Protocol exception"><div class="titlepage"><div><div><h3 class="title"><a name="d5e380"></a>2.2.1.&nbsp;Protocol exception</h3></div></div></div>
+            
+            <p>
+            <code class="classname">ProtocolException</code> signals a fatal HTTP protocol violation that
+            usually results in an immediate termination of the HTTP message processing.
+            </p>
+        </div>
+    </div>
+    <div class="section" title="2.3.&nbsp;Blocking HTTP protocol handlers"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e384"></a>2.3.&nbsp;Blocking HTTP protocol handlers</h2></div></div></div>
+        
+        <div class="section" title="2.3.1.&nbsp;HTTP service"><div class="titlepage"><div><div><h3 class="title"><a name="d5e386"></a>2.3.1.&nbsp;HTTP service</h3></div></div></div>
+            
+            <p>
+            <code class="classname">HttpService</code> is a server side HTTP protocol handler based on the
+            blocking I/O model that implements the essential requirements of the HTTP protocol for
+            the server side message processing as described by RFC 2616.
+            </p>
+            <p>
+            <code class="classname">HttpService</code> relies on <code class="interfacename">HttpProcessor
+            </code> instance to generate mandatory protocol headers for all outgoing
+            messages and apply common, cross-cutting message transformations to all incoming and
+            outgoing messages, whereas HTTP request handlers are expected to take care of
+            application specific content generation and processing.
+            </p>
+            <pre class="programlisting">
+HttpProcessor httpproc = HttpProcessorBuilder.create()
+        .add(new ResponseDate())
+        .add(new ResponseServer("MyServer-HTTP/1.1"))
+        .add(new ResponseContent())
+        .add(new ResponseConnControl())
+        .build();
+HttpService httpService = new HttpService(httpproc, null);
+</pre>
+            <div class="section" title="2.3.1.1.&nbsp;HTTP request handlers"><div class="titlepage"><div><div><h4 class="title"><a name="d5e394"></a>2.3.1.1.&nbsp;HTTP request handlers</h4></div></div></div>
+                
+                <p>
+                The <code class="interfacename">HttpRequestHandler</code> interface represents a
+                routine for processing of a specific group of HTTP requests. <code class="classname">HttpService
+                </code> is designed to take care of protocol specific aspects, whereas
+                individual request handlers are expected to take care of application specific HTTP
+                processing. The main purpose of a request handler is to generate a response object
+                with a content entity to be sent back to the client in response to the given
+                request.
+                </p>
+                <pre class="programlisting">
+HttpRequestHandler myRequestHandler = new HttpRequestHandler() {
+
+    public void handle(
+            HttpRequest request,
+            HttpResponse response,
+            HttpContext context) throws HttpException, IOException {
+        response.setStatusCode(HttpStatus.SC_OK);
+        response.setEntity(
+                new StringEntity("some important message",
+                        ContentType.TEXT_PLAIN));
+    }
+
+};
+</pre>
+            </div>
+            <div class="section" title="2.3.1.2.&nbsp;Request handler resolver"><div class="titlepage"><div><div><h4 class="title"><a name="d5e400"></a>2.3.1.2.&nbsp;Request handler resolver</h4></div></div></div>
+                
+                <p>
+                HTTP request handlers are usually managed by a <code class="interfacename">
+                HttpRequestHandlerResolver</code> that matches a request URI to a request
+                handler. HttpCore includes a very simple implementation of the request handler
+                resolver based on a trivial pattern matching algorithm: <code class="classname">
+                HttpRequestHandlerRegistry</code> supports only three formats:
+                <code class="literal">*</code>, <code class="literal">&lt;uri&gt;*</code> and
+                <code class="literal">*&lt;uri&gt;</code>.
+                </p>
+                <pre class="programlisting">
+HttpProcessor httpproc = &lt;...&gt;
+
+HttpRequestHandler myRequestHandler1 = &lt;...&gt;
+HttpRequestHandler myRequestHandler2 = &lt;...&gt;
+HttpRequestHandler myRequestHandler3 = &lt;...&gt;
+
+UriHttpRequestHandlerMapper handlerMapper = new UriHttpRequestHandlerMapper();
+handlerMapper.register("/service/*", myRequestHandler1);
+handlerMapper.register("*.do", myRequestHandler2);
+handlerMapper.register("*", myRequestHandler3);
+HttpService httpService = new HttpService(httpproc, handlerMapper);
+</pre>
+                <p>
+                Users are encouraged to provide more sophisticated implementations of
+                <code class="interfacename">HttpRequestHandlerResolver</code> - for instance, based on
+                regular expressions.
+                </p>
+            </div>
+            <div class="section" title="2.3.1.3.&nbsp;Using HTTP service to handle requests"><div class="titlepage"><div><div><h4 class="title"><a name="d5e411"></a>2.3.1.3.&nbsp;Using HTTP service to handle requests</h4></div></div></div>
+                
+                <p>
+                When fully initialized and configured, the <code class="classname">HttpService</code> can
+                be used to execute and handle requests for active HTTP connections. The
+                <code class="methodname">HttpService#handleRequest()</code> method reads an incoming
+                request, generates a response and sends it back to the client. This method can be
+                executed in a loop to handle multiple requests on a persistent connection. The
+                <code class="methodname">HttpService#handleRequest()</code> method is safe to execute from
+                multiple threads. This allows processing of requests on several connections
+                simultaneously, as long as all the protocol interceptors and requests handlers used
+                by the <code class="classname">HttpService</code> are thread-safe.
+                </p>
+                <pre class="programlisting">
+HttpService httpService = &lt;...&gt;
+HttpServerConnection conn = &lt;...&gt;
+HttpContext context = &lt;...&gt;
+
+boolean active = true;
+try {
+    while (active &amp;&amp; conn.isOpen()) {
+        httpService.handleRequest(conn, context);
+    }
+} finally {
+    conn.shutdown();
+}
+</pre>
+            </div>
+        </div>
+        <div class="section" title="2.3.2.&nbsp;HTTP request executor"><div class="titlepage"><div><div><h3 class="title"><a name="d5e419"></a>2.3.2.&nbsp;HTTP request executor</h3></div></div></div>
+            
+            <p>
+            <code class="classname">HttpRequestExecutor</code> is a client side HTTP protocol handler based
+            on the blocking I/O model that implements the essential requirements of the HTTP
+            protocol for the client side message processing, as described by RFC 2616.
+            The <code class="classname">HttpRequestExecutor</code> relies on the <code class="interfacename">HttpProcessor
+            </code> instance to generate mandatory protocol headers for all outgoing
+            messages and apply common, cross-cutting message transformations to all incoming and
+            outgoing messages. Application specific processing can be implemented outside
+            <code class="classname">HttpRequestExecutor</code> once the request has been executed and a
+            response has been received.
+            </p>
+            <pre class="programlisting">
+HttpClientConnection conn = &lt;...&gt;
+
+HttpProcessor httpproc = HttpProcessorBuilder.create()
+        .add(new RequestContent())
+        .add(new RequestTargetHost())
+        .add(new RequestConnControl())
+        .add(new RequestUserAgent("MyClient/1.1"))
+        .add(new RequestExpectContinue(true))
+        .build();
+HttpRequestExecutor httpexecutor = new HttpRequestExecutor();
+
+HttpRequest request = new BasicHttpRequest("GET", "/");
+HttpCoreContext context = HttpCoreContext.create();
+httpexecutor.preProcess(request, httpproc, context);
+HttpResponse response = httpexecutor.execute(request, conn, context);
+httpexecutor.postProcess(response, httpproc, context);
+
+HttpEntity entity = response.getEntity();
+EntityUtils.consume(entity);
+</pre>
+            <p>
+            Methods of <code class="classname">HttpRequestExecutor</code> are safe to execute from multiple
+            threads. This allows execution of requests on several connections simultaneously, as
+            long as all the protocol interceptors used by the <code class="classname">HttpRequestExecutor
+            </code> are thread-safe.
+            </p>
+        </div>
+        <div class="section" title="2.3.3.&nbsp;Connection persistence / re-use"><div class="titlepage"><div><div><h3 class="title"><a name="d5e430"></a>2.3.3.&nbsp;Connection persistence / re-use</h3></div></div></div>
+            
+            <p>
+            The <code class="interfacename">ConnectionReuseStrategy</code> interface is intended to
+            determine whether the underlying connection can be re-used for processing of further
+            messages after the transmission of the current message has been completed. The default
+            connection re-use strategy attempts to keep connections alive whenever possible.
+            Firstly, it examines the version of the HTTP protocol used to transmit the message.
+            <code class="literal">HTTP/1.1</code> connections are persistent by default, while <code class="literal">
+            HTTP/1.0</code> connections are not. Secondly, it examines the value of the
+            <code class="literal">Connection</code> header. The peer can indicate whether it intends to
+            re-use the connection on the opposite side by sending <code class="literal">Keep-Alive</code> or
+            <code class="literal">Close</code> values in the <code class="literal">Connection</code> header. Thirdly,
+            the strategy makes the decision whether the connection is safe to re-use based on the
+            properties of the enclosed entity, if available.
+            </p>
+        </div>
+    </div>
+    <div class="section" title="2.4.&nbsp;Connection pools"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e440"></a>2.4.&nbsp;Connection pools</h2></div></div></div>
+        
+        <p>
+        Efficient client-side HTTP transports often requires effective re-use of persistent
+        connections. HttpCore facilitates the process of connection re-use by providing support
+        for managing pools of persistent HTTP connections. Connection pool implementations are
+        thread-safe and can be used concurrently by multiple consumers.
+        </p>
+        <p>
+        By default the pool allows only 20 concurrent connections in total and two concurrent
+        connections per a unique route. The two connection limit is due to the requirements of the
+        HTTP specification. However, in practical terms this can often be too restrictive. One can
+        change the pool configuration at runtime to allow for more concurrent connections depending
+        on a particular application context.
+        </p>
+        <pre class="programlisting">
+HttpHost target = new HttpHost("localhost");
+BasicConnPool connpool = new BasicConnPool();
+connpool.setMaxTotal(200);
+connpool.setDefaultMaxPerRoute(10);
+connpool.setMaxPerRoute(target, 20);
+Future&lt;BasicPoolEntry&gt; future = connpool.lease(target, null);
+BasicPoolEntry poolEntry = future.get();
+HttpClientConnection conn = poolEntry.getConnection();
+</pre>
+        <p>
+        Please note that the connection pool has no way of knowing whether or not a leased
+        connection is still being used. It is the responsibility of the connection pool user
+        to ensure that the connection is released back to the pool once it is not longer needed,
+        even if the connection is not reusable.
+        </p>
+        <pre class="programlisting">
+BasicConnPool connpool = &lt;...&gt;
+Future&lt;BasicPoolEntry&gt; future = connpool.lease(target, null);
+BasicPoolEntry poolEntry = future.get();
+try {
+    HttpClientConnection conn = poolEntry.getConnection();
+} finally {
+    connpool.release(poolEntry, true);
+}
+</pre>
+        <p>
+        The state of the connection pool can be interrogated at runtime.
+        </p>
+        <pre class="programlisting">
+HttpHost target = new HttpHost("localhost");
+BasicConnPool connpool = &lt;...&gt;
+PoolStats totalStats = connpool.getTotalStats();
+System.out.println("total available: " + totalStats.getAvailable());
+System.out.println("total leased: " + totalStats.getLeased());
+System.out.println("total pending: " + totalStats.getPending());
+PoolStats targetStats = connpool.getStats(target);
+System.out.println("target available: " + targetStats.getAvailable());
+System.out.println("target leased: " + targetStats.getLeased());
+System.out.println("target pending: " + targetStats.getPending());
+</pre>
+        <p>
+        Please note that connection pools do not pro-actively evict expired connections. Even though
+        expired connection cannot be leased to the requester, the pool may accumulate stale
+        connections over time especially after a period of inactivity. It is generally advisable
+        to force eviction of expired and idle connections from the pool after an extensive period
+        of inactivity.
+        </p>
+        <pre class="programlisting">
+BasicConnPool connpool = &lt;...&gt;
+connpool.closeExpired();
+connpool.closeIdle(1, TimeUnit.MINUTES);
+</pre>
+      <p>
+      Generally it is considered to be a responsibility of the consumer to keep track of
+      connections leased from the pool and to ensure their immediate release as soon as they
+      are no longer needed or actively used. Nevertheless <code class="classname">BasicConnPool </code>
+      provides protected methods to enumerate available idle connections and those currently
+      leased from the pool. This enables the pool consumer to query connection state and
+      selectively terminate connections meeting a particular criterion.
+      </p>
+      <pre class="programlisting">
+static class MyBasicConnPool extends BasicConnPool {
+
+    @Override
+    protected void enumAvailable(final PoolEntryCallback&lt;HttpHost, HttpClientConnection&gt; callback) {
+        super.enumAvailable(callback);
+    }
+
+    @Override
+    protected void enumLeased(final PoolEntryCallback&lt;HttpHost, HttpClientConnection&gt; callback) {
+        super.enumLeased(callback);
+    }
+
+}
+</pre>
+      <pre class="programlisting">
+MyBasicConnPool connpool = new MyBasicConnPool();
+connpool.enumAvailable(new PoolEntryCallback&lt;HttpHost, HttpClientConnection&gt;() {
+
+    @Override
+    public void process(final PoolEntry&lt;HttpHost, HttpClientConnection&gt; entry) {
+        Date creationTime = new Date(entry.getCreated());
+        if (creationTime.before(someTime)) {
+            entry.close();
+        }
+    }
+
+});
+</pre>
+    </div>
+    <div class="section" title="2.5.&nbsp;TLS/SSL support"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e455"></a>2.5.&nbsp;TLS/SSL support</h2></div></div></div>
+        
+        <p>
+        Blocking connections can be bound to any arbitrary socket. This makes SSL support quite
+        straight-forward. Any <code class="classname">SSLSocket</code> instance can be bound to a blocking
+        connection in order to make all messages transmitted over than connection secured by
+        TLS/SSL.
+        </p>
+        <pre class="programlisting">
+SSLContext sslcontext = SSLContexts.createSystemDefault();
+SocketFactory sf = sslcontext.getSocketFactory();
+SSLSocket socket = (SSLSocket) sf.createSocket("somehost", 443);
+// Enforce TLS and disable SSL
+socket.setEnabledProtocols(new String[] {
+        "TLSv1",
+        "TLSv1.1",
+        "TLSv1.2" });
+// Enforce strong ciphers
+socket.setEnabledCipherSuites(new String[] {
+        "TLS_RSA_WITH_AES_256_CBC_SHA",
+        "TLS_DHE_RSA_WITH_AES_256_CBC_SHA",
+        "TLS_DHE_DSS_WITH_AES_256_CBC_SHA" });
+DefaultBHttpClientConnection conn = new DefaultBHttpClientConnection(8 * 1204);
+conn.bind(socket);
+</pre>
+    </div>
+  <div class="section" title="2.6.&nbsp;Embedded HTTP server"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d5e460"></a>2.6.&nbsp;Embedded HTTP server</h2></div></div></div>
+    
+    <p>
+    As of version 4.4 HttpCore ships with an embedded HTTP server based on blocking I/O components
+    described above.
+    </p>
+    <pre class="programlisting">
+HttpRequestHandler requestHandler = &lt;...&gt;
+HttpProcessor httpProcessor = &lt;...&gt;
+SocketConfig socketConfig = SocketConfig.custom()
+        .setSoTimeout(15000)
+        .setTcpNoDelay(true)
+        .build();
+final HttpServer server = ServerBootstrap.bootstrap()
+        .setListenerPort(8080)
+        .setHttpProcessor(httpProcessor)
+        .setSocketConfig(socketConfig)
+        .setExceptionLogger(new StdErrorExceptionLogger())
+        .registerHandler("*", requestHandler)
+        .create();
+server.start();
+server.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
+
+Runtime.getRuntime().addShutdownHook(new Thread() {
+    @Override
+    public void run() {
+        server.shutdown(5, TimeUnit.SECONDS);
+    }
+});
+</pre>
+  </div>
+</div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="fundamentals.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="nio.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;1.&nbsp;Fundamentals&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;3.&nbsp;Asynchronous I/O based on NIO</td></tr></table></div></body></html>

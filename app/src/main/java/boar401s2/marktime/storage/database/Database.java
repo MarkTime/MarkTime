@@ -3,18 +3,21 @@ package boar401s2.marktime.storage.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.impl.client.DefaultHttpClient;
-
+import java.io.BufferedInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * Created by John Board on 26/01/2016.
@@ -28,13 +31,8 @@ public class Database extends SQLiteOpenHelper{
     public Database(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         db = this.getWritableDatabase();
-        try {
-            upload(new URL("http://johnrobboard.com/MarkTime/upload.php"), new File("/data/data/boar401s2.marktime/databases/MarkTime.db"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        //System.out.println("Output: " + String.valueOf(uploadFile("/data/data/boar401s2.marktime/databases/MarkTime.db")));
+
     }
 
     @Override
@@ -59,21 +57,119 @@ public class Database extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE " + DBContract.getAttendanceTableName() + ";");
     }
 
-    public static void upload(URL url, File file) throws IOException, URISyntaxException {
-        HttpClient client = new DefaultHttpClient(); //The client object which will do the upload
-        HttpPost httpPost = new HttpPost(url.toURI()); //The POST request to send
 
-        FileBody fileB = new FileBody(file);
 
-        MultipartEntity request = new MultipartEntity(); //The HTTP entity which will holds the different body parts, here the file
-        request.addPart("file", fileB);
+    public static int uploadFile(String sourceFileUri) {
 
-        httpPost.setEntity(request);
-        HttpResponse response = client.execute(httpPost); //Once the upload is complete (successful or not), the client will return a response given by the server
+        int serverResponseCode = 0;
+        String fileName = sourceFileUri;
 
-        if(response.getStatusLine().getStatusCode()==200) { //If the code contained in this response equals 200, then the upload is successful (and ready to be processed by the php code)
-            System.out.println("Upload successful !");
+        HttpURLConnection conn = null;
+        DataOutputStream dos = null;
+        String lineEnd = "\r\n";
+        String twoHyphens = "--";
+        String boundary = "*****";
+        int bytesRead, bytesAvailable, bufferSize;
+        byte[] buffer;
+        int maxBufferSize = 1 * 1024 * 1024;
+        File sourceFile = new File(sourceFileUri);
+
+        try {
+
+            // open a URL connection to the Servlet
+            FileInputStream fileInputStream = new FileInputStream(sourceFile);
+            URL url = new URL("http://johnrobboard.com/MarkTime/upload.php");
+
+            // Open a HTTP  connection to  the URL
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setDoInput(true); // Allow Inputs
+            conn.setDoOutput(true); // Allow Outputs
+            conn.setUseCaches(false); // Don't use a Cached Copy
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Connection", "Keep-Alive");
+            conn.setRequestProperty("ENCTYPE", "multipart/form-data");
+            conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+            conn.setRequestProperty("uploaded_file", fileName);
+
+            dos = new DataOutputStream(conn.getOutputStream());
+
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name='uploaded_file';filename='"
+                            + fileName + "'" + lineEnd);
+
+                    dos.writeBytes(lineEnd);
+
+            // create a buffer of  maximum size
+            bytesAvailable = fileInputStream.available();
+
+            bufferSize = Math.min(bytesAvailable, maxBufferSize);
+            buffer = new byte[bufferSize];
+
+            // read file and write it into form...
+            bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+            while (bytesRead > 0) {
+
+                dos.write(buffer, 0, bufferSize);
+                bytesAvailable = fileInputStream.available();
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+            }
+
+            // send multipart form data necesssary after file data...
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+            // Responses from the server (code and message)
+            serverResponseCode = conn.getResponseCode();
+            String serverResponseMessage = conn.getResponseMessage();
+            System.out.println("UPLOAD: "+serverResponseMessage);
+
+            if(serverResponseCode == 200){
+                System.out.println("Finished.");
+            }
+
+            //close the streams //
+            fileInputStream.close();
+            dos.flush();
+            dos.close();
+
+        } catch (MalformedURLException ex) {
+            ex.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return serverResponseCode;
+    } // End else block
+
+    public static void downloadFile(String uri){
+        int count = 0;
+        try {
+            URL url = new URL(uri);
+            URLConnection conexion = url.openConnection();
+            conexion.connect();
+
+            int fileLength = conexion.getContentLength();
+
+            InputStream input = new BufferedInputStream(url.openStream());
+            OutputStream output = new FileOutputStream("/data/data/boar401s2.marktime/databases/MarkTime.db");
+
+            byte data[] = new byte[1024];
+
+            long total = 0;
+
+            while ((count = input.read(data)) != -1) {
+                total += count;
+                System.out.println("" + (int) ((total * 100) / fileLength));
+                output.write(data, 0, count);
+            }
+
+            output.flush();
+            output.close();
+            input.close();
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
-
 }

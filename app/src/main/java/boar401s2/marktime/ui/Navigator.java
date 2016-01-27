@@ -12,6 +12,8 @@ import boar401s2.marktime.handlers.Boy;
 import boar401s2.marktime.handlers.Company;
 import boar401s2.marktime.handlers.Section;
 import boar401s2.marktime.handlers.Squad;
+import boar401s2.marktime.storage.database.Database;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
