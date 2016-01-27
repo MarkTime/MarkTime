@@ -10,7 +10,6 @@ import boar401s2.marktime.events.AsyncTaskParent;
 import boar401s2.marktime.storage.database.Database;
 import boar401s2.marktime.storage.interfaces.Spreadsheet;
 import boar401s2.marktime.storage.interfaces.Worksheet;
-import boar401s2.marktime.storage.spreadsheet.OfflineSpreadsheet;
 
 /**
  * This class is a wrapper for accessing the
@@ -27,17 +26,8 @@ public class Company {
 	
 	public Company(AsyncTaskParent parent){
 		this.parent = parent;
-		
-		//Initalize spreadsheets
-		attendance = new OfflineSpreadsheet(MarkTime.settings.getString("spreadsheet", ""));
-		register = new OfflineSpreadsheet(MarkTime.settings.getString("register", ""));
-		
-		//Load spreadsheets from file
-		attendance.load(MarkTime.activity.getFilesDir()+"/"+attendance.getName()+".db");
-		register.load(MarkTime.activity.getFilesDir()+"/"+register.getName()+".db");
 
 		database = new Database(MarkTime.app.getBaseContext());
-		getSectionNames_();
 	}
 	
 	/**
@@ -85,7 +75,7 @@ public class Company {
 		return c.getInt(c.getColumnIndex("_id"));
 	}
 
-	public List<String> getSectionNames_(){
+	public List<String> getSectionNames(){
 		Cursor c = database.db.rawQuery("SELECT sectionName FROM sections;", null);
 		c.moveToFirst();
 		List<String> names = new ArrayList<String>();
@@ -98,9 +88,11 @@ public class Company {
 	
 	/**
 	 * Returns a list of the section names
+     * Returns from spreadsheet. Depricated.
 	 * @return
 	 */
-	public List<String> getSectionNames(){
+    @Deprecated
+	public List<String> getSectionNames_(){
 		List<String> result = new ArrayList<String>();
 		for (Section s: getSections()){
 			result.add(s.getName());
@@ -112,7 +104,8 @@ public class Company {
 	 * Adds a section to the company
 	 * @param id
 	 */
-	public void addSection(String id){
+    @Deprecated
+	public void addSection_(String id){
 		String name = id;
 		attendance.createWorksheet(name);
 		attendance.getWorksheet(name).setSize(1, 6);
@@ -120,7 +113,7 @@ public class Company {
 		saveAttendance();
 	}
 
-	public void addSection_(String sectionName){
+	public void addSection(String sectionName){
 		database.db.execSQL("INSERT INTO sections (sectionName) VALUES ('" + sectionName + "');");
 	}
 	
@@ -128,9 +121,14 @@ public class Company {
 	 * Deletes a section from the company
 	 * @param id
 	 */
-	public void deleteSection(String id){
+	@Deprecated
+	public void deleteSection_(String id){
 		attendance.deleteSheet(id);
 		saveAttendance();
+	}
+
+	public void deleteSection(String sectionName){
+		database.db.execSQL("DELETE FROM sections WHERE sectionName=?", new String[]{sectionName});
 	}
 	
 	//==========[Spreadsheet Stuff]==========//

@@ -77,7 +77,7 @@ public class Navigator extends Activity implements AsyncTaskParent{
 			clearItems();
 			
 			addHeader("Section");
-			for(String section: company.getSectionNames_()){
+			for(String section: company.getSectionNames()){
 				addItem("Section", section, ListViewEntryTypes.BUTTON);
 			}
 			
@@ -91,7 +91,7 @@ public class Navigator extends Activity implements AsyncTaskParent{
 			clearItems();
 			
 			addHeader("Squad");
-			for(String squad: section.getSquadNames_()){
+			for(String squad: section.getSquadNames()){
 				addItem("Squad", squad, ListViewEntryTypes.BUTTON);
 			}
 			
@@ -126,9 +126,9 @@ public class Navigator extends Activity implements AsyncTaskParent{
 		listView.setAdapter(adapter);
         
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-		     public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
-		    	 onItemClicked(entries.get(position).split(",")[0]);
-		     }
+			public void onItemClick(AdapterView<?> parentAdapter, View view, int position, long id) {
+				onItemClicked(entries.get(position).split(",")[0]);
+			}
 		});
         
         Intent i = getIntent();
@@ -172,6 +172,10 @@ public class Navigator extends Activity implements AsyncTaskParent{
 	}
 	
 	//==========[Events]==========//
+
+	public void onItemLongClicked(String id){
+		System.out.println("Long clicked "+id);
+	}
 	
 	public void onItemClicked(String id){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -192,7 +196,7 @@ public class Navigator extends Activity implements AsyncTaskParent{
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							company.addSection(input.getText().toString().trim());
-							company.addSection_(input.getText().toString().trim());
+							//company.addSection_(input.getText().toString().trim());
 							displayLevel(currentLevel);
 					    }
 					});
@@ -218,7 +222,7 @@ public class Navigator extends Activity implements AsyncTaskParent{
 					    @Override
 					    public void onClick(DialogInterface dialog, int which) {
 					        section.addSquad(input.getText().toString().trim());
-                            section.addSquad_(input.getText().toString().trim());
+                            //section.addSquad_(input.getText().toString().trim());
                             displayLevel(currentLevel);
 					    }
 					});

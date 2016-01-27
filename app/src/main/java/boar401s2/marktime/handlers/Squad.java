@@ -1,10 +1,11 @@
 package boar401s2.marktime.handlers;
 
+import android.database.Cursor;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import boar401s2.marktime.storage.interfaces.Worksheet;
-import boar401s2.marktime.storage.spreadsheet.parsers.ListParser;
 
 /**
  * A class that acts as a wrapper for the squad as
@@ -16,15 +17,10 @@ public class Squad {
 	
 	String name;
 	Section section;
-	ListParser listParser;
-	Worksheet worksheet;
 	
 	public Squad(String name, Section section){
 		this.name = name;
 		this.section = section;
-		worksheet = getCompany().getAttendanceSpreadsheet().getWorksheet(getName());
-		listParser = new ListParser(worksheet);
-		listParser.parse();
 	}
 	
 	/**
@@ -39,9 +35,14 @@ public class Squad {
 	 * @return List of boys names
 	 */
 	public List<String> getBoysNames(){
+		Cursor c = section.company.database.db.rawQuery("SELECT boyName FROM boys WHERE boySquad=?;", new String[]{name});
+		System.out.println(c.getCount());
+		c.moveToFirst();
 		List<String> names = new ArrayList<String>();
-		for (Boy boy: getBoys()){
-			names.add(boy.getName());
+		while(!c.isAfterLast()){
+			System.out.println(c.getString(0));
+			names.add(c.getString(0));
+			c.moveToNext();
 		}
 		return names;
 	}
@@ -59,31 +60,24 @@ public class Squad {
 	 * Gets all the boys in the squad
 	 * @return List of boys
 	 */
-	public List<Boy> getBoys(){
-		List<String> boyNames = listParser.getValues();
-		List<Boy> boys = new ArrayList<Boy>();
-		for (String boy: boyNames){
-			boys.add(new Boy(boy, this));
-		}
-		return boys;
-	}
 	
 	/**
 	 * Adds a boy to the squad
-	 * @param name
+	 * @param boyName
 	 */
-	public void addBoy(String name){
-		listParser.addValue(name);
-		section.company.saveAttendance();
+	public void addBoy(String boyName){
+		section.company.database.db.execSQL("INSERT INTO boys (boyName, boySquad) VALUES (?, ?)", new String[]{boyName, name});
 	}
 	
 	/**
 	 * Removes a boy from the squad
-	 * @param name
+	 * @param boyName
 	 */
-	public void removeBoy(String name){
-		listParser.removeValue(name);
-	}
+    public void removeBoy(String boyName){
+        section.company.database.db.execSQL("DELETE FROM boys WHERE boyName=?", new String[]{boyName});
+    }
+
+
 	
 	//==========[Parent stuff==========//
 	

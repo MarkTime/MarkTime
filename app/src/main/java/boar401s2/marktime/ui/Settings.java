@@ -5,8 +5,6 @@ import java.util.Arrays;
 import boar401s2.marktime.MarkTime;
 import boar401s2.marktime.R;
 import com.google.android.gms.common.AccountPicker;
-import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
-import com.google.api.services.drive.DriveScopes;
 
 import android.os.Bundle;
 import android.accounts.AccountManager;
@@ -24,8 +22,6 @@ public class Settings extends Activity {
 	MarkTime parent;
 	SharedPreferences settings;
 	SharedPreferences.Editor editor;
-	
-	GoogleAccountCredential credential;
 	
 	public Settings(){
 		settings = MarkTime.settings;
@@ -79,7 +75,7 @@ public class Settings extends Activity {
 	 * Callback for the button "Submit". Writes data to parameters.
 	 * @param view
 	 */
-	public void onSubmit(View view){
+	public void onSubmit(View view) {
 		EditText spreadsheet = (EditText) findViewById(R.id.settings_spreadsheet_name);
 		EditText register = (EditText) findViewById(R.id.settings_spreadsheet_template);
 		EditText account = (EditText) findViewById(R.id.settings_account);
@@ -90,18 +86,6 @@ public class Settings extends Activity {
 		editor.putString("company", company.getText().toString());
 		editor.apply();
 		finish();
-	}
-	
-	/**
-	 * Callback for the textbox "Account". This opens 
-	 * an account selector dialog.
-	 * @param view
-	 */
-	public void onAccountEditorClicked(View view){
-		credential = GoogleAccountCredential.usingOAuth2(this, Arrays.asList(DriveScopes.DRIVE_FILE));
-		Intent intent = AccountPicker.newChooseAccountIntent(null, null, new String[]{"com.google"},
-		         false, null, null, null, null);
-		 startActivityForResult(intent, 1);
 	}
 	
 	@Override

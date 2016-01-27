@@ -10,6 +10,7 @@ import boar401s2.marktime.constants.ResultIDList;
 import boar401s2.marktime.events.AsyncTaskParent;
 import boar401s2.marktime.handlers.Boy;
 import boar401s2.marktime.handlers.Company;
+import boar401s2.marktime.storage.database.DBContract;
 import boar401s2.marktime.util.MarkingData;
 import android.os.Bundle;
 import android.app.Activity;
@@ -115,8 +116,8 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 			setTitle("Marking: "+boy.getName());
 			clearItems();
 			
-			if(boy.getNightData(MarkingData.getDate())!=null){
-				data = boy.getNightData(MarkingData.getDate());
+			if(boy.getNightData(DBContract.getDatestamp())!=null){
+				data = boy.getNightData(DBContract.getDatestamp());
 			}
 			
 			addHeader("Uniform");
@@ -169,7 +170,6 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 		    public void onClick(DialogInterface dialog, int which) {
 		    	dataChanged = true;
 		    	data.attendance = picker.getValue();
-		    	boy.setNightData(data);
 		    	displayLevel(LevelIDList.BOY_MARK);
 		    }
 		});
@@ -262,7 +262,7 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 				builder.setPositiveButton("OK", new DialogInterface.OnClickListener() { 
 				    @Override
 				    public void onClick(DialogInterface dialog, int which) {
-				        data.date = input.getText().toString().trim();
+				        data.date = Integer.parseInt(input.getText().toString());
 				        entry.setExtra("subtitle", data.date);
 				        updateListView();
 				    }

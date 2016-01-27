@@ -1,8 +1,13 @@
 package boar401s2.marktime.handlers;
 
+import android.database.Cursor;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import boar401s2.marktime.storage.database.DBContract;
 import boar401s2.marktime.storage.interfaces.Spreadsheet;
 import boar401s2.marktime.storage.interfaces.Worksheet;
-import boar401s2.marktime.storage.spreadsheet.parsers.TableParser;
 import boar401s2.marktime.util.MarkingData;
 
 
@@ -32,55 +37,63 @@ public class Boy {
 	 * Saves MarkingData to the appropriate attendance file.
 	 * Use this method to set the attendance data for this boy.
 	 */
-	public void setNightData(MarkingData data){
-		Spreadsheet spreadsheet = getCompany().attendance;
-		String worksheetName = squad.getName()+" - "+MarkingData.getDate();
-		if (!spreadsheet.worksheetExists(worksheetName)){
-			spreadsheet.duplicateSheet("Night Template", worksheetName);
-		}
-		Worksheet worksheet = spreadsheet.getWorksheet(worksheetName);
-		TableParser parser = new TableParser(worksheet);
-		
-		parser.setRow(getName(), squad.getBoysNames().indexOf(getName())+1);
-		parser.setValue(getName(), "Name", getName());
-		parser.setValue(getName(), "Hat", String.valueOf(data.hat));
-		parser.setValue(getName(), "Tie", String.valueOf(data.tie));
-		parser.setValue(getName(), "Havasac", String.valueOf(data.havasac));
-		parser.setValue(getName(), "Badges", String.valueOf(data.badges));
-		parser.setValue(getName(), "Belt", String.valueOf(data.belt));
-		parser.setValue(getName(), "Pants", String.valueOf(data.pants));
-		parser.setValue(getName(), "Socks", String.valueOf(data.socks));
-		parser.setValue(getName(), "Shoes", String.valueOf(data.shoes));
-		parser.setValue(getName(), "Church", String.valueOf(data.church));
-		parser.setValue(getName(), "Attendance", String.valueOf(data.attendance));
-		
-		getCompany().saveAttendance();
-	}
-	
-	public MarkingData getNightData(String date){
-		Spreadsheet spreadsheet = getCompany().getAttendanceSpreadsheet();
-		String worksheetName = squad.getName()+" - "+MarkingData.getDate();
-		MarkingData data = new MarkingData();
-		if(spreadsheet.worksheetExists(worksheetName)){
-			Worksheet worksheet = spreadsheet.getWorksheet(worksheetName);
-			TableParser parser = new TableParser(worksheet);
-			if(parser.hasRow(getName())){
-				System.out.println("Compiling NightData");
-				data.hat = Boolean.valueOf(parser.getValue(getName(), "Hat"));
-				data.tie = Boolean.valueOf(parser.getValue(getName(), "Tie"));
-				data.havasac = Boolean.valueOf(parser.getValue(getName(), "Havasac"));
-				data.badges = Boolean.valueOf(parser.getValue(getName(), "Badges"));
-				data.belt = Boolean.valueOf(parser.getValue(getName(), "Belt"));
-				data.pants = Boolean.valueOf(parser.getValue(getName(), "Pants"));
-				data.socks = Boolean.valueOf(parser.getValue(getName(), "Socks"));
-				data.shoes = Boolean.valueOf(parser.getValue(getName(), "Shoes"));
-				data.church = Boolean.valueOf(parser.getValue(getName(), "Church"));
-				data.attendance = Integer.parseInt(parser.getValue(getName(), "Attendance"));
-				return data;
-			}
-		}
-		return null;
-	}
+
+    public int getID(){
+        Cursor c = getCompany().database.db.rawQuery("SELECT * FROM boys WHERE boyName=?", new String[]{name});
+        c.moveToFirst();
+        return c.getInt(c.getColumnIndex("_id"));
+    }
+
+    public void setNightData(MarkingData data){
+        String datestamp = DBContract.getDatestamp();
+        if(nightDataExists(datestamp)){
+            getCompany().database.db.execSQL("DELETE FROM attendance WHERE boyID=? AND datestamp=?", new String[]{String.valueOf(getID()), datestamp});
+        }
+        String sqlQuery = "INSERT INTO attendance (boyID, attendance, church, hat, tie, havasac, badges, belt, pants, socks, shoes, datestamp) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+        getCompany().database.db.execSQL(sqlQuery, new String[]{
+                String.valueOf(getID()),
+                String.valueOf(data.attendance),
+                String.valueOf(data.church),
+                String.valueOf(data.hat),
+                String.valueOf(data.tie),
+                String.valueOf(data.havasac),
+                String.valueOf(data.badges),
+                String.valueOf(data.belt),
+                String.valueOf(data.pants),
+                String.valueOf(data.socks),
+                String.valueOf(data.shoes),
+                datestamp});
+    }
+
+
+    public boolean nightDataExists(String datestamp){
+        Cursor c = getCompany().database.db.rawQuery("SELECT * FROM attendance WHERE datestamp=? AND boyID=?;", new String[]{datestamp, String.valueOf(getID())});
+        return c.getCount()>0;
+    }
+
+    public MarkingData getNightData(String datestamp){
+        Cursor c = getCompany().database.db.rawQuery("SELECT * FROM attendance WHERE datestamp=? AND boyID=?;", new String[]{datestamp, String.valueOf(getID())});
+        MarkingData data = new MarkingData();
+        c.moveToFirst();
+        if(c.getCount() == 1){
+            data.attendance = c.getInt(1);
+            data.church = c.getString(2).equalsIgnoreCase("true");
+            data.hat = c.getString(3).equalsIgnoreCase("true");
+            data.tie = c.getString(4).equalsIgnoreCase("true");
+            data.havasac = c.getString(5).equalsIgnoreCase("true");
+            data.badges = c.getString(6).equalsIgnoreCase("true");
+            data.belt = c.getString(7).equalsIgnoreCase("true");
+            data.pants = c.getString(8).equalsIgnoreCase("true");
+            data.socks = c.getString(9).equalsIgnoreCase("true");
+            data.shoes = c.getString(10).equalsIgnoreCase("true");
+            data.date = c.getInt(11);
+            data.printData();
+            return data;
+        } else {
+            System.out.println("Multiple entries - this code should never be called.");
+        }
+        return null;
+    }
 
 	//==========[Parent stuff]==========//
 	
