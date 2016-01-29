@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import boar401s2.marktime.storage.database.DBContract;
-import boar401s2.marktime.storage.interfaces.Spreadsheet;
-import boar401s2.marktime.storage.interfaces.Worksheet;
 import boar401s2.marktime.util.MarkingData;
 
 

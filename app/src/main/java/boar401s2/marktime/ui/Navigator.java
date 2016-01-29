@@ -294,7 +294,7 @@ public class Navigator extends Activity implements AsyncTaskParent{
 					        switch (which){
 					        case DialogInterface.BUTTON_POSITIVE:
 					        	section.deleteSquad(squad.getName());
-					        	section.getCompany().saveAttendance();
+					        	//section.getCompany().saveAttendance();
 					        	displayLevel(LevelIDList.SQUAD);
 					            break;
 					        case DialogInterface.BUTTON_NEGATIVE:

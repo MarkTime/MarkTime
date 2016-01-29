@@ -18,6 +18,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Scanner;
 
 /**
  * Created by John Board on 26/01/2016.
@@ -31,14 +32,24 @@ public class Database extends SQLiteOpenHelper{
     public Database(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         db = this.getWritableDatabase();
-        //System.out.println("Output: " + String.valueOf(uploadFile("/data/data/boar401s2.marktime/databases/MarkTime.db")));
+        System.out.println("Reading flag.");
+        URL url = null;
+        try {
+            url = new URL("http://marktime.johnrobboard.com/api/merged_flag");
+            Scanner s = new Scanner(url.openStream());
+            System.out.println(s.next());
+            System.out.println("Finished flag reading.");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        //Tables created in onOpen (CREATE IF NOT EXISTS...)
-        System.out.println("On create called.");
+
     }
 
     @Override
@@ -47,17 +58,13 @@ public class Database extends SQLiteOpenHelper{
         db.execSQL(DBContract.getCreateBoyTableQuery());
         db.execSQL(DBContract.getCreateSectionTableQuery());
         db.execSQL(DBContract.getCreateSquadTableQuery());
-        System.out.println("Created tables.");
+        db.execSQL(DBContract.getCreateDeletionsTableQuery());
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
-        System.out.println("On upgrade called");
-        db.execSQL("DROP TABLE boys;");
-        db.execSQL("DROP TABLE " + DBContract.getAttendanceTableName() + ";");
+
     }
-
-
 
     public static int uploadFile(String sourceFileUri) {
 
@@ -73,12 +80,11 @@ public class Database extends SQLiteOpenHelper{
         byte[] buffer;
         int maxBufferSize = 1 * 1024 * 1024;
         File sourceFile = new File(sourceFileUri);
-
         try {
 
             // open a URL connection to the Servlet
             FileInputStream fileInputStream = new FileInputStream(sourceFile);
-            URL url = new URL("http://johnrobboard.com/MarkTime/upload.php");
+            URL url = new URL("http://marktime.johnrobboard.com/api/uploadNew.php");
 
             // Open a HTTP  connection to  the URL
             conn = (HttpURLConnection) url.openConnection();
@@ -124,6 +130,98 @@ public class Database extends SQLiteOpenHelper{
             // Responses from the server (code and message)
             serverResponseCode = conn.getResponseCode();
             String serverResponseMessage = conn.getResponseMessage();
+
+            Log.i("uploadFile", "HTTP Response is : "
+                    + serverResponseMessage + ": " + serverResponseCode);
+
+            if(serverResponseCode == 200){
+                System.out.println("Success.");
+            }
+
+            //close the streams //
+            fileInputStream.close();
+            dos.flush();
+            dos.close();
+
+        } catch (MalformedURLException ex) {
+
+            ex.printStackTrace();
+
+            Log.e("Upload file to server", "error: " + ex.getMessage(), ex);
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+        return serverResponseCode;
+    }
+
+
+/*
+    public static int uploadFile(String sourceFileUri) {
+
+        int serverResponseCode = 0;
+        String fileName = sourceFileUri;
+
+        HttpURLConnection conn = null;
+        DataOutputStream dos = null;
+        String lineEnd = "\r\n";
+        String twoHyphens = "--";
+        String boundary = "*****";
+        int bytesRead, bytesAvailable, bufferSize;
+        byte[] buffer;
+        int maxBufferSize = 1 * 1024 * 1024;
+        File sourceFile = new File(sourceFileUri);
+
+        try {
+
+            // open a URL connection to the Servlet
+            FileInputStream fileInputStream = new FileInputStream(sourceFile);
+            URL url = new URL("http://marktime.johnrobboard.com/api/uploadNew.php");
+
+            // Open a HTTP  connection to  the URL
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setDoInput(true); // Allow Inputs
+            conn.setDoOutput(true); // Allow Outputs
+            conn.setUseCaches(false); // Don't use a Cached Copy
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Connection", "Keep-Alive");
+            conn.setRequestProperty("ENCTYPE", "multipart/form-data");
+            conn.setRequestProperty("Contesnt-Type", "multipart/form-data;boundary=" + boundary);
+            conn.setRequestProperty("uploaded_file", "MarkTime.db");
+
+            dos = new DataOutputStream(conn.getOutputStream());
+
+            dos.writeBytes(twoHyphens + boundary + lineEnd);
+            dos.writeBytes("Content-Disposition: form-data; name='uploaded_file';filename='"
+                            + "MarkTime.db" + "'" + lineEnd);
+            System.out.println(fileName);
+                    dos.writeBytes(lineEnd);
+
+            // create a buffer of  maximum size
+            bytesAvailable = fileInputStream.available();
+
+            bufferSize = Math.min(bytesAvailable, maxBufferSize);
+            buffer = new byte[bufferSize];
+
+            // read file and write it into form...
+            bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+            while (bytesRead > 0) {
+
+                dos.write(buffer, 0, bufferSize);
+                bytesAvailable = fileInputStream.available();
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+            }
+
+            // send multipart form data necesssary after file data...
+            dos.writeBytes(lineEnd);
+            dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+            // Responses from the server (code and message)
+            serverResponseCode = conn.getResponseCode();
+            String serverResponseMessage = conn.getResponseMessage();
             System.out.println("UPLOAD: "+serverResponseMessage);
 
             if(serverResponseCode == 200){
@@ -141,7 +239,8 @@ public class Database extends SQLiteOpenHelper{
             e.printStackTrace();
         }
         return serverResponseCode;
-    } // End else block
+    }// End else block
+ */
 
     public static void downloadFile(String uri){
         int count = 0;

@@ -15,6 +15,10 @@ android {
         exclude 'META-INF/ASL2.0'
     }
 
+    sourceSets {
+        main.java.srcDirs += 'src/main/java/boar401s2.marktime'
+    }
+
     defaultConfig {
         applicationId "boar401s2.marktime"
         minSdkVersion 11

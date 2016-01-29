@@ -13,6 +13,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -23,7 +27,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="boar401s2.marktime.MarkTime"
+            android:name=".MarkTime"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,29 +36,37 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="boar401s2.marktime.ui.Settings"
+            android:name=".ui.Settings"
             android:label="@string/title_activity_settings" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="boar401s2.marktime.MarkTime" />
         </activity>
         <activity
-            android:name="boar401s2.marktime.ui.ListTemplate"
+            android:name=".ui.ListTemplate"
             android:label="@string/title_activity_list_template" >
         </activity>
         <activity
-            android:name="boar401s2.marktime.ui.Navigator"
+            android:name=".ui.Navigator"
             android:label="@string/title_activity_navigator" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="boar401s2.marktime.MarkTime" />
         </activity>
         <activity
-            android:name="boar401s2.marktime.ui.BoyUI"
+            android:name=".ui.BoyUI"
             android:label="@string/title_activity_boy" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="boar401s2.marktime.ui.Navigator" />
+        </activity>
+        <activity
+            android:name=".ui.Synchronise"
+            android:label="@string/title_activity_synchronise"
+            android:parentActivityName=".MarkTime" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="boar401s2.marktime.MarkTime" />
         </activity>
     </application>
 

@@ -13,6 +13,10 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
@@ -63,6 +67,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="boar401s2.marktime.ui.Navigator" />
+        </activity>
+        <activity
+            android:name="boar401s2.marktime.ui.Synchronise"
+            android:label="@string/title_activity_synchronise"
+            android:parentActivityName="boar401s2.marktime.MarkTime" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="boar401s2.marktime.MarkTime" />
         </activity>
         <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity

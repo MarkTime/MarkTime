@@ -32,7 +32,7 @@ public class DBContract {
     }
 
     public static String getCreateAttendanceTableQuery(){
-        return "CREATE TABLE IF NOT EXISTS attendance (" +
+        return "CREATE TABLE IF NOT EXISTS attendance (_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "                          boyID         INTEGER," +
                 "                          attendance    INTEGER," +
                 "                          church        INTEGER," +

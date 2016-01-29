@@ -5,8 +5,6 @@ import android.database.Cursor;
 import java.util.ArrayList;
 import java.util.List;
 
-import boar401s2.marktime.storage.interfaces.Worksheet;
-
 /**
  * Class for accessing the section as defined
  * in the attendance file.
@@ -76,13 +74,21 @@ public class Section {
 	public void addSquad(String squadName){
 		company.database.db.execSQL("INSERT INTO squads (squadName, squadSection) VALUES (?, ?)", new String[]{squadName, name});
 	}
-	
+
+	public int getSquadID(String squadName){
+		Cursor c = company.database.db.rawQuery("SELECT * FROM squads WHERE squadName=?", new String[]{squadName});
+		c.moveToFirst();
+		return c.getInt(c.getColumnIndex("_id"));
+	}
+
 	/**
 	 * Deletes a squad from the Section
 	 * @param squadName
 	 */
 	public void deleteSquad(String squadName){
+		int squadID = getSquadID(squadName);
 		company.database.db.execSQL("DELETE FROM squads WHERE squadName=?", new String[]{squadName});
+		company.database.db.execSQL("INSERT INTO changelog (tableName, rowID, action) VALUES ('squads',?,'DEL');", new String[]{String.valueOf(squadID)});
 	}
 	
 	//==========[Parent stuff==========//

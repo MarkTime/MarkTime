@@ -5,8 +5,6 @@ import android.database.Cursor;
 import java.util.ArrayList;
 import java.util.List;
 
-import boar401s2.marktime.storage.interfaces.Worksheet;
-
 /**
  * A class that acts as a wrapper for the squad as
  * defined in the Attendance file
@@ -68,13 +66,21 @@ public class Squad {
 	public void addBoy(String boyName){
 		section.company.database.db.execSQL("INSERT INTO boys (boyName, boySquad) VALUES (?, ?)", new String[]{boyName, name});
 	}
-	
+
+    public int getBoyID(String boyName){
+        Cursor c = section.company.database.db.rawQuery("SELECT * FROM boys WHERE boyName=?", new String[]{boyName});
+        c.moveToFirst();
+        return c.getInt(c.getColumnIndex("_id"));
+    }
+
 	/**
 	 * Removes a boy from the squad
 	 * @param boyName
 	 */
     public void removeBoy(String boyName){
+        int boyID = getBoyID(boyName);
         section.company.database.db.execSQL("DELETE FROM boys WHERE boyName=?", new String[]{boyName});
+		section.company.database.db.execSQL("INSERT INTO changelog (tableName, rowID, action) VALUES ('boys',?,'DEL');", new String[]{String.valueOf(boyID)});
     }
 
 

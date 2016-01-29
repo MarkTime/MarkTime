@@ -7,6 +7,7 @@ import boar401s2.marktime.storage.database.Database;
 import boar401s2.marktime.ui.BoyUI;
 import boar401s2.marktime.ui.Navigator;
 import boar401s2.marktime.ui.Settings;
+import boar401s2.marktime.ui.Synchronise;
 
 import android.app.Activity;
 import android.content.Context;
@@ -54,7 +55,7 @@ public class MarkTime extends Activity {
 		setContentView(R.layout.activity_mark_time);
 		isNetworkAvailable = isNetworkAvailable();
 		//Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(MarkTime.this));
-		Database.downloadFile("http://johnrobboard.com/MarkTime/MarkTime.db");
+
 	}
 
 	/**
@@ -85,8 +86,8 @@ public class MarkTime extends Activity {
 	 */
 	public void openSynchronise(View view){
 		if (isNetworkAvailable()){
-			//Intent i = new Intent(this, Synchronise.class);
-			//startActivity(i);
+			Intent i = new Intent(this, Synchronise.class);
+			startActivity(i);
 		} else {
 			Toast.makeText(this, "Internet connection unavaliable. Unable to synchronise.", Toast.LENGTH_SHORT).show();
 		}

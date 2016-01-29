@@ -230,7 +230,7 @@ public class BoyUI extends Activity implements AsyncTaskParent {
 				        switch (which){
 				        case DialogInterface.BUTTON_POSITIVE:
 				        	boy.getSquad().removeBoy(boy.getName());
-				        	boy.getCompany().saveAttendance();
+				        	//boy.getCompany().saveAttendance();
 				        	navigateUp();
 				            break;
 				        case DialogInterface.BUTTON_NEGATIVE:
